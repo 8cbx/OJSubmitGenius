@@ -1,22 +1,27 @@
-#encoding=utf8
-import pycurl
-import StringIO
-c = pycurl.Curl()
-b=StringIO.StringIO()
-h=open("code.cpp","r")
-e=h.read()
-h.close()
-#print "check=0&problemid=1000&language=0&usercode="+e
-c.setopt(pycurl.COOKIEJAR,"cookie.txt")
-c.setopt(pycurl.COOKIEFILE,"cookie.txt")
-c.setopt(pycurl.URL,'http://acm.hdu.edu.cn/userloginex.php?action=login')
-c.setopt(pycurl.POSTFIELDS, "username=testfile&userpass=testfile&login=Sign+In")
-c.setopt(pycurl.URL,'http://acm.hdu.edu.cn/submit.php?action=submit')
-c.setopt(pycurl.POSTFIELDS, "check=0&problemid=1000&language=0&usercode="+e)
-c.setopt(pycurl.FOLLOWLOCATION, 1)
-c.setopt(pycurl.WRITEFUNCTION, b.write)
-c.perform()
-c.close()
-d= b.getvalue()
-print d
-
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+import re;
+import cookielib;
+import urllib;
+import urllib2;
+import optparse;
+def SendCode(code,problemid,language):
+    h=open(code,"r")
+    e=h.read()
+    #e=urllib.quote(e)
+    h.close()
+    HduMainUrl = "http://acm.hdu.edu.cn/";    
+    header={ 'User-Agent': 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.2.16) Gecko/20110319 Firefox/3.6.16'}
+    HduMainSubmitUrl = "http://acm.hdu.edu.cn/submit.php?action=submit";
+    postDict = {
+            'check'         : '0',
+            'problemid'     : problemid,
+	    'language'      : language,
+	    'usercode'      : str(e),
+        };
+    postData = urllib.urlencode(postDict);
+    req = urllib2.Request(HduMainSubmitUrl, postData, header);
+    req.add_header('Content-Type', "application/x-www-form-urlencoded");
+    resp = urllib2.urlopen(req);
+    respHtml = resp.read();
+    print "respHtml=",respHtml;
