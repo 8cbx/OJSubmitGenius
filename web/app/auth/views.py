@@ -39,6 +39,8 @@ def edit_profile():
         current_user.name = form.name.data
         current_user.country = form.country.data
         current_user.school = form.school.data
+        current_user.account_POJ = form.account_POJ.data
+        current_user.password_POJ = form.password_POJ.data
         current_user.about_me = form.about_me.data
         db.session.add(current_user)
         flash('Your profile has been updated.')
@@ -46,6 +48,8 @@ def edit_profile():
     form.name.data = current_user.name
     form.country.data = current_user.country
     form.school.data = current_user.school
+    form.account_POJ.data = current_user.account_POJ
+    form.password_POJ.data = current_user.password_POJ
     form.about_me.data = current_user.about_me
     return render_template('auth/edit_profile.html', form=form)
 
@@ -65,6 +69,8 @@ def edit_profile_admin(id):
         user.name = form.name.data
         user.country = form.country.data
         user.school = form.school.data
+        user.account_POJ = form.account_POJ.data
+        user.password_POJ = form.password_POJ.data
         user.about_me = form.about_me.data
         db.session.add(user)
         flash('The profile has been updated.')
@@ -74,6 +80,8 @@ def edit_profile_admin(id):
     form.confirmed.data = user.confirmed
     form.role.data = user.role_id
     form.name.data = user.name
+    form.account_POJ.data = user.account_POJ
+    form.password_POJ.data = user.password_POJ
     form.country.data = user.country
     form.school.data = user.school
     form.about_me.data = user.about_me
@@ -83,7 +91,7 @@ def edit_profile_admin(id):
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(username=form.username.data).first()
         if user is not None and user.verify_password(form.password.data):
             login_user(user, form.remember_me.data)
             return redirect(request.args.get('next') or url_for('main.index'))
