@@ -7,7 +7,7 @@ from ..models import User
 from ..email import send_email
 from .forms import LoginForm, RegistrationForm, ChangePasswordForm,\
     PasswordResetRequestForm, PasswordResetForm, ChangeEmailForm,\
-    EditProfileForm, EditProfileAdminForm
+    EditProfileForm, EditProfileAdminForm, OnlineJudgeForm
 from ..decorators import admin_required
 
 @auth.before_app_request
@@ -39,8 +39,8 @@ def edit_profile():
         current_user.name = form.name.data
         current_user.country = form.country.data
         current_user.school = form.school.data
-        current_user.account_POJ = form.account_POJ.data
-        current_user.password_POJ = form.password_POJ.data
+        #current_user.account_POJ = form.account_POJ.data
+        #current_user.password_POJ = form.password_POJ.data
         current_user.about_me = form.about_me.data
         db.session.add(current_user)
         flash('Your profile has been updated.')
@@ -48,8 +48,8 @@ def edit_profile():
     form.name.data = current_user.name
     form.country.data = current_user.country
     form.school.data = current_user.school
-    form.account_POJ.data = current_user.account_POJ
-    form.password_POJ.data = current_user.password_POJ
+    #form.account_POJ.data = current_user.account_POJ
+    #form.password_POJ.data = current_user.password_POJ
     form.about_me.data = current_user.about_me
     return render_template('auth/edit_profile.html', form=form)
 
@@ -69,8 +69,8 @@ def edit_profile_admin(id):
         user.name = form.name.data
         user.country = form.country.data
         user.school = form.school.data
-        user.account_POJ = form.account_POJ.data
-        user.password_POJ = form.password_POJ.data
+        #user.account_POJ = form.account_POJ.data
+        #user.password_POJ = form.password_POJ.data
         user.about_me = form.about_me.data
         db.session.add(user)
         flash('The profile has been updated.')
@@ -80,12 +80,26 @@ def edit_profile_admin(id):
     form.confirmed.data = user.confirmed
     form.role.data = user.role_id
     form.name.data = user.name
-    form.account_POJ.data = user.account_POJ
-    form.password_POJ.data = user.password_POJ
+    #form.account_POJ.data = user.account_POJ
+    #form.password_POJ.data = user.password_POJ
     form.country.data = user.country
     form.school.data = user.school
     form.about_me.data = user.about_me
     return render_template('auth/edit_profile.html', form=form, user=user)
+
+@auth.route('/OnlineJudge', methods=['GET', 'POST'])
+@login_required
+def OnlineJudge():
+    form = OnlineJudgeForm()
+    if form.validate_on_submit():
+       current_user.account_POJ = form.account_POJ.data
+       current_user.password_POJ = form.password_POJ.data
+       db.session.add(current_user)
+       flash('The account has been updated')
+       #return redirect(url_for('.user', username=user.username))
+    form.account_POJ.data = current_user.account_POJ
+    form.password_POJ.data = current_user.password_POJ
+    return render_template('auth/OnlineJudge.html', form=form)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -225,3 +239,4 @@ def change_email(token):
     else:
         flash('Invalid request.')
     return redirect(url_for('main.index'))
+

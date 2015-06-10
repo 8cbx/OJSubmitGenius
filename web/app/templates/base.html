@@ -36,8 +36,8 @@
                     	<li><a href="{{ url_for('auth.user', username=current_user.username) }}">Profile</a></li>
                         <li><a href="{{ url_for('auth.change_password') }}">Change Password</a></li>
                         <li><a href="{{ url_for('auth.change_email_request') }}">Change Email</a></li>
+                        <li><a href="{{ url_for('auth.OnlineJudge') }}">Online Judge</a></li>
                         <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
-                        
                     </ul>
                 </li>
                 {% else %}
