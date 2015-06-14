@@ -31,6 +31,3 @@ def TryLogin(username,userpass):
     	return 1
     else:
     	return 0
-if __name__=="__main__":
-     print TryLogin('8cbx','123456')
-    #print "respHtml=",respHtml;
