@@ -3,8 +3,6 @@ from wtforms import StringField, PasswordField, BooleanField, SubmitField, Selec
 from wtforms.validators import Required, Length, Email, Regexp, EqualTo, Optional, NumberRange
 from wtforms import ValidationError
 from ..models import User
-
-
 class LoginForm(Form):
     username = StringField('Username', validators=[Required(), Length(1, 64)])
     password = PasswordField('Password', validators=[Required()])
@@ -116,8 +114,9 @@ class EditProfileAdminForm(Form):
         if field.data != self.user.username and \
                 User.query.filter_by(username=field.data).first():
             raise ValidationError('Username already in use.')
+            
 class OnlineJudgeForm(Form):
-    account_POJ = StringField('POJ account',validators=[Length(0, 64), Regexp('^[A-Za-z0-9][A-Za-z0-9_]*$', 0,'Usernames must have only letters, ''numbers, or underscores')])
+    account_POJ = StringField('POJ account',validators=[Length(0, 64)])
     password_POJ = PasswordField('POJ password',validators=[Length(0, 64)])
     submit = SubmitField('Submit')
 

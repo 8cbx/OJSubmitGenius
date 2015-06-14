@@ -9,6 +9,8 @@ from .forms import LoginForm, RegistrationForm, ChangePasswordForm,\
     PasswordResetRequestForm, PasswordResetForm, ChangeEmailForm,\
     EditProfileForm, EditProfileAdminForm, OnlineJudgeForm
 from ..decorators import admin_required
+from poj_login import TryLogin
+
 
 @auth.before_app_request
 def before_request():
@@ -90,16 +92,27 @@ def edit_profile_admin(id):
 @auth.route('/OnlineJudge', methods=['GET', 'POST'])
 @login_required
 def OnlineJudge():
-    form = OnlineJudgeForm()
-    if form.validate_on_submit():
-       current_user.account_POJ = form.account_POJ.data
-       current_user.password_POJ = form.password_POJ.data
-       db.session.add(current_user)
-       flash('The account has been updated')
-       #return redirect(url_for('.user', username=user.username))
-    form.account_POJ.data = current_user.account_POJ
-    form.password_POJ.data = current_user.password_POJ
-    return render_template('auth/OnlineJudge.html', form=form)
+	form = OnlineJudgeForm()
+	if form.validate_on_submit():
+		if TryLogin(form.account_POJ.data,form.password_POJ.data) or (form.account_POJ.data == ''and form.password_POJ.data==''):
+				if form.account_POJ.data == ''and form.password_POJ.data=='':
+					current_user.account_POJ ='NU LL'
+					current_user.password_POJ= 'NULL'
+				else:
+					current_user.account_POJ = form.account_POJ.data
+					current_user.password_POJ = form.password_POJ.data
+				db.session.add(current_user)
+				flash('The account has been updated')
+		else:
+			flash('The username or password is wrong!')
+		#return redirect(url_for('.user', username=user.username))
+	if current_user.account_POJ=='NU LL':
+		form.account_POJ.data = ''
+		form.password_POJ.data = ''
+	else:
+		form.account_POJ.data = current_user.account_POJ
+		form.password_POJ.data = current_user.password_POJ
+	return render_template('auth/OnlineJudge.html', form=form)
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
