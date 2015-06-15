@@ -14,7 +14,7 @@ def TryLogin(username,userpass):
     req = urllib2.Request(PojMainUrl,None, header)
     resp = urllib2.urlopen(req);
     for index, cookie in enumerate(cj):
-        print '[',index, ']',cookie;
+        print ('[',index, ']',cookie);
     PojMainLoginUrl = "http://poj.org/login";
     postDict = {
             'user_id1'      : username,

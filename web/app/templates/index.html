@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 
 {% block title %}Flasky{% endblock %}
 
@@ -6,4 +7,20 @@
 <div class="page-header">
     <h1>Hello, {% if current_user.is_authenticated() %}{{ current_user.username }}{% else %}Stranger{% endif %}!</h1>
 </div>
+<div>
+    {% if current_user.can(Permission.WRITE_ARTICLES) %}
+    {{ wtf.quick_form(form) }}
+    {% endif %}
+</div>
+<ul class="problems">
+    {% for problems in problems %}
+    <li class="problems">
+        <div class="problems-content">
+            <div class="problems-date">{{ moment(problems.LastUpdate).fromNow() }}</div>
+            <div class="problems-PID">{{ problems.PID }}</div>
+            <div class="problems-OJ_ID">{{ problems.OJ_ID }}</div>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
 {% endblock %}

@@ -3,10 +3,12 @@ from flask.ext.login import login_required, current_user
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm
 from .. import db
-from ..models import Role, User
+from ..models import Role, User, Problem
 from ..decorators import admin_required
 
 
-@main.route('/')
+@main.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+	problems = Problem.query.order_by(Problem.LastUpdate.desc()).all()
+	return render_template('index.html', problems = problems)
+	

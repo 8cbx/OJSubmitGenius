@@ -181,3 +181,13 @@ login_manager.anonymous_user = AnonymousUser
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+class Problem(db.Model):
+	__tablename__ = 'problems'
+	SID = db.Column(db.Integer, primary_key=True)
+	OJ_ID = db.Column(db.String(64))
+	PID = db.Column(db.Integer)
+	Title = db.Column(db.String(128))
+	Total_Submissions = db.Column(db.Integer)
+	Accepted = db.Column(db.Integer)	
+	LastUpdate = db.Column(db.DateTime, index=True, default=datetime.utcnow)
