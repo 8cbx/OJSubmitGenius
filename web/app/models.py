@@ -63,7 +63,7 @@ class User(UserMixin, db.Model):
     last_seen = db.Column(db.DateTime(), default=datetime.utcnow)
     avatar_hash = db.Column(db.String(32))
     school = db.Column(db.String(64))
-    account_POJ = db.Column(db.String(64))
+    account_POJ = db.Column(db.String(64), default='NU LL')
     password_POJ = db.Column(db.String(64))
 
     def __init__(self, **kwargs):
