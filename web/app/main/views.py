@@ -11,4 +11,4 @@ from ..decorators import admin_required
 def index():
 	problems = Problem.query.order_by(Problem.LastUpdate.desc()).all()
 	return render_template('index.html', problems = problems)
-	
+

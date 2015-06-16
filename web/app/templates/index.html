@@ -12,15 +12,50 @@
     {{ wtf.quick_form(form) }}
     {% endif %}
 </div>
+<script type="text/javascript" class="init">
+$(document).ready(function() {
+    $('#problems').dataTable();
+     
+    $('#problems tbody').on('click', 'tr', function () {
+        var name = $('td', this).eq(0).text();
+        alert( 'You clicked on '+name+'\'s row' );
+    } );
+} );
+</script>
 <ul class="problems">
+	<table id="problems" class="display" cellspacing="0" width="100%">
+	<thead>
+		<tr>
+			<th>OJ</th>
+			<th data-orderable="false">PID</th>
+			<th>Title</th>
+			<th>Total_Submissions</th>
+			<th>Accepted</th>
+			<th>LastUpdate</th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<th>OJ</th>
+			<th>PID</th>
+			<th>Title</th>
+			<th>Total_Submissions</th>
+			<th>Accepted</th>
+			<th>LastUpdate</th>
+		</tr>
+	</tfoot>
     {% for problems in problems %}
-    <li class="problems">
-        <div class="problems-content">
-            <div class="problems-date">{{ moment(problems.LastUpdate).fromNow() }}</div>
-            <div class="problems-PID">{{ problems.PID }}</div>
-            <div class="problems-OJ_ID">{{ problems.OJ_ID }}</div>
-        </div>
-    </li>
+    	<tbody>
+            <tr>
+                <th>{{ problems.OJ_ID }}</th>
+                <th>{{ problems.PID }}</th>
+                <th>{{ problems.Title }}</th>
+                <th>{{ problems.Total_Submissions }}</th>
+                <th>{{ problems.Accepted }}</th>
+                <th>{{ moment(problems.LastUpdate).fromNow() }}</th>
+            </tr>
+        </tbody>
     {% endfor %}
+    </table>
 </ul>
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import render_template, redirect, request, url_for, flash
+from flask import render_template, redirect, request, url_for, flash, abort
 from flask.ext.login import login_user, logout_user, login_required, \
     current_user
 from . import auth
@@ -16,6 +16,8 @@ from poj_login import TryLogin
 def before_request():
     if current_user.is_authenticated():
         current_user.ping()
+        if request.endpoint==None:
+        	abort(404)
         if not current_user.confirmed \
                 and request.endpoint[:5] != 'auth.' \
                 and request.endpoint != 'static':
@@ -30,7 +32,11 @@ def unconfirmed():
 
 @auth.route('/user/<username>')
 def user(username):
-    user = User.query.filter_by(username=username).first_or_404()
+    user = User.query.filter_by(username=username).first()
+    if user == None:
+    	abort(404)
+    if user.confirmed==0:
+    	return redirect(url_for('auth.unconfirmed'))
     return render_template('auth/user.html', user=user)
 
 @auth.route('/edit-profile', methods=['GET', 'POST'])
