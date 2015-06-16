@@ -10,7 +10,7 @@ from ..decorators import admin_required
 @main.route('/problem', methods=['GET', 'POST'])
 def indexProblrm():
 	problems = Problem.query.order_by(Problem.LastUpdate.desc()).all()
-	return render_template('indexProblrm.html', problems = problems)
+	return render_template('indexProblem.html', problems = problems)
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
