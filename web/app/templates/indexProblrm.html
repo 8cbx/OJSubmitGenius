@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
 
 {% block title %}Flasky{% endblock %}
 
@@ -49,7 +50,7 @@ $(document).ready(function() {
             <tr>
                 <th>{{ problems.OJ_ID }}</th>
                 <th>{{ problems.PID }}</th>
-                <th>{{ problems.Title }}</th>
+                <th><a href="{{ url_for('main.index') }}">{{ problems.Title }}</th>
                 <th>{{ problems.Total_Submissions }}</th>
                 <th>{{ problems.Accepted }}</th>
                 <th>{{ moment(problems.LastUpdate).fromNow() }}</th>
@@ -58,4 +59,10 @@ $(document).ready(function() {
     {% endfor %}
     </table>
 </ul>
+{% include '_posts.html' %}
+{% if pagination %}
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, '.index') }}
+</div>
+{% endif %}
 {% endblock %}
