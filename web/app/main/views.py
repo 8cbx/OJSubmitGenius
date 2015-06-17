@@ -21,3 +21,9 @@ def indexProblem():
 def index():
     return render_template('index.html')
 
+@main.route('/problem/<int:SID>')
+def problem(SID):
+    problem = Problem.query.get_or_404(SID)
+    return render_template('problem.html', problems=[problem])
+	 
+
