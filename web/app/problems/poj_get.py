@@ -234,9 +234,7 @@ if __name__ == '__main__':
 	fp = open("detals.txt","r")
 	conn=MySQLdb.connect(host='46.101.10.209',user='root',passwd='123456',port=3306,db='test',charset='utf8')
 	cur=conn.cursor()
-	cur.execute("alter table `problems` modify column `OJ_ID` varchar(64) character set utf8  null;")
-	conn.commit()
-	cur.execute("alter table `problems` modify column `Title` varchar(128) character set utf8  null;")
+	cur.execute("alter table problems default character set utf8;")
 	conn.commit()
 	arr=fp.readlines()
 	for lines in arr:
@@ -247,9 +245,11 @@ if __name__ == '__main__':
 		print values[0]
 		print values[1].encode("utf-8")
 		now = datetime.utcnow()
-		cur.execute('insert into problems (PID,OJ_ID,Title,Total_Submissions,Accepted,LastUpdate) values(%s,%s,%s,%s,%s,%s);',(values[0],'POJ',values[1].encode("utf8"),values[2],values[3],now))
+		cur.execute('insert into problems (PID,OJ_ID,Title,Total_Submissions,Accepted,LastUpdate) values(%s,%s,%s,%s,%s,%s);',(values[0],'POJ',values[1].encode("utf-8"),values[2],values[3],now))
 		conn.commit()
 		page = getPageContent('http://poj.org/problem?id='+str(values[0]))
+		while page.find("Error Occurred")!=-1 and page.find("The page is temporarily unavailable")!=-1:
+			page = getPageContent('http://poj.org/problem?id='+str(values[0]))
 		#print page
 		#print '\n'+str(num)
 		Data=""
