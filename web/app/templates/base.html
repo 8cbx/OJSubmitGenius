@@ -1,3 +1,4 @@
+
 {% extends "base2.html" %}
 
 {% block title %}Flasky{% endblock %}
@@ -23,7 +24,7 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('main.indexProblrm') }}">Problems</a></li>
+                <li><a href="{{ url_for('main.indexProblem') }}">Problems</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated() %}
