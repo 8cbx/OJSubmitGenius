@@ -4,5 +4,40 @@
 {% block title %}Flasky{% endblock %}
 
 {% block page_content %}
-{% include '_problemPage.html' %}
+<div class="problem-header">
+        <h1>{{ problems.PID }}{{ problems.Title }}</h1>
+        <table id="problems" class="table table-striped table-bordered" cellspacing="0" width="100%">
+	<thead>
+		<tr>
+			<th>Time Limit</th>
+			<th>Memory Limit</th>
+			<th>Total Submissions</th>
+			<th>Accepted</th>
+		</tr>
+	</thead>
+    	<tbody>
+            <tr>
+                <th>{{ problems.Time_Limit }}</th>
+                <th>{{ problems.Memory_Limit }}</th>
+                <th>{{ problems.Total_Submissions }}</th>
+                <th>{{ problems.Accepted }}</th>
+            </tr>
+        </tbody>
+        </table>
+    <h2>Description</h2>
+    <p>{{ problems.Description }}</p>
+    <h2>Input</h2>
+    <p>{{ problems.Input }}</p>
+    <h2>Output</h2>
+    <p>{{ problems.Output }}</p>
+    <h2>Sample Input</h2>
+    <p>{{ problems.Sample_Input }}</p>
+    <h2>Sample Output</h2>
+    <p>{{ problems.Sample_Output }}</p>
+    <h2>Hint</h2>
+    <p>{{ problems.Hint }}</p>
+    <h2>Source</h2>
+    <p>{{ problems.Source }}</p>
+    
+    </div>
 {% endblock %}

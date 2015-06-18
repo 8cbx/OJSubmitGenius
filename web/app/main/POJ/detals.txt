@@ -1,0 +1,100 @@
+1000,A+B Problem,199338,357946
+1001,Exponentiation,35484,145434
+1002,487-3279,45802,257343
+1003,Hangover,53031,108804
+1004,Financial Management,61119,164627
+1005,I Think I Need a Houseboat,40031,92128
+1006,Biorhythms,37700,119883
+1007,DNA Sorting,35612,88619
+1008,Maya Calendar,21554,70026
+1009,Edge Detection,4380,18903
+1010,STAMPS,4772,16730
+1011,Sticks,29770,127166
+1012,Joseph,18968,49945
+1013,Counterfeit Dollar,13243,41573
+1014,Dividing,16322,63043
+1015,Jury Compromise,6772,25779
+1016,Numbers That Count,6417,19138
+1017,Packets,15871,46900
+1018,Communication System,8790,24632
+1019,Number Sequence,10212,35455
+1020,Anniversary Cake,5151,15772
+1021,2D-Nim,1473,3245
+1022,Packing Unit 4D Cubes,717,2170
+1023,The Fun Number System,3394,10051
+1024,Tester Program,839,2390
+1025,Department,426,1790
+1026,Cipher,5376,20026
+1027,The Same Game,1867,4979
+1028,Web Navigation,13774,30740
+1029,False coin,4922,17611
+1030,Rating,391,1696
+1031,Fence,1114,3301
+1032,Parliament,7344,17411
+1033,Defragment,1366,3922
+1034,The dog task,1128,2806
+1035,Spell checker,7587,20585
+1036,Gangsters,3291,11784
+1037,A decorative fence,2524,6819
+1038,Bugs Integrated\.\.. Inc.,3544,9261
+1039,Pipe,2908,9577
+1040,Transportation,1648,4053
+1041,John's trip,2556,7640
+1042,Gone Fishing,9134,30315
+1043,What's In A Name?,887,2472
+1044,Date bugs,853,2901
+1045,Bode Plot,8444,13350
+1046,Color Me Less,15429,31699
+1047,Round and Round We Go,5683,12175
+1048,Follow My Logic,574,1993
+1049,Microprocessor Simulation,914,3118
+1050,To the Max,22856,43095
+1051,P\.\..MTHBGWB,4331,7526
+1052,Plato's Blocks,305,745
+1053,Set Me,1379,3005
+1054,The Troublesome Frog,3209,10767
+1055,BULK MAILING,271,934
+1056,IMMEDIATE DECODABILITY,5628,11869
+1057,FILE MAPPING,993,2010
+1058,The Gourmet Club,452,1478
+1059,Chutes and Ladders,856,39090
+1060,Modular multiplication of polynomials,1920,4228
+1061,青蛙的约会,17834,95679
+1062,昂贵的聘礼,11557,39840
+1063,Flip and Shift,3305,7039
+1064,Cable master,5997,28214
+1065,Wooden Sticks,8146,19304
+1066,Treasure Hunt,2402,5774
+1067,取石子游戏,12379,36592
+1068,Parencodings,13319,22729
+1069,The Bermuda Triangle,596,1244
+1070,Deformed Wheel,138,623
+1071,Illusive Chase,517,1144
+1072,Puzzle Out,317,1144
+1073,The Willy Memorial Program,197,639
+1074,Parallel Expectations,267,850
+1075,University Entrance Examination,182,602
+1076,Bowl,199,885
+1077,Eight,11691,26753
+1078,Gizilch,554,1423
+1079,Ratio,1478,3971
+1080,Human Gene Functions,9937,17856
+1081,You Who?,259,721
+1082,Calendar Game,2424,5106
+1083,Moving Tables,9263,27701
+1084,Square Destroyer,1444,3384
+1085,Triangle War,1142,2896
+1086,Unscrambling Images,294,729
+1087,A Plug for UNIX,4871,14475
+1088,滑雪,30748,82227
+1089,Intervals,3037,7645
+1090,Chain,1088,3294
+1091,跳蚤,2636,8819
+1092,Farmland,495,1293
+1093,Formatting Text,634,2405
+1094,Sorting It All Out,10251,29596
+1095,Trees Made to Order,3953,6914
+1096,Space Station Shielding,523,1464
+1097,Roads Scholar,317,844
+1098,Robots,175,545
+1099,Square Ice,1556,3932

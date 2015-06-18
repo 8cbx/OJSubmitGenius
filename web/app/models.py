@@ -191,3 +191,18 @@ class Problem(db.Model):
 	Total_Submissions = db.Column(db.Integer)
 	Accepted = db.Column(db.Integer)	
 	LastUpdate = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+class Problem_detail():
+	PID=''
+	Title=''
+	Time_Limit=''
+	Memory_Limit=''
+	Total_Submissions=0
+	Accepted=0
+	Description=''
+	Input=''
+	Output=''
+	Sample_Input=''
+	Sample_Output=''
+	Hint=''
+	Source=''

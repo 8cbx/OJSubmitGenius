@@ -4,9 +4,11 @@ from flask.ext.login import login_required, current_user
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm
 from .. import db
-from ..models import Permission, Role, User, Problem
+from ..models import Permission, Role, User, Problem, Problem_detail
 from ..decorators import admin_required
-
+import sys
+import os
+import codecs
 
 @main.route('/problem', methods=['GET', 'POST'])
 def indexProblem():
@@ -23,7 +25,68 @@ def index():
 
 @main.route('/problem/<int:SID>')
 def problem(SID):
-    problem = Problem.query.get_or_404(SID)
-    return render_template('problem.html', problems=[problem])
+	problem = Problem.query.get_or_404(SID)
+	problems=Problem_detail()
+	fp= open('./app/main/POJ/POJ_'+str(problem.PID),"r")
+	arr=fp.readlines()
+	flag=0
+	for lines in arr:
+		print lines
+		print repr(lines)
+		if lines.find('-PID-')!=-1:
+			flag=1;
+		elif lines.find('-Title:-')!=-1:
+			flag=2;
+		elif lines.find('-Time Limit:-')!=-1:
+			flag=3;
+		elif lines.find('-Memory Limit:-')!=-1:
+			flag=4;
+		elif lines.find('-Total Submissions:-')!=-1:
+			flag=5;
+		elif lines.find('-Accepted:-')!=-1:
+			flag=6;
+		elif lines.find('-Description:-')!=-1:
+			flag=7;
+		elif lines.find('-Input:-')!=-1:
+			flag=8;
+		elif lines.find('-Output:-')!=-1:
+			flag=9;
+		elif lines.find('-Sample Input:-')!=-1:
+			flag=10;
+		elif lines.find('-Sample Output:-')!=-1:
+			flag=11;
+		elif lines.find('-Hint:-')!=-1:
+			flag=12;
+		elif lines.find('-Source:-')!=-1:
+			flag=13;
+		elif flag==1 and lines.find('-PID-')==-1:
+			problems.PID=problems.PID+lines
+		elif flag==2 and lines.find('-Title:-')==-1:
+			problems.Title=problems.Title+lines.decode('utf-8')
+		elif flag==3 and lines.find('-Memory Limit:-')==-1:
+			problems.Time_Limit=problems.Time_Limit+lines
+		elif flag==4 and lines.find('-Total Submissions:-')==-1:
+			problems.Memory_Limit=problems.Memory_Limit+lines
+		elif flag==5 and lines.find('-Accepted:-')==-1:
+			lines=lines.strip()
+			problems.Total_Submissions=problems.Total_Submissions+int(lines)
+		elif flag==6 and lines.find('-Description:-')==-1:
+			lines=lines.strip()
+			problems.Accepted=problems.Accepted+int(lines)
+		elif flag==7 and lines.find('-Input:-')==-1:
+			problems.Description=problems.Description+lines.decode('utf-8')+'\n'
+		elif flag==8 and lines.find('-Output:-')==-1:
+			problems.Input=problems.Input+lines.decode('utf-8')+'\n'
+		elif flag==9 and lines.find('-Sample Input:-')==-1:
+			problems.Output=problems.Output+lines.decode('utf-8')+'\n'
+		elif flag==10 and lines.find('-Sample Output:-')==-1:
+			problems.Sample_Input=problems.Sample_Input+lines.decode('utf-8')+'\n'
+		elif flag==11 and lines.find('-Hint:-')==-1:
+			problems.Sample_Output=problems.Sample_Output+lines.decode('utf-8')+'\n'
+		elif flag==12 and lines.find('-Source:-')==-1:
+			problems.Hint=problems.Hint+lines.decode('utf-8')+'\n' 		
+		elif flag==13:
+			problems.Source=problems.Source+lines.decode('utf-8')+'\n'
+	return render_template('problem.html',problems=problems)
 	 
 
