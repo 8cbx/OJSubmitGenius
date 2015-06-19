@@ -241,6 +241,11 @@ if __name__ == '__main__':
 	cur=conn.cursor()
 	cur.execute("alter table problems default character set utf8;")
 	conn.commit()
+	cur.execute("alter table `problems` modify column `OJ_ID` varchar(64) character set utf8  null;")
+	conn.commit()
+	cur.execute("alter table `problems` modify column `Title` varchar(128) character set utf8  null;")
+	conn.commit()
+	conn.commit()
 	arr=fp.readlines()
 	for lines in arr:
 		#values=[]

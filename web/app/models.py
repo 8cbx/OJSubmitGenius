@@ -47,6 +47,14 @@ class Role(db.Model):
     def __repr__(self):
         return '<Role %r>' % self.name
 
+class Follow(db.Model):
+    __tablename__ = 'follows'
+    follower_id = db.Column(db.Integer, db.ForeignKey('users.id'),
+                            primary_key=True)
+    followed_id = db.Column(db.Integer, db.ForeignKey('users.id'),
+                            primary_key=True)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -193,7 +201,8 @@ class Problem(db.Model):
 	LastUpdate = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
 class Problem_detail():
-	PID=''
+	OJ_ID=''
+	PID=0
 	Title=''
 	Time_Limit=''
 	Memory_Limit=''
@@ -207,3 +216,15 @@ class Problem_detail():
 	Sample_Output=[]
 	Hint=[]
 	Source=''
+class Code_detail(db.Model):
+	__tablename__ = 'status'
+	SID=db.Column(db.Integer, primary_key=True)
+	user=db.Column(db.String(64))
+	OJ_ID=db.Column(db.String(64))
+	PID = db.Column(db.Integer)
+	Result=db.Column(db.String(64))
+	Memory=db.Column(db.String(64))
+	Time=db.Column(db.String(64))
+	Language=db.Column(db.String(64))
+	Code_Length=db.Column(db.String(64))
+	Submit_Time=db.Column(db.DateTime, index=True, default=datetime.utcnow)

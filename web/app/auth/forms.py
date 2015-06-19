@@ -120,4 +120,3 @@ class OnlineJudgeForm(Form):
     password_POJ = PasswordField('POJ password',validators=[Length(0, 64)])
     submit = SubmitField('Submit')
 
-    	

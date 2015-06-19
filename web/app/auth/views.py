@@ -61,8 +61,6 @@ def edit_profile():
     form.about_me.data = current_user.about_me
     return render_template('auth/edit_profile.html', form=form)
 
-
-
 @auth.route('/edit-profile/<int:id>', methods=['GET', 'POST'])
 @login_required
 @admin_required

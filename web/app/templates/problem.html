@@ -56,6 +56,6 @@
     {% endfor %}
     <h2>Source</h2>
     <p>{{ problems.Source|safe }}</p>
-    
+    <a class="btn btn-default" href="{{ url_for('main.submit',OJ_ID=problems.OJ_ID, PID=problems.PID) }}">Submit</a>
     </div>
 {% endblock %}

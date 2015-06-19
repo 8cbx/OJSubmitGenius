@@ -1,16 +1,19 @@
 from flask import render_template, redirect, url_for, abort, flash, request,\
     current_app
 from flask.ext.login import login_required, current_user
+from datetime import datetime
 from . import main
-from .forms import EditProfileForm, EditProfileAdminForm
+from .forms import EditProfileForm, EditProfileAdminForm, SubmitForm
 from .. import db
-from ..models import Permission, Role, User, Problem, Problem_detail
+from ..models import Permission, Role, User, Problem, Problem_detail, Code_detail
 from ..decorators import admin_required
+from poj_submit import Submit
+from poj_login import TryLogin
 import sys
 import os
 import codecs
 
-@main.route('/problem', methods=['GET', 'POST'])
+@main.route('/problem')
 def indexProblem():
 	page = request.args.get('page', 1, type=int)
 	pagination = Problem.query.order_by(Problem.LastUpdate.desc()).paginate(
@@ -23,11 +26,50 @@ def indexProblem():
 def index():
     return render_template('index.html')
 
+@main.route('/submit/<PID>/<OJ_ID>', methods=['GET', 'POST'])
+@login_required
+def submit(OJ_ID,PID):
+	form = SubmitForm()
+	user = User.query.filter_by(username=current_user.username).first()
+	code=Code_detail()
+	if form.validate_on_submit():
+		code.user=current_user.username
+		code.OJ_ID=form.OJ_ID.data
+		code.PID=form.PID.data
+		code.Result='Pending'
+		code.Memory=''
+		code.Time=''
+		if form.Language.data=='0':
+			code.Language='G++'
+		if form.Language.data=='1':
+			code.Language='GCC'
+		if form.Language.data=='2':
+			code.Language='Java'
+		if form.Language.data=='3':
+			code.Language='Pascal'
+		if form.Language.data=='4':
+			code.Language='C++'
+		if form.Language.data=='5':
+			code.Language='C'
+		if form.Language.data=='6':
+			code.Language='Fortran'
+		code.Code_Length=len(form.Code.data)
+		#code.Submit_Time=datetime.utcnow
+		TryLogin(user.account_POJ,user.password_POJ)
+		Submit(form.Code.data,code.PID,int(form.Language.data))
+		db.session.add(code)
+		flash('Your code has been submitted.')
+		return redirect(url_for('.index'))
+	form.OJ_ID.data=OJ_ID
+	form.PID.data=PID
+	return render_template('submit.html', form=form)
+
 @main.route('/problem/<int:SID>')
 def problem(SID):
 	problem = Problem.query.get_or_404(SID)
 	problems=Problem_detail()
-	problems.PID=''
+	problems.OJ_ID=problem.OJ_ID
+	problems.PID=0
 	problems.Title=''
 	problems.Time_Limit=''
 	problems.Memory_Limit=''
@@ -45,8 +87,8 @@ def problem(SID):
 	arr=fp.readlines()
 	flag=0
 	for lines in arr:
-		print lines
-		print repr(lines)
+		#print lines
+		#print repr(lines)
 		if lines.find('-PID-')!=-1:
 			flag=1;
 		elif lines.find('-Title:-')!=-1:
@@ -74,7 +116,7 @@ def problem(SID):
 		elif lines.find('-Source:-')!=-1:
 			flag=13;
 		elif flag==1 and lines.find('-PID-')==-1:
-			problems.PID=problems.PID+lines
+			problems.PID=problems.PID+int(lines)
 		elif flag==2 and lines.find('-Title:-')==-1:
 			problems.Title=problems.Title+lines.decode('utf-8')
 		elif flag==3 and lines.find('-Memory Limit:-')==-1:
