@@ -7,9 +7,9 @@ Parencodings
 -Memory Limit:-
 10000K
 -Total Submissions:-
-22729
+22742
 -Accepted:-
-13319
+13325
 -Description:-
 Let S = s1 s2...s2n  be a well-formed string of parentheses. S can be encoded in two different ways:
 q	By an integer sequence P = p1 p2...pn where pi is the number of left parentheses before the ith right parenthesis in S (P-sequence).

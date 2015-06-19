@@ -14,14 +14,14 @@ Unscrambling Images
 Quadtrees are commonly used for encoding digital images in a compact form. Given an n * n image (where n is a power of 2, 1<= n<= 16), its quadtree encoding is computed as follows. Start with a quadtree with exactly one node, namely the root, and associate with this node the n * n square region for the entire image. Then the following is performed recursively:
 1. If every pixel in the region associated with the current node has an intensity value of p, then the node is made a leaf and it is assigned an associated value of p.
 2. Otherwise, four nodes are added as children of the current node. The region is divided into four equal (square) quadrants and each quadrant is assigned to one child node. The algorithm recurses on each of the children nodes.
-When the process terminates, we obtain a quadtree in which every internal node has four children. Every leaf node has an associated value representing the intensity of the region corresponding to the leaf node. An example of an image and its quadtree encoding is shown below.<img src="http://poj.org/images/1086/1086_1.jpg"
+When the process terminates, we obtain a quadtree in which every internal node has four children. Every leaf node has an associated value representing the intensity of the region corresponding to the leaf node. An example of an image and its quadtree encoding is shown below.<img src="http://poj.org/images/1086/1086_1.jpg"/>
 
 We have assumed that the four children represent, from left to right, the upper left, upper right, lower left, and lower right quadrants, respectively.
 To easily identify a node in a quadtree, we assign a number to each node by the following rules:
 1. The root is numbered 0.
 2. If the number of a node is k, then its children, from left to right, are numbered 4k+1; 4k+2; 4k+3; 4k +4.
 Images encoded as quadtrees can be encrypted by a secret password as follows: whenever a subdivision is performed, the four branches are reordered. The reordering may be different at each node, but it is completely determined by the password and the node number.
-Unfortunately, some people use the "save password" feature in the encoding program and use the same password for multiple images. By observing the encoding of a well-chosen test image, any image encoded with the same password can be decoded without the password. In this test image, each pixel has a distinct intensity from 0 to n^2-1 arranged from left-to-right, top-to-bottom in increasing order. An example for n = 16 is given below:<img src="http://poj.org/images/1086/1086_2.jpg"
+Unfortunately, some people use the "save password" feature in the encoding program and use the same password for multiple images. By observing the encoding of a well-chosen test image, any image encoded with the same password can be decoded without the password. In this test image, each pixel has a distinct intensity from 0 to n^2-1 arranged from left-to-right, top-to-bottom in increasing order. An example for n = 16 is given below:<img src="http://poj.org/images/1086/1086_2.jpg"/>
 
 You managed to gain access to the encoding program and used it to encode the test image. Given the quadtree encoding of the test image, write a program to decode any other image encoded with the same password.
 -Input:-

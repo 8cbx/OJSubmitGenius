@@ -199,10 +199,11 @@ class Problem_detail():
 	Memory_Limit=''
 	Total_Submissions=0
 	Accepted=0
-	Description=''
-	Input=''
-	Output=''
-	Sample_Input=''
-	Sample_Output=''
-	Hint=''
+	Special_Judge=''
+	Description=[]
+	Input=[]
+	Output=[]
+	Sample_Input=[]
+	Sample_Output=[]
+	Hint=[]
 	Source=''

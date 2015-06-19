@@ -7,9 +7,9 @@ Department
 -Memory Limit:-
 10000K
 -Total Submissions:-
-1790
+1793
 -Accepted:-
-426
+429
 -Description:-
 The Department of Security has a new headquarters building. The building has several floors, and on each floor there are rooms numbered xxyy where yy stands for the room number and xx for the floor number, 0<xx; yy<= 10. The building has `pater-noster' elevator, i.e. elevator build up from several cabins running all around. From time to time the agents must visit the headquarters. During their visit they want to visit several rooms and in each room they want to stay for some time. Due to the security reasons, there can be only one agent in the same room at the same time, The same rule applies to the elevators. The visits are planned in the way ensuring they can be accomplished within one day. Each agent visits the headquarters at most once a day.
 

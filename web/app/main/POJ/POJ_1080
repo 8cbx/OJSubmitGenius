@@ -7,9 +7,9 @@ Human Gene Functions
 -Memory Limit:-
 10000K
 -Total Submissions:-
-17858
+17866
 -Accepted:-
-9937
+9941
 -Description:-
 It is well known that a human gene can be considered as a sequence, consisting of four nucleotides, which are simply denoted by four letters, A, C, G, and T. Biologists have been interested in identifying human genes and  determining  their  functions,  because  these  can  be  used  to  diagnose  human  diseases  and  to  design  new drugs for them.
 
@@ -30,7 +30,7 @@ length. These two strings are aligned:
 AGTGAT-G
 -GT--TAG
 
-In this alignment, there are four matches, namely, G in the second position, T in the third, T in the sixth,  and G in the eighth. Each pair of aligned characters is assigned a score according to the following scoring matrix.<img src="http://poj.org/images/1080/1080_1.gif"
+In this alignment, there are four matches, namely, G in the second position, T in the third, T in the sixth,  and G in the eighth. Each pair of aligned characters is assigned a score according to the following scoring matrix.<img src="http://poj.org/images/1080/1080_1.gif"/>
 
 denotes  that  a  space-space match  is  not  allowed. The  score  of  the  alignment  above  is  (-3)+5+5+(-2)+(-3)+5+(-3)+5=9.
 

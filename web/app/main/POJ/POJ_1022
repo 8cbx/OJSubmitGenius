@@ -7,18 +7,18 @@ Packing Unit 4D Cubes
 -Memory Limit:-
 10000K
 -Total Submissions:-
-2170
+2186
 -Accepted:-
-717
+719
 -Description:-
-img src="http://poj.org/images/1022/1.gif"align=left/>
+img src="http://poj.org/images/1022/1.gif",align=left/>
 
 
 
 We usually think that there are three geometric dimensions; the fourth dimension is usually time. However, the Association for Customizing Machines (ACM) has to deal with four geometrical dimensions for their strange customer EE3 who needs to pack four dimensional products into perpendicular parallelepipeds before shipping them to the newly emerged market niche just on the outskirts of the Milky Way.
 Each of EE3 products consists of a number of unit 4D cubes that are glued together at their faces. A face of a 4D cube is a 3D cube and each 4D cube has 8 such faces. The picture on the left shows a 4D cube projected into a plane with the four principal, orthogonal axes shown. It takes a bit of effort to stretch our imagination and see the faces of a 4D cube in such a projection. The pictures below try to illustrate how the two faces along each of the four axes are situated in 4D. Again, using just the planar projection it is not so easy to illustrate and takes some effort to see. But we have done a good job, didn't we?
 
-<img src="http://poj.org/images/1022/2.gif"
+<img src="http://poj.org/images/1022/2.gif"/>
 
 Each EE3 product to be packed consists of a number of unit 4D cubes that are glued together along their faces which are 3D cubes. Your job is simple: find the minimal volume measured in the number of unit 4D cubes of a perpendicular parallelepiped (a 4D box) into which the product can be packed before shipping.
 -Input:-

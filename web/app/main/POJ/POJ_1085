@@ -11,11 +11,11 @@ Triangle War
 -Accepted:-
 1142
 -Description:-
-Triangle War is a two-player game played on the following triangular grid:<img src="http://poj.org/images/1085_1.jpg"
+Triangle War is a two-player game played on the following triangular grid:<img src="http://poj.org/images/1085_1.jpg"/>
 
 Two players, A and B, take turns filling in any dotted line connecting two dots, with A starting first. Once a line is filled, it cannot be filled again. If the line filled by a player completes one or more triangles, she owns the completed triangles and she is awarded another turn (i.e. the opponent skips a turn). The game ends after all dotted lines are filled in, and the player with the most triangles wins the game. The difference in the number of triangles owned by the two players is not important.
 
-For example, if A fills in the line between 2 and 5 in the partial game on the left below:<img src="http://poj.org/images/1085_2.jpg"
+For example, if A fills in the line between 2 and 5 in the partial game on the left below:<img src="http://poj.org/images/1085_2.jpg"/>
 
 Then, she owns the triangle labelled A and takes another turn to fill in the line between 3 and 5. B can now own 3 triangles (if he wishes) by filling in the line between 2 and 3, then the one between 5 and 6, and finally the one between 6 and 9. B would then make one more move before it is A's turn again.
 In this problem, you are given a number of moves that have already been made. From the partial game, you should determine which player will win assuming that each player plays a perfect game from that point on. That is, assume that each player always chooses the play that leads to the best possible outcome for himself/herself.

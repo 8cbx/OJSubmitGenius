@@ -7,9 +7,9 @@ Financial Management
 -Memory Limit:-
 10000K
 -Total Submissions:-
-164628
+164694
 -Accepted:-
-61119
+61154
 -Description:-
 Larry graduated this year and finally has a job. He's making a lot of money, but somehow never seems to have enough. Larry has decided that he needs to grab hold of his financial portfolio and solve his financing problems. The first step is to figure out what's been going on with his money. Larry has his bank account statements and wants to see how much money he has. Help Larry by writing a program to take his closing balance from each of the past twelve months and calculate his average account balance.
 -Input:-

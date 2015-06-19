@@ -7,9 +7,9 @@ Parliament
 -Memory Limit:-
 10000K
 -Total Submissions:-
-17414
+17418
 -Accepted:-
-7345
+7347
 -Description:-
 New convocation of The Fool Land's Parliament consists of N delegates. According to the present regulation delegates should be divided into disjoint groups of different sizes and every day each group has to send one delegate to the conciliatory committee. The composition of the conciliatory committee should be different each day. The Parliament works only while this can be accomplished.
 You are to write a program that will determine how many delegates should contain each group in order for Parliament to work as long as possible.

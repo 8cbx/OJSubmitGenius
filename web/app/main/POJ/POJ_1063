@@ -11,9 +11,9 @@ Flip and Shift
 -Accepted:-
 3305
 -Description:-
-This puzzle consists of a random sequence of m black disks and n white disks on an oval-shaped track, with a turnstile capable of flipping (i.e., reversing) three consecutive disks. In Figure 1, there are 8 black disks and 10 white disks on the track. You may spin the turnstile to flip the three disks in it or shift one position clockwise for each of  the disks on the track (Figure 1).<img src="http://poj.org/images/1063/f1.gif"
+This puzzle consists of a random sequence of m black disks and n white disks on an oval-shaped track, with a turnstile capable of flipping (i.e., reversing) three consecutive disks. In Figure 1, there are 8 black disks and 10 white disks on the track. You may spin the turnstile to flip the three disks in it or shift one position clockwise for each of  the disks on the track (Figure 1).<img src="http://poj.org/images/1063/f1.gif"/>
 
-The goal of  this puzzle  is  to gather  the disks of  the  same color  in adjacent positions using  flips and  shifts. (Figure 2)<img src="http://poj.org/images/1063/f2.gif"
+The goal of  this puzzle  is  to gather  the disks of  the  same color  in adjacent positions using  flips and  shifts. (Figure 2)<img src="http://poj.org/images/1063/f2.gif"/>
 
 You  are  to write  a  program which  decides whether  a  given  sequence  can  reach  a  goal  or  not.  If  a  goal  is reachable, then write a message "YES"; otherwise, write a message "NO".
 -Input:-

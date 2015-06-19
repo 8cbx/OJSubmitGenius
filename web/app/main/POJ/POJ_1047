@@ -7,9 +7,9 @@ Round and Round We Go
 -Memory Limit:-
 10000K
 -Total Submissions:-
-12175
+12181
 -Accepted:-
-5683
+5687
 -Description:-
 A cyclic number is an integer n digits in length which, when multiplied by any integer from 1 to n, yields a"cycle"of the digits of the original number. That is, if you consider the number after the last digit to "wrap around"back to the first digit, the sequence of digits in both numbers will be the same, though they may start at different positions.For example, the number 142857 is cyclic, as illustrated by the following table:
 142857	*1	=	142857

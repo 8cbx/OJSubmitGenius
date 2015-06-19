@@ -7,9 +7,9 @@ Sticks
 -Memory Limit:-
 10000K
 -Total Submissions:-
-127168
+127233
 -Accepted:-
-29772
+29792
 -Description:-
 George took sticks of the same length and cut them randomly until all parts became at most 50 units long. Now he wants to return sticks to the original state, but he forgot how many sticks he had originally and how long they were originally. Please help him and design a program which computes the smallest possible original length of those sticks. All lengths expressed in units are integers greater than zero.
 -Input:-

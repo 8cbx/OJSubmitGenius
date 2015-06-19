@@ -7,9 +7,9 @@ Follow My Logic
 -Memory Limit:-
 10000K
 -Total Submissions:-
-1993
+1995
 -Accepted:-
-574
+575
 -Description:-
 For this problem you will determine the output of a logic circuit composed of one or more inputs, zero or more dual-input AND/OR gates, and one output. The input circuits are drawn with standard ASCII characters. Circuit paths are represented using horizontal and vertical lines, and junctions. Horizontal lines are represented with dash characters (ASCII code 45 decimal), vertical lines with vertical bar characters (ASCII code 124 decimal), and junctions with plus characters (ASCII code 43 decimal).
 -Input:-

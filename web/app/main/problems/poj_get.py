@@ -97,15 +97,20 @@ class DealWithPages(HTMLParser.HTMLParser):
 			#print '<img ',
 			Data = Data + '<img '
 			for name,value in attrs:
-				#print name,
-				Data = Data + name
+				#print name
+				#print value
 				if name == 'src':
+					Data = Data + name
 					#print '="'+index+value+'"',
-					Data = Data + '="'+index+value+'"'+ '/>'
+					Data = Data + '="'+index+value+'"'
 				else:
+					#print name
+					#print value
+					Data =Data + ','+name
 					#print '='+value,
 					#print '/>',
-					Data = Data +'='+value + '/>'
+					Data =Data +'='+value
+			Data=Data + '/>'
 	def handle_data(self, data):
 		global flag
 		global flagofsmall
@@ -231,7 +236,7 @@ def db_add(data,num):
 	fp2.close()
 
 if __name__ == '__main__':
-	fp = open("detals.txt","r")
+	fp = open("details.txt","r")
 	conn=MySQLdb.connect(host='46.101.10.209',user='root',passwd='123456',port=3306,db='test',charset='utf8')
 	cur=conn.cursor()
 	cur.execute("alter table problems default character set utf8;")

@@ -13,7 +13,7 @@ flagofsmall = 0
 Data=''
 havei=0
 coun=0
-fp = open("detals.txt","w")
+fp = open("details.txt","w")
 havebeenprint=0
 def getPageContent(url):
     headers = {'user-agent':'Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; Trident/5.0)', 'cache-control':'no-cache'}    

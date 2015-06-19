@@ -7,9 +7,9 @@ Tester Program
 -Memory Limit:-
 10000K
 -Total Submissions:-
-2390
+2391
 -Accepted:-
-839
+840
 -Description:-
 Tester Program
 
@@ -18,7 +18,7 @@ For this contest, we first designed the following problem (note that you do not 
 Another Wall in the Maze
 
 In ACM/ICPC contests, you'll often see questions such as "find the shortest path out of this maze." Let's turn this on its head and ask "given a path, find a maze for which the given path is the shortest path." Our paths will run vertically and horizontally between the regularly spaced points of a rectangular grid. The problem is to compute a set of unit-length baffles (walls) separating grid points that forces the given path to be the unique shortest path from its starting point to the end point. To make things more interesting, we will require that there should be no redundant walls constructed in the sense that it should not be possible to remove any wall and still have the given path as the unique shortest path. In the following figure for example, consider the path through the 8 ? 5 grid on the left maze of the top row. The wall placements in the two mazes to its right (top row) make that path unique. The two mazes on the lower row are faulty.
-The path is not unique in the one on the left, and there are some redundant walls on the right.<img src="http://poj.org/images/1024/maze.gif"
+The path is not unique in the one on the left, and there are some redundant walls on the right.<img src="http://poj.org/images/1024/maze.gif"/>
 
 -Input:-
 (of the original problem)

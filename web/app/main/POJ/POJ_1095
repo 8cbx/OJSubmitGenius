@@ -7,9 +7,9 @@ Trees Made to Order
 -Memory Limit:-
 10000K
 -Total Submissions:-
-6914
+6916
 -Accepted:-
-3953
+3954
 -Description:-
 We can number binary trees using the following scheme:
 The empty tree is numbered 0.
@@ -17,7 +17,7 @@ The single-node tree is numbered 1.
 All binary trees having m nodes have numbers less than all those having m+1 nodes.
 Any binary tree having m nodes with left and right subtrees L and R is numbered n such that all trees having m nodes numbered > n have either Left subtrees numbered higher than L, or A left subtree = L and a right subtree numbered higher than R.
 
-The first 10 binary trees and tree number 20 in this sequence are shown below:<img src="http://poj.org/images/1095/1095_1.gif"
+The first 10 binary trees and tree number 20 in this sequence are shown below:<img src="http://poj.org/images/1095/1095_1.gif"/>
 
 Your job for this problem is to output a binary tree when given its order number.
 -Input:-

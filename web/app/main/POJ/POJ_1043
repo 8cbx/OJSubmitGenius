@@ -7,9 +7,9 @@ What's In A Name?
 -Memory Limit:-
 10000K
 -Total Submissions:-
-2472
+2474
 -Accepted:-
-887
+888
 -Description:-
 The FBI is conducting a surveillance of a known criminal hideout which serves as a communication center for a number of men and women of nefarious intent. Using sophisticated decryption software and good old fashion wiretaps, they are able to decode any e-mail messages leaving the site. However, before any arrest warrants can be served, they must match actual names with the user ID's on the messages. While these criminals are evil, they're not stupid, so they use random strings of letters for
 their ID's (no dillingerj ID's found here). The FBI knows that each criminal uses only one ID. The only other information they have which will help them is a log of names of the people who enter and leave the hideout. In many cases, this is enough to link the names to the ID's.

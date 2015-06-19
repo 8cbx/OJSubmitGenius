@@ -7,13 +7,13 @@ Moving Tables
 -Memory Limit:-
 10000K
 -Total Submissions:-
-27704
+27717
 -Accepted:-
-9264
+9271
 -Description:-
-The famous ACM (Advanced Computer Maker) Company has rented a floor of a building whose shape is in the following figure.<img src="http://poj.org/images/1083/1083_1.gif"
+The famous ACM (Advanced Computer Maker) Company has rented a floor of a building whose shape is in the following figure.<img src="http://poj.org/images/1083/1083_1.gif"/>
 
-The  floor  has  200  rooms  each  on  the  north  side  and  south  side  along  the  corridor. Recently  the Company made a plan  to  reform  its  system. The  reform  includes moving a  lot of  tables between  rooms. Because  the corridor is narrow and all the tables are big, only one table can pass through the corridor. Some plan is needed to make  the moving efficient. The manager  figured out  the  following plan: Moving a  table  from a  room  to another  room can be done within 10 minutes. When moving a  table  from  room  i  to  room  j,  the part of  the corridor  between  the  front  of  room  i  and  the  front  of  room  j  is  used.  So,  during  each  10 minutes,  several moving between two rooms not sharing the same part of the corridor will be done simultaneously. To make it clear the manager illustrated the possible cases and impossible cases of simultaneous moving.<img src="http://poj.org/images/1083/1083_2.gif"
+The  floor  has  200  rooms  each  on  the  north  side  and  south  side  along  the  corridor. Recently  the Company made a plan  to  reform  its  system. The  reform  includes moving a  lot of  tables between  rooms. Because  the corridor is narrow and all the tables are big, only one table can pass through the corridor. Some plan is needed to make  the moving efficient. The manager  figured out  the  following plan: Moving a  table  from a  room  to another  room can be done within 10 minutes. When moving a  table  from  room  i  to  room  j,  the part of  the corridor  between  the  front  of  room  i  and  the  front  of  room  j  is  used.  So,  during  each  10 minutes,  several moving between two rooms not sharing the same part of the corridor will be done simultaneously. To make it clear the manager illustrated the possible cases and impossible cases of simultaneous moving.<img src="http://poj.org/images/1083/1083_2.gif"/>
 
 For each room, at most one table will be either moved in or moved out. Now, the manager seeks out a method to minimize the time to move all the tables.  Your job is to write a program to solve the manager's problem.
 -Input:-

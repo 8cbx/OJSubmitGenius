@@ -11,7 +11,7 @@ Pipe
 -Accepted:-
 2908
 -Description:-
-The GX Light Pipeline Company started to prepare bent pipes for the new transgalactic light pipeline. During the design phase of the new pipe shape the company ran into the problem of determining how far the light can reach inside each component of the pipe. Note that the material which the pipe is made from is not transparent and not light reflecting.<img src="http://poj.org/images/1039/pipe.gif"
+The GX Light Pipeline Company started to prepare bent pipes for the new transgalactic light pipeline. During the design phase of the new pipe shape the company ran into the problem of determining how far the light can reach inside each component of the pipe. Note that the material which the pipe is made from is not transparent and not light reflecting.<img src="http://poj.org/images/1039/pipe.gif"/>
 
 Each pipe component consists of many straight pipes connected tightly together. For the programming purposes, the company developed the description of each component as a sequence of points [x1; y1], [x2; y2], . . ., [xn; yn], where x1<x2<. . . xn . These are the upper points of the pipe contour. The bottom points of the pipe contour consist of points with y-coordinate decreased by 1. To each upper point [xi; yi] there is a corresponding bottom point [xi; (yi)-1] (see picture above). The company wants to find, for each pipe component, the point with maximal x-coordinate that the light will reach. The light is emitted by a segment source with endpoints [x1; (y1)-1] and [x1; y1] (endpoints are emitting light too). Assume that the light is not bent at the pipe bent points and the bent points do not stop the light beam.
 -Input:-

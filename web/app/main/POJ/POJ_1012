@@ -7,9 +7,9 @@ Joseph
 -Memory Limit:-
 10000K
 -Total Submissions:-
-49945
+49958
 -Accepted:-
-18968
+18973
 -Description:-
 The Joseph's problem is notoriously known. For those who are not familiar with the original problem: from among n people, numbered 1, 2, . . ., n, standing in circle every mth is going to be executed and only the life of the last remaining person will be saved. Joseph was smart enough to choose the position of the last remaining person, thus saving his life to give us the message about the incident. For example when n = 6 and m = 5 then the people will be executed in the order 5, 4, 6, 2, 3 and 1 will be saved.
 

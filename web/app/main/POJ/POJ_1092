@@ -11,14 +11,14 @@ Farmland
 -Accepted:-
 495
 -Description:-
-We have a map for farming land in a country. The whole farming land of the  country is divided into a set of disjoint farming regions. Each farmer owns  only one farming region in this country. There is a boundary fence between two neighboring farming regions. The farmland map for this country can be represented in a plane graph. The following Figure-1 shows one example.<img src="http://poj.org/images/1092/1092_1.jpg"
+We have a map for farming land in a country. The whole farming land of the  country is divided into a set of disjoint farming regions. Each farmer owns  only one farming region in this country. There is a boundary fence between two neighboring farming regions. The farmland map for this country can be represented in a plane graph. The following Figure-1 shows one example.<img src="http://poj.org/images/1092/1092_1.jpg"/>
 
 Figure-1: Farmland graph G(V,E)
 
 There are two types of edges, boundary edge and non-boundary edge. All edges of G(V,E) except (v8, v6) and (v11, v10) are boundary edges which are between two neighboring farming regions. The "proper farming region" in a Farmland graph is a closed region bounded by a simple cycle and it should not contain any vertices or edges inside. In this figure, the polygon<v1,v9,v8,v7 >is a proper farming region, and the region<v2, v1, v7, v8 , v2, v5, v4, v3 >is not a proper farming region since its boundary cycle is not simple.
 We assume that the farmland graph G(V,E) is a simple connected graph, which  does not allow self-loops (Figure-2 (a)) and parallel edges (Figure-2 (b)).Also in Farmland graph G(V,E), we do not consider the outer face of G(V,E).You can see that there are 2 proper farming regions in G(V,E) shown in Figure-1,namely<v1,v9,v8,v7> and<v2,v3,v4,v5>, since there are no vertices or edges inside. But the polygon<v1,v7,v8,v2> is not a proper farming region since vertex v3, v4, and v5 are located in that region. Similarly, the region
 is not a proper region because a vertex v10 is inside the region.A degenerate polygon<v6, v8> is not a proper region because it has no valid area inside.
-<img src="http://poj.org/images/1092/1092_2.jpg"
+<img src="http://poj.org/images/1092/1092_2.jpg"/>
 
 Figure-2: (a) self-loop<v1,v1> , and (b) 3 parallel edges {<v1,v2>,<v1,v2>,<v1,v2>}
 

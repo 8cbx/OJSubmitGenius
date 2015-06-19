@@ -7,9 +7,9 @@ Jury Compromise
 -Memory Limit:-
 65536K
 -Total Submissions:-
-25779
+25810
 -Accepted:-
-6772
+6774
 Special Judge
 -Description:-
 In Frobnia, a far-away country, the verdicts in court trials are determined by a jury consisting of members of the general public. Every time a trial is set to begin, a jury has to be selected, which is done as follows. First, several people are drawn randomly from the public. For each person in this pool, defence and prosecution assign a grade from 0 to 20 indicating their preference for this person. 0 means total dislike, 20 on the other hand means that this person is considered ideally suited for the jury.

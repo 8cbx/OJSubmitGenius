@@ -7,14 +7,14 @@ The Same Game
 -Memory Limit:-
 10000K
 -Total Submissions:-
-4979
+4985
 -Accepted:-
-1867
+1869
 -Description:-
 The game named "Same" is a single person game played on a 10 \Theta 15 board. Each square contains a ball colored red (R), green (G), or blue (B). Two balls belong to the same cluster if they have the same color, and one can be reached from another by following balls of the same color in the four directions up, down, left, and right. At each step of the game, the player chooses a ball whose cluster has at least two balls and removes all balls in the cluster from the board. Then, the board is "compressed" in two steps:
 1. Shift the remaining balls in each column down to fill the empty spaces. The order of the balls in each column is preserved.
 2. If a column becomes empty, shift the remaining columns to the left as far as possible. The order of the columns is preserved.
-For example, choosing the ball at the bottom left corner in the sub-board below causes:<img src="http://poj.org/images/1027/game.jpg"
+For example, choosing the ball at the bottom left corner in the sub-board below causes:<img src="http://poj.org/images/1027/game.jpg"/>
 
 The objective of the game is to remove every ball from the board, and the game is over when every ball is removed or when every cluster has only one ball. The scoring of each game is as follows. The player starts with a score of 0. When a cluster of m balls is removed, the player's score increases by (m-2)^2 . A bonus of 1000 is given if every ball is removed at the end of the game.
 You suspect that a good strategy might be to choose the ball that gives the largest possible cluster at each step, and you want to test this strategy by writing a program to simulate games played using this strategy. If there are two or more balls to choose from, the program should choose the leftmost ball giving the largest cluster. If there is still a tie, it should choose the bottommost ball of these leftmost balls.

@@ -27,6 +27,20 @@ def index():
 def problem(SID):
 	problem = Problem.query.get_or_404(SID)
 	problems=Problem_detail()
+	problems.PID=''
+	problems.Title=''
+	problems.Time_Limit=''
+	problems.Memory_Limit=''
+	problems.Total_Submissions=0
+	problems.Accepted=0
+	problems.Spical_Judge=''
+	problems.Description=[]
+	problems.Input=[]
+	problems.Output=[]
+	problems.Sample_Input=[]
+	problems.Sample_Output=[]
+	problems.Hint=[]
+	problems.Source=''
 	fp= open('./app/main/POJ/POJ_'+str(problem.PID),"r")
 	arr=fp.readlines()
 	flag=0
@@ -70,23 +84,26 @@ def problem(SID):
 		elif flag==5 and lines.find('-Accepted:-')==-1:
 			lines=lines.strip()
 			problems.Total_Submissions=problems.Total_Submissions+int(lines)
+		elif flag==6 and lines.find('Special Judge')!=-1:
+			problems.Special_Judge='Special Judge'
 		elif flag==6 and lines.find('-Description:-')==-1:
 			lines=lines.strip()
 			problems.Accepted=problems.Accepted+int(lines)
 		elif flag==7 and lines.find('-Input:-')==-1:
-			problems.Description=problems.Description+lines.decode('utf-8')+'\n'
+			problems.Description.append(lines.decode('utf-8'))
 		elif flag==8 and lines.find('-Output:-')==-1:
-			problems.Input=problems.Input+lines.decode('utf-8')+'\n'
+			problems.Input.append(lines.decode('utf-8'))
 		elif flag==9 and lines.find('-Sample Input:-')==-1:
-			problems.Output=problems.Output+lines.decode('utf-8')+'\n'
+			problems.Output.append(lines.decode('utf-8'))
 		elif flag==10 and lines.find('-Sample Output:-')==-1:
-			problems.Sample_Input=problems.Sample_Input+lines.decode('utf-8')+'\n'
+			problems.Sample_Input.append(lines.decode('utf-8'))
 		elif flag==11 and lines.find('-Hint:-')==-1:
-			problems.Sample_Output=problems.Sample_Output+lines.decode('utf-8')+'\n'
+			problems.Sample_Output.append(lines.decode('utf-8'))
 		elif flag==12 and lines.find('-Source:-')==-1:
-			problems.Hint=problems.Hint+lines.decode('utf-8')+'\n' 		
+			problems.Hint.append(lines.decode('utf-8'))
 		elif flag==13:
 			problems.Source=problems.Source+lines.decode('utf-8')+'\n'
+	fp.close()
 	return render_template('problem.html',problems=problems)
 	 
 

@@ -7,9 +7,9 @@ Packets
 -Memory Limit:-
 10000K
 -Total Submissions:-
-46901
+46924
 -Accepted:-
-15871
+15878
 -Description:-
 A factory produces products packed in square packets of the same height h and of the sizes 1*1, 2*2, 3*3, 4*4, 5*5, 6*6. These products are always delivered to customers in the square parcels of the same height h as the products have and of the size 6*6. Because of the expenses it is the interest of the factory as well as of the customer to minimize the number of parcels necessary to deliver the ordered products from the factory to the customer. A good program solving the problem of finding the minimal number of parcels necessary to deliver the given products according to an order would save a lot of money. You are asked to make such a program.
 -Input:-

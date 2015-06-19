@@ -7,9 +7,9 @@ Numbers That Count
 -Memory Limit:-
 10000K
 -Total Submissions:-
-19140
+19146
 -Accepted:-
-6418
+6421
 -Description:-
 "Kronecker's Knumbers" is a little company that manufactures plastic digits for use in signs (theater marquees, gas station price displays, and so on). The owner and sole employee, Klyde Kronecker, keeps track of how many digits of each type he has used by maintaining an inventory book. For instance, if he has just made a sign containing the telephone number "5553141", he'll write down the number "5553141" in one column of his book, and in the next column he'll list how many of each digit he used: two 1s, one 3, one 4, and three 5s. (Digits that don't get used don't appear in the inventory.) He writes the inventory in condensed form, like this: "21131435".
 

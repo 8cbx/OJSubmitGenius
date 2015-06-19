@@ -7,9 +7,9 @@ Counterfeit Dollar
 -Memory Limit:-
 10000K
 -Total Submissions:-
-41573
+41601
 -Accepted:-
-13243
+13249
 -Description:-
 Sally Jones has a dozen Voyageur silver dollars. However, only eleven of the coins are true silver dollars; one coin is counterfeit even though its color and size make it indistinguishable from the real silver dollars. The counterfeit coin has a different weight from the other coins but Sally does not know if it is heavier or lighter than the real coins.
 Happily, Sally has a friend who loans her a very accurate balance scale. The friend will permit Sally three weighings to find the counterfeit coin. For instance, if Sally weighs two coins against each other and the scales balance then she knows these two coins are true. Now if Sally weighs

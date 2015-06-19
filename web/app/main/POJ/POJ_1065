@@ -7,9 +7,9 @@ Wooden Sticks
 -Memory Limit:-
 10000K
 -Total Submissions:-
-19306
+19317
 -Accepted:-
-8147
+8151
 -Description:-
 There is a pile of  n  wooden sticks. The length and weight of each stick are known in advance. The sticks are to be processed by a woodworking machine in one by one fashion. It needs some time, called setup time, for the  machine  to  prepare  processing  a  stick.  The  setup  times  are  associated  with  cleaning  operations  and changing tools and shapes in the machine. The setup times of the woodworking machine are given as follows:
 (a) The setup time for the first wooden stick is 1 minute.

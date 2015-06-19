@@ -7,9 +7,9 @@ Bode Plot
 -Memory Limit:-
 10000K
 -Total Submissions:-
-13350
+13354
 -Accepted:-
-8444
+8446
 -Description:-
 Consider the AC circuit below. We will assume that the circuit is in steady-state. Thus, the voltage at nodes 1 and 2 are given by v
 1
@@ -33,7 +33,7 @@ is the frequency (in radians per second), and t is time. V
 R
 is the magnitude of the voltage drop across the resistor, and
 q
-is its phase.<img src="http://poj.org/images/1045/bode.jpg"
+is its phase.<img src="http://poj.org/images/1045/bode.jpg"/>
 
 You are to write a program to determine V
 R

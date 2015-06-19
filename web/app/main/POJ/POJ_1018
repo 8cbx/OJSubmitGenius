@@ -7,9 +7,9 @@ Communication System
 -Memory Limit:-
 10000K
 -Total Submissions:-
-24633
+24663
 -Accepted:-
-8791
+8798
 -Description:-
 We have received an order from Pizoor Communications Inc. for a special communication system. The system consists of several devices. For each device, we are free to choose from several manufacturers. Same devices from two manufacturers differ in their maximum bandwidths and prices.
 By overall bandwidth (B) we mean the minimum of the bandwidths of the chosen devices in the communication system and the total price (P) is the sum of the prices of all chosen devices. Our goal is to choose a manufacturer for each device to maximize B/P.

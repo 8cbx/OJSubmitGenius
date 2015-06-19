@@ -7,9 +7,9 @@ Spell checker
 -Memory Limit:-
 65536K
 -Total Submissions:-
-20585
+20713
 -Accepted:-
-7587
+7641
 -Description:-
 You, as a member of a development team for a new spell checking program, are to write a module that will check the correctness of given words using a known dictionary of all correct words in all their forms.
 If the word is absent in the dictionary then it can be replaced by correct words (from the dictionary) that can be obtained by one of the following operations:

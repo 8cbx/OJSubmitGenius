@@ -7,9 +7,9 @@ Transportation
 -Memory Limit:-
 10000K
 -Total Submissions:-
-4053
+4100
 -Accepted:-
-1648
+1673
 -Description:-
 Ruratania is just entering capitalism and is establishing new enterprising activities in many fields in- cluding transport. The transportation company TransRuratania is starting a new express train from city A to city B with several stops in the stations on the way. The stations are successively numbered, city A station has number 0, city B station number m. The company runs an experiment in order to improve passenger transportation capacity and thus to increase its earnings. The train has a maximum capacity n passengers. The price of the train ticket is equal to the number of stops (stations) between the starting station and the destination station (including the destination station). Before the train starts its route from the city A, ticket orders are collected from all onroute stations. The ticket order from the station S means all reservations of tickets from S to a fixed destination station. In case the company cannot accept all orders because of the passenger capacity limitations, its rejection policy is that it either completely accept or completely reject single orders from single stations.
 

@@ -11,7 +11,7 @@ The Bermuda Triangle
 -Accepted:-
 596
 -Description:-
-People in the hidden region of the Bermuda Triangle make everything they need in triangular shapes. One day, someone decided to break the rule and bake a hexagonally shaped cake. But as usual, he has to serve the cake in triangular pieces. The pieces are equilateral triangles but in different sizes for different people. He can use as many triangles as needed to cut the cake into pieces, such that nothing remains from the cake. For example, the following figure shows one way that a hexagon with side 9 can be cut into triangles with side 2 and 3. (The cake is cut along the thick lines, thin lines are drawn to show the sizes).<img src="http://poj.org/images/1069_1.jpg"
+People in the hidden region of the Bermuda Triangle make everything they need in triangular shapes. One day, someone decided to break the rule and bake a hexagonally shaped cake. But as usual, he has to serve the cake in triangular pieces. The pieces are equilateral triangles but in different sizes for different people. He can use as many triangles as needed to cut the cake into pieces, such that nothing remains from the cake. For example, the following figure shows one way that a hexagon with side 9 can be cut into triangles with side 2 and 3. (The cake is cut along the thick lines, thin lines are drawn to show the sizes).<img src="http://poj.org/images/1069_1.jpg"/>
 
 -Input:-
 is a hexagon and triangle types (specified by the length of their sides) and the goal is to decide if the hexagon can be completely divided by the given triangle types.

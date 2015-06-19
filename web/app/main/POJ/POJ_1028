@@ -7,9 +7,9 @@ Web Navigation
 -Memory Limit:-
 10000K
 -Total Submissions:-
-30740
+30743
 -Accepted:-
-13774
+13777
 -Description:-
 Standard web browsers contain features to move backward and forward among the pages recently visited. One way to implement these features is to use two stacks to keep track of the pages that can be reached by moving backward and forward. In this problem, you are asked to implement this.
 The following commands need to be supported:

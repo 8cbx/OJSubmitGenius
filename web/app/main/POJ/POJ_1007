@@ -7,9 +7,9 @@ DNA Sorting
 -Memory Limit:-
 10000K
 -Total Submissions:-
-88619
+88646
 -Accepted:-
-35612
+35622
 -Description:-
 One measure of ``unsortedness'' in a sequence is the number of pairs of entries that are out of order with respect to each other. For instance, in the letter sequence ``DAABEC'', this measure is 5, since D is greater than four letters to its right and E is greater than one letter to its right. This measure is called the number of inversions in the sequence. The sequence ``AACEDGG'' has only one inversion (E and D)---it is nearly sorted---while the sequence ``ZWQM'' has 6 inversions (it is as unsorted as can be---exactly the reverse of sorted).
 

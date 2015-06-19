@@ -11,7 +11,7 @@
 -Accepted:-
 1473
 -Description:-
-The 2D-Nim board game is played on a grid, with pieces on the grid points. On each move, a player may remove any positive number of contiguous pieces in any row or column. The player who removes the last piece wins. For example, consider the left grid in the following figure.<img src="http://poj.org/images/1021/2d.gif"
+The 2D-Nim board game is played on a grid, with pieces on the grid points. On each move, a player may remove any positive number of contiguous pieces in any row or column. The player who removes the last piece wins. For example, consider the left grid in the following figure.<img src="http://poj.org/images/1021/2d.gif"/>
 
 The player on move may remove (A), (B), (A, B), (A, B, C), or (B,F), etc., but may not remove (A, C), (D, E), (H, I) or (B, G).
 For purposes of writing 2D-Nim-playing software, a certain programmer wants to be able to tell whether or not a certain position has ever been analyzed previously. Because of the rules of 2D-Nim, it should be clear that the two boards above are essentially equivalent. That is, if there is a winning strategy for the left board, the same one must apply to the right board. The fact that the contiguous groups of pieces appear in different places and orientations is clearly irrelevant. All that matters is that the same clusters of pieces (a cluster being a set of contiguous pieces that can be reached from each other by a sequence of one-square vertical or horizontal moves) appear in each. For example, the cluster of pieces (A, B, C, F, G) appears on both boards, but it has been reflected (swapping left and right), rotated, and moved. Your task is to determine whether two given board states are equivalent in this sense or not.
