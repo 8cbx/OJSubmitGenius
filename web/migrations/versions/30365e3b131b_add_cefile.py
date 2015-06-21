@@ -1,13 +1,13 @@
-"""Add status
+"""Add CEfile
 
-Revision ID: 38c1ae4fed6e
+Revision ID: 30365e3b131b
 Revises: None
-Create Date: 2015-06-19 19:56:07.170050
+Create Date: 2015-06-21 20:26:14.619894
 
 """
 
 # revision identifiers, used by Alembic.
-revision = '38c1ae4fed6e'
+revision = '30365e3b131b'
 down_revision = None
 
 from alembic import op
@@ -36,6 +36,21 @@ def upgrade():
     sa.UniqueConstraint('name')
     )
     op.create_index(op.f('ix_roles_default'), 'roles', ['default'], unique=False)
+    op.create_table('status',
+    sa.Column('SID', sa.Integer(), nullable=False),
+    sa.Column('user', sa.String(length=64), nullable=True),
+    sa.Column('OJ_ID', sa.String(length=64), nullable=True),
+    sa.Column('PID', sa.Integer(), nullable=True),
+    sa.Column('Result', sa.String(length=64), nullable=True),
+    sa.Column('Memory', sa.String(length=64), nullable=True),
+    sa.Column('Time', sa.String(length=64), nullable=True),
+    sa.Column('Language', sa.String(length=64), nullable=True),
+    sa.Column('Code_Length', sa.String(length=64), nullable=True),
+    sa.Column('CEfile', sa.String(length=64), nullable=True),
+    sa.Column('Submit_Time', sa.DateTime(), nullable=True),
+    sa.PrimaryKeyConstraint('SID')
+    )
+    op.create_index(op.f('ix_status_Submit_Time'), 'status', ['Submit_Time'], unique=False)
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('email', sa.String(length=64), nullable=True),
@@ -74,6 +89,8 @@ def downgrade():
     op.drop_index(op.f('ix_users_username'), table_name='users')
     op.drop_index(op.f('ix_users_email'), table_name='users')
     op.drop_table('users')
+    op.drop_index(op.f('ix_status_Submit_Time'), table_name='status')
+    op.drop_table('status')
     op.drop_index(op.f('ix_roles_default'), table_name='roles')
     op.drop_table('roles')
     op.drop_index(op.f('ix_problems_LastUpdate'), table_name='problems')

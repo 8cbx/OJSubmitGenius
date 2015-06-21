@@ -256,4 +256,5 @@ class Code_detail(db.Model):
 	Time=db.Column(db.String(64))
 	Language=db.Column(db.String(64))
 	Code_Length=db.Column(db.String(64))
+	CEfile=db.Column(db.String(64))
 	Submit_Time=db.Column(db.DateTime, index=True, default=datetime.utcnow)

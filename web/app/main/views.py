@@ -9,6 +9,7 @@ from ..models import Permission, Role, User, Problem, Problem_detail, Code_detai
 from ..decorators import admin_required
 from poj_submit import Submit
 from poj_login import TryLogin
+from POJfile.poj_status import GetStatus
 import sys
 import os
 import codecs
@@ -39,6 +40,7 @@ def submit(OJ_ID,PID):
 		code.Result='Pending'
 		code.Memory=''
 		code.Time=''
+		code.CEfile=''
 		if form.Language.data=='0':
 			code.Language='G++'
 		if form.Language.data=='1':
@@ -57,6 +59,7 @@ def submit(OJ_ID,PID):
 		#code.Submit_Time=datetime.utcnow
 		TryLogin(user.account_POJ,user.password_POJ)
 		Submit(form.Code.data,code.PID,int(form.Language.data))
+		code=GetStatus(current_user.account_POJ,code,form.Language.data)
 		db.session.add(code)
 		flash('Your code has been submitted.')
 		return redirect(url_for('.index'))
