@@ -1,4 +1,5 @@
-from flask import render_template, redirect, request, url_for, flash, abort
+from flask import render_template, redirect, request, url_for, flash, abort, \
+    current_app
 from flask.ext.login import login_user, logout_user, login_required, \
     current_user
 from . import auth
@@ -259,7 +260,6 @@ def change_email(token):
 
 @auth.route('/follow/<username>')
 @login_required
-@permission_required(Permission.FOLLOW)
 def follow(username):
     user = User.query.filter_by(username=username).first()
     if user is None:
@@ -300,7 +300,7 @@ def followers(username):
         error_out=False)
     follows = [{'user': item.follower, 'timestamp': item.timestamp}
                for item in pagination.items]
-    return render_template('followers.html', user=user, title="Followers of",
+    return render_template('auth/followers.html', user=user, title="Followers of",
                            endpoint='.followers', pagination=pagination,
                            follows=follows)
 
@@ -317,6 +317,6 @@ def followed_by(username):
         error_out=False)
     follows = [{'user': item.followed, 'timestamp': item.timestamp}
                for item in pagination.items]
-    return render_template('followers.html', user=user, title="Followed by",
+    return render_template('auth/followers.html', user=user, title="Followed by",
                            endpoint='.followed_by', pagination=pagination,
                            follows=follows)
