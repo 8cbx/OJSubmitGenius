@@ -60,12 +60,13 @@ class DealWithPages(HTMLParser.HTMLParser):
 		stack_size = self.st.getLength()
 		if stack_size == 2:
 			#print data
-			if data=='Presentation Error' or data=='Time Limit Exceeded' or data=='Memory Limit Exceeded' or data=='Wrong Answer' or data=='Runtime Error' or data=='Output Limit Exceeded' or data=='Compile Error' or data=='Compiling':
+			if data=='Presentation Error' or data=='Time Limit Exceeded' or data=='Memory Limit Exceeded' or data=='Wrong Answer' or data=='Runtime Error' or data=='Output Limit Exceeded' or data=='Compile Error' or data=='Compiling' or data=='Running & Judging':
 				Data1.append(data)
 				Data1.append(' ')
 				Data1.append(' ')
 			elif len(Data1)==9:
 				Data.append(Data1)
+				#print Data
 				Data1=[]
 				Data1.append(data)
 			else:
@@ -79,7 +80,7 @@ class DealWithPages(HTMLParser.HTMLParser):
 			self.st.pop()
 
 def SaveCEfile(filename,RID):
-	fp1=open('.CEfile/'+str(filename),'w')
+	fp1=open(str(filename),'w')
 	page = getPageContent('http://poj.org/showcompileinfo?solution_id='+str(RID))
 	while page.find("Error Occurred")!=-1 and page.find("The page is temporarily unavailable")!=-1:
 		page = getPageContent('http://poj.org/showcompileinfo?solution_id='+str(RID))
@@ -90,8 +91,11 @@ def SaveCEfile(filename,RID):
 	fp1.close()
 
 def GetStatus(user,code,language):
+	global Data
+	global Data1
 	Data=[]
-	print code.PID
+	Data1=[]
+	#print code.PID
 	page = getPageContent('http://poj.org/status?problem_id='+str(code.PID)+'&user_id='+user+'&result=&language='+str(language))
 	while page.find("Error Occurred")!=-1 and page.find("The page is temporarily unavailable")!=-1:
 		page = getPageContent('http://poj.org/status?problem_id='+str(code.PID)+'&user_id='+user+'&result=&language=')
@@ -99,17 +103,19 @@ def GetStatus(user,code,language):
 	#print '\n'+str(num)
 	my=DealWithPages()
 	my.feed(page)
+	#print Data
 	Data.append(Data1)
-	print Data
-	while Data[0][3]=='Compiling':
+	#print Data[0][3]
+	#print Data1
+	while (Data[0][3]=='Compiling' or Data[0][3]=='Running '):
 		Data=[]
+		Data1=[]
 		page = getPageContent('http://poj.org/status?problem_id='+str(code.PID)+'&user_id='+user+'&result=&language='+str(language))
 		while page.find("Error Occurred")!=-1 and page.find("The page is temporarily unavailable")!=-1:
 			page = getPageContent('http://poj.org/status?problem_id='+str(code.PID)+'&user_id='+user+'&result=&language=')
 		my=DealWithPages()
 		my.feed(page)
 		Data.append(Data1)
-	code.user=Data[0][1]
 	code.OJ_ID='POJ'
 	code.PID = int(Data[0][2])		
 	code.Result=Data[0][3]
@@ -118,7 +124,8 @@ def GetStatus(user,code,language):
 	code.Language=Data[0][6]
 	code.Code_Length=Data[0][7]
 	code.CEfile=''
+	print Data[0]
 	if Data[0][3]=="Compile Error":
-		SaveCEfile('POJ_'+str(code.PID)+str(Data[0][0]),Data[0][0])
+		SaveCEfile('./app/main/POJCEfile/POJ_'+str(code.PID)+str(Data[0][0]),Data[0][0])
 		code.CEfile='POJ_'+str(code.PID)+str(Data[0][0])
 	return code

@@ -9,7 +9,7 @@ from ..models import Permission, Role, User, Problem, Problem_detail, Code_detai
 from ..decorators import admin_required
 from poj_submit import Submit
 from poj_login import TryLogin
-from POJfile.poj_status import GetStatus
+from poj_status import GetStatus
 import sys
 import os
 import codecs
