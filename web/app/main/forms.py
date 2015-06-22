@@ -56,3 +56,13 @@ class SubmitForm(Form):
 	Language=SelectField('OJ', choices=[("0","G++"),("1","GCC"),("2","Java"),("3","Pascal"),("4","C++"),("5","C"),("6","Fortran")])
 	Code=TextAreaField('Code',validators=[Required(),Length(0, 65535)])
 	submit = SubmitField('Submit')
+class ProblemFilter(Form):
+	OJ_ID=SelectField('OJ', choices=[("POJ","POJ")])
+	PID=StringField('PID',validators=[Length(0, 8)])
+	submit = SubmitField('Filter!')
+class StatusFilter(Form):
+	PID=StringField('PID',validators=[Length(0, 8)])
+	OJ_ID=SelectField('OJ', choices=[('','All'),("POJ","POJ")])
+	user=StringField('User Name',validators=[Length(0, 8)])
+	Result=SelectField('Result', choices=[('','All'),("Accepted","Accepted"),('Presentation Error','Presentation Error'),('Time Limit Exceeded','Time Limit Exceeded'),('Memory Limit Exceeded','Memory Limit Exceeded'),('Wrong Answer','Wrong Answer'),('Runtime Error','Runtime Error'),('Output Limit Exceeded','Output Limit Exceeded'),('Compile Error','Compile Error')])
+	submit = SubmitField('Filter!')

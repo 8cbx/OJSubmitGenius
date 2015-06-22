@@ -15,6 +15,9 @@
     {{ wtf.quick_form(form) }}
     {% endif %}
 </div>
+<div class="col-md-4">
+    {{ wtf.quick_form(form) }}
+</div>
 {% if pagination %}
 <div class="pagination">
     {{ macros.pagination_widget(pagination, '.indexStatus') }}

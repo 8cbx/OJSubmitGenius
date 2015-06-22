@@ -320,7 +320,6 @@ def followed_by(username):
     return render_template('auth/followers.html', user=user, title="Followed by",
                            endpoint='.followed_by', pagination=pagination,
                            follows=follows)
-
 @auth.route('/Accepted_Problem/<username>')
 def AC_problem(username):
     user = User.query.filter_by(username=username).first()
