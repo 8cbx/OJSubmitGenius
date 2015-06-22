@@ -18,28 +18,108 @@ import codecs
 @main.route('/status')
 def indexStatus():
 	page = request.args.get('page', 1, type=int)
-	pagination = Code_detail.query.order_by(Code_detail.RunID.asc()).paginate(
-       page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
-		error_out=False)
+	OJ_ID = request.args.get('OJ_ID', '')
+	user = request.args.get('uesr', '')
+	Result = request.args.get('result', '')
+	PID = request.args.get('PID', -1, type=int)
+	if OJ_ID=='' and user=='' and Result=='' and PID==-1:
+		pagination = Code_detail.query.order_by(Code_detail.RunID.desc()).paginate(
+     	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif OJ_ID!='' and user=='' and Result=='' and PID==-1:
+		pagination = Code_detail.query.filter(Code_detail.OJ_ID==OJ_ID).paginate(
+     	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif OJ_ID=='' and user!='' and Result=='' and PID==-1:
+		pagination = Code_detail.query.filter(Code_detail.user==user).paginate(
+     	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif OJ_ID=='' and user=='' and Result!='' and PID==-1:
+		pagination = Code_detail.query.filter(Code_detail.Result==Result).paginate(
+     	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif OJ_ID=='' and user=='' and Result=='' and PID!=-1:
+		pagination = Code_detail.query.filter(Code_detail.PID==PID).paginate(
+     	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif OJ_ID!='' and user!='' and Result=='' and PID==-1:
+		pagination = Code_detail.query.filter(Code_detail.OJ_ID==OJ_ID,Code_detail.user==user).paginate(
+     	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif OJ_ID!='' and user=='' and Result!='' and PID==-1:
+		pagination = Code_detail.query.filter(Code_detail.OJ_ID==OJ_ID,Code_detail.Result==Result).paginate(
+     	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif OJ_ID!='' and user=='' and Result=='' and PID!=-1:
+		pagination = Code_detail.query.filter(Code_detail.OJ_ID==OJ_ID,Code_detail.PID==PID).paginate(
+     	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif OJ_ID=='' and user!='' and Result!='' and PID==-1:
+		pagination = Code_detail.query.filter(Code_detail.user==user,Code_detail.Result==Result).paginate(
+     	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif OJ_ID=='' and user!='' and Result=='' and PID!=-1:
+		pagination = Code_detail.query.filter(Code_detail.user==user,Code_detail.PID==PID).paginate(
+     	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif OJ_ID=='' and user=='' and Result!='' and PID!=-1:
+		pagination = Code_detail.query.filter(Code_detail.Result==Result,Code_detail.PID==PID).paginate(
+     	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif OJ_ID=='':
+		pagination = Code_detail.query.filter(Code_detail.user==user,Code_detail.Result==Result,Code_detail.PID==PID).paginate(
+     	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif user=='':
+		pagination = Code_detail.query.filter(Code_detail.OJ_ID==OJ_ID,Code_detail.Result==Result,Code_detail.PID==PID).paginate(
+     	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif Result=='':
+		pagination = Code_detail.query.filter(Code_detail.OJ_ID==OJ_ID,Code_detail.user==user,Code_detail.PID==PID).paginate(
+     	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif PID==-1:
+		pagination = Code_detail.query.filter(Code_detail.OJ_ID==OJ_ID,Code_detail.user==user,Code_detail.Result==Result).paginate(
+     	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+     	  	error_out=False)
 	status = pagination.items
 	return render_template('indexStatus.html', status=status, pagination=pagination)
 
 @main.route('/problem')
 def indexProblem():
 	page = request.args.get('page', 1, type=int)
-	pagination = Problem.query.order_by(Problem.LastUpdate.desc()).paginate(
-       page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
-		error_out=False)
+	OJ_ID = request.args.get('OJ_ID', '')
+	PID = request.args.get('PID', -1, type=int)
+	if OJ_ID=='' and PID==-1:
+		pagination = Problem.query.order_by(Problem.LastUpdate.desc()).paginate(
+       		page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif OJ_ID!='' and PID==-1:
+		pagination = Problem.query.filter(Problem.OJ_ID==OJ_ID).paginate(
+       		page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif OJ_ID==''and PID!=-1:
+		pagination = Problem.query.filter(Problem.PID==PID).paginate(
+       		page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+	elif OJ_ID!=''and PID!=-1:
+		pagination = Problem.query.filter(Problem.OJ_ID==OJ_ID,Problem.PID==PID).paginate(
+       		page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
 	problems = pagination.items
 	return render_template('indexProblem.html',problems=problems, pagination=pagination)
+
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
 
-@main.route('/submit/<PID>/<OJ_ID>/<SID>', methods=['GET', 'POST'])
+@main.route('/submit', methods=['GET', 'POST'])
 @login_required
-def submit(OJ_ID,PID,SID):
+def submit():
+	OJ_ID = request.args.get('OJ_ID', '')
+	SID = request.args.get('SID', -1, type=int)
+	PID = request.args.get('PID', -1, type=int)
 	form = SubmitForm()
 	user = User.query.filter_by(username=current_user.username).first()
 	code=Code_detail()
