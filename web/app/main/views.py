@@ -14,6 +14,16 @@ import sys
 import os
 import codecs
 
+
+@main.route('/statu')
+def indexStatu():
+	page = request.args.get('page', 1, type=int)
+	pagination = Code_detail.query.order_by(Code_detail.SID.desc()).paginate(
+       page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+		error_out=False)
+	status = pagination.items
+	return render_template('indexStatu.html', status=status, pagination=pagination)
+
 @main.route('/problem')
 def indexProblem():
 	page = request.args.get('page', 1, type=int)
@@ -62,7 +72,7 @@ def submit(OJ_ID,PID):
 		code=GetStatus(current_user.account_POJ,code,form.Language.data)
 		db.session.add(code)
 		flash('Your code has been submitted.')
-		return redirect(url_for('.index'))
+		return redirect(url_for('.indexStatu'))
 	form.OJ_ID.data=OJ_ID
 	form.PID.data=PID
 	return render_template('submit.html', form=form)
