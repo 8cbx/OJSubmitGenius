@@ -1,0 +1,55 @@
+<script type="text/javascript" class="init">
+$(document).ready(function() {
+    $('#status').dataTable();
+     
+    $('#status tbody').on('click', 'tr', function () {
+        var name = $('td', this).eq(0).text();
+        alert( 'You clicked on '+name+'\'s row' );
+    } );
+} );
+</script>
+<ul class="status">
+	<table id="status" class="table table-striped table-bordered" cellspacing="0" width="100%">
+	<thead>
+		<tr>
+			<th>Run ID</th>
+			<th>OJ Name</th>
+			<th>User Name</th>
+			<th>Result</th>
+			<th>Memory</th>
+                    <th>Time</th>
+                    <th>Language</th>
+                    <th>Code Length</th>
+                    <th>Submit Time</th>
+		</tr>
+	</thead>
+	<tfoot>
+		<tr>
+			<th>Run ID</th>
+			<th>OJ Name</th>
+			<th>User Name</th>
+			<th>Result</th>
+			<th>Memory</th>
+                    <th>Time</th>
+                    <th>Language</th>
+                    <th>Code Length</th>
+                    <th>Submit Time</th>
+		</tr>
+	</tfoot>
+    {% for status in status %}
+    	<tbody>
+            <tr>
+                <th>{{ status.SID }}</th>
+                <th>{{ status.OJ_ID }}</th>
+                <th><a href="{{ url_for('auth.user', username=status.user) }}">{{ status.user }}</th>
+                <th>{{ status.Result }}</th>
+                <th>{{ status.Memory }}</th>
+                <th>{{ status.Time }}</th>
+                <th>{{ status.Language }}</th>
+                <th>{{ status.Code_Length }}</th>
+                <th>{{ status.Submit_Time }}</th>
+            </tr>
+        </tbody>
+    {% endfor %}
+    </table>
+</ul>

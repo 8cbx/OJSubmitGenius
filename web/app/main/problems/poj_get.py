@@ -255,7 +255,7 @@ if __name__ == '__main__':
 		print values[0]
 		print values[1].encode("utf-8")
 		now = datetime.utcnow()
-		cur.execute('insert into problems (PID,OJ_ID,Title,Total_Submissions,Accepted,LastUpdate) values(%s,%s,%s,%s,%s,%s);',(values[0],'POJ',values[1].encode("utf-8"),values[2],values[3],now))
+		cur.execute('insert into problems (PID,OJ_ID,Title,Accepted,Total_Submissions,LastUpdate) values(%s,%s,%s,%s,%s,%s);',(values[0],'POJ',values[1].encode("utf-8"),values[2],values[3],now))
 		conn.commit()
 		page = getPageContent('http://poj.org/problem?id='+str(values[0]))
 		while page.find("Error Occurred")!=-1 and page.find("The page is temporarily unavailable")!=-1:

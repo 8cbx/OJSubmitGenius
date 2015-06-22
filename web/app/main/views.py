@@ -18,7 +18,7 @@ import codecs
 @main.route('/status')
 def indexStatus():
 	page = request.args.get('page', 1, type=int)
-	pagination = Code_detail.query.order_by(Code_detail.SID.desc()).paginate(
+	pagination = Code_detail.query.order_by(Code_detail.RunID.asc()).paginate(
        page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
 		error_out=False)
 	status = pagination.items
@@ -77,6 +77,9 @@ def submit(OJ_ID,PID,SID):
 		fp= open('./app/main/POJcode/POJ_'+str(code.RemoteID),"w")
 		fp.write(form.Code.data)
 		fp.close()
+		if code.Result=='Accepted':
+			problem=Problem.query.filter_by(SID=code.SID).first()
+			current_user.add_accepted_problem(problem)
 		return redirect(url_for('.indexStatus'))
 	form.OJ_ID.data=OJ_ID
 	form.PID.data=PID
