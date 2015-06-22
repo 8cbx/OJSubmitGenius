@@ -230,6 +230,7 @@ class Problem(db.Model):
 	LastUpdate = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
 class Problem_detail():
+	SID=''
 	OJ_ID=''
 	PID=0
 	Title=''
@@ -247,10 +248,12 @@ class Problem_detail():
 	Source=''
 class Code_detail(db.Model):
 	__tablename__ = 'status'
-	SID=db.Column(db.Integer, primary_key=True)
+	RunID=db.Column(db.Integer, primary_key=True)
 	user=db.Column(db.String(64))
 	OJ_ID=db.Column(db.String(64))
 	PID = db.Column(db.Integer)
+	SID = db.Column(db.Integer)
+	RemoteID=db.Column(db.String(64))
 	Result=db.Column(db.String(64))
 	Memory=db.Column(db.String(64))
 	Time=db.Column(db.String(64))

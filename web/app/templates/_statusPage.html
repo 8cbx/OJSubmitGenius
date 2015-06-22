@@ -13,33 +13,36 @@ $(document).ready(function() {
 	<thead>
 		<tr>
 			<th>Run ID</th>
+			<th>PID</th>
 			<th>OJ Name</th>
 			<th>User Name</th>
 			<th>Result</th>
 			<th>Memory</th>
-                    <th>Time</th>
-                    <th>Language</th>
-                    <th>Code Length</th>
-                    <th>Submit Time</th>
+			<th>Time</th>
+			<th>Language</th>
+			<th>Code Length</th>
+			<th>Submit Time</th>
 		</tr>
 	</thead>
 	<tfoot>
 		<tr>
 			<th>Run ID</th>
+			<th>PID</th>
 			<th>OJ Name</th>
 			<th>User Name</th>
 			<th>Result</th>
 			<th>Memory</th>
-                    <th>Time</th>
-                    <th>Language</th>
-                    <th>Code Length</th>
-                    <th>Submit Time</th>
+			<th>Time</th>
+			<th>Language</th>
+			<th>Code Length</th>
+			<th>Submit Time</th>
 		</tr>
 	</tfoot>
     {% for status in status %}
     	<tbody>
             <tr>
-                <th>{{ status.SID }}</th>
+                <th>{{ status.RunID }}</th>
+                <th><a href="{{ url_for('main.problem', SID=status.SID) }}">{{ status.PID }}</th>
                 <th>{{ status.OJ_ID }}</th>
                 <th><a href="{{ url_for('auth.user', username=status.user) }}">{{ status.user }}</th>
                 <th>{{ status.Result }}</th>

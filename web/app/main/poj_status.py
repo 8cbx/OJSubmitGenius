@@ -124,7 +124,8 @@ def GetStatus(user,code,language):
 	code.Language=Data[0][6]
 	code.Code_Length=Data[0][7]
 	code.CEfile=''
-	print Data[0]
+	code.RemoteID=Data[0][0]
+	#print Data[0]
 	if Data[0][3]=="Compile Error":
 		SaveCEfile('./app/main/POJCEfile/POJ_'+str(code.PID)+str(Data[0][0]),Data[0][0])
 		code.CEfile='POJ_'+str(code.PID)+str(Data[0][0])

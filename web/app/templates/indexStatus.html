@@ -17,13 +17,13 @@
 </div>
 {% if pagination %}
 <div class="pagination">
-    {{ macros.pagination_widget(pagination, '.indexStatu') }}
+    {{ macros.pagination_widget(pagination, '.indexStatus') }}
 </div>
 {% endif %}
-{% include '_statuPage.html' %}
+{% include '_statusPage.html' %}
 {% if pagination %}
 <div class="pagination">
-    {{ macros.pagination_widget(pagination, '.indexStatu') }}
+    {{ macros.pagination_widget(pagination, '.indexStatus') }}
 </div>
 {% endif %}
 {% endblock %}

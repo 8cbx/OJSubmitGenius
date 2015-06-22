@@ -15,14 +15,14 @@ import os
 import codecs
 
 
-@main.route('/statu')
-def indexStatu():
+@main.route('/status')
+def indexStatus():
 	page = request.args.get('page', 1, type=int)
 	pagination = Code_detail.query.order_by(Code_detail.SID.desc()).paginate(
        page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
 		error_out=False)
 	status = pagination.items
-	return render_template('indexStatu.html', status=status, pagination=pagination)
+	return render_template('indexStatus.html', status=status, pagination=pagination)
 
 @main.route('/problem')
 def indexProblem():
@@ -37,13 +37,14 @@ def indexProblem():
 def index():
     return render_template('index.html')
 
-@main.route('/submit/<PID>/<OJ_ID>', methods=['GET', 'POST'])
+@main.route('/submit/<PID>/<OJ_ID>/<SID>', methods=['GET', 'POST'])
 @login_required
-def submit(OJ_ID,PID):
+def submit(OJ_ID,PID,SID):
 	form = SubmitForm()
 	user = User.query.filter_by(username=current_user.username).first()
 	code=Code_detail()
 	if form.validate_on_submit():
+		code.SID=SID
 		code.user=current_user.username
 		code.OJ_ID=form.OJ_ID.data
 		code.PID=form.PID.data
@@ -51,6 +52,7 @@ def submit(OJ_ID,PID):
 		code.Memory=''
 		code.Time=''
 		code.CEfile=''
+		code.RemoteID=''
 		if form.Language.data=='0':
 			code.Language='G++'
 		if form.Language.data=='1':
@@ -72,7 +74,10 @@ def submit(OJ_ID,PID):
 		code=GetStatus(current_user.account_POJ,code,form.Language.data)
 		db.session.add(code)
 		flash('Your code has been submitted.')
-		return redirect(url_for('.indexStatu'))
+		fp= open('./app/main/POJcode/POJ_'+str(code.RemoteID),"w")
+		fp.write(form.Code.data)
+		fp.close()
+		return redirect(url_for('.indexStatus'))
 	form.OJ_ID.data=OJ_ID
 	form.PID.data=PID
 	return render_template('submit.html', form=form)
@@ -81,6 +86,7 @@ def submit(OJ_ID,PID):
 def problem(SID):
 	problem = Problem.query.get_or_404(SID)
 	problems=Problem_detail()
+	problems.SID=problem.SID
 	problems.OJ_ID=problem.OJ_ID
 	problems.PID=0
 	problems.Title=''
