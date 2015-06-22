@@ -37,7 +37,7 @@ $(document).ready(function() {
                 <th>{{ problems.PID }}</th>
                 <th><a href="{{ url_for('main.problem', SID=problems.SID) }}">{{ problems.Title }}</th>
                 <th>{{ problems.Total_Submissions }}</th>
-                <th>{{ problems.Accepted }}</th>
+                <th><a href="{{ url_for('main.AC_user', SID=problems.SID) }}">{{ problems.Accepted }}</th>
                 <th>{{ moment(problems.LastUpdate).fromNow() }}</th>
             </tr>
         </tbody>

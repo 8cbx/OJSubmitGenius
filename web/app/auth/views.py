@@ -320,3 +320,19 @@ def followed_by(username):
     return render_template('auth/followers.html', user=user, title="Followed by",
                            endpoint='.followed_by', pagination=pagination,
                            follows=follows)
+
+@auth.route('/Accepted_Problem/<username>')
+def AC_problem(username):
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+        flash('Invalid user.')
+        return redirect(url_for('.index'))
+    page = request.args.get('page', 1, type=int)
+    pagination = user.AC_problems.paginate(
+        page, per_page=current_app.config['FLASKY_AC_PROBLEM_PER_PAGE'],
+        error_out=False)
+    problem = [{'problem': item.AC_problems, 'AC_time': item.AC_time}
+               for item in pagination.items]
+    return render_template('auth/AC_problem.html', user=user, title="Accepted Problem",
+                           pagination=pagination,
+                           problem=problem)

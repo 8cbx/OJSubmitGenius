@@ -250,4 +250,18 @@ def problem(SID):
 	fp.close()
 	return render_template('problem.html',problems=problems)
 	 
-
+@main.route('/problem/<int:SID>/AC_user')
+def AC_user(SID):
+	problem = Problem.query.filter_by(SID=SID).first()
+	if problem is None:
+		flash('Invalid problem.')
+		return redirect(url_for('.index'))
+	page = request.args.get('page', 1, type=int)
+	pagination = problem.AC_user.paginate(
+		page, per_page=current_app.config['FLASKY_AC_PROBLEM_PER_PAGE'],
+		error_out=False)
+	user = [{'user': item.AC_user, 'AC_time': item.AC_time}
+			for item in pagination.items]
+	return render_template('AC_user.html', title="Accepted User",
+                           pagination=pagination,
+                           user=user)
