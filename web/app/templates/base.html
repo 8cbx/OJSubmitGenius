@@ -26,6 +26,17 @@
             <ul class="nav navbar-nav">
                 <li><a href="{{ url_for('main.indexProblem') }}">Problems</a></li>
                 <li><a href="{{ url_for('main.indexStatus') }}">Status</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        Contest <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% if current_user.is_authenticated() %}
+                        <li><a href="{{ url_for('main.index') }}">Add Contest</a></li>
+                        {% endif %}
+                        <li><a href="{{ url_for('main.index') }}">All Contest</a></li>
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 {% if current_user.is_authenticated() %}
