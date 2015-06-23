@@ -12,6 +12,8 @@
     {% for user in user %}
     <tr>
         <td>
+            <a href="{{ url_for('auth.user', username = user.user.username) }}">
+                <img class="img-rounded" src="{{ user.user.gravatar(size=32) }}">
                 {{ user.user.username }}
             </a>
         </td>
@@ -19,4 +21,7 @@
     </tr>
     {% endfor %}
 </table>
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, endpoint, SID = SID) }}
+</div>
 {% endblock %}

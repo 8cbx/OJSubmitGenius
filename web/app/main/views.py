@@ -271,5 +271,5 @@ def AC_user(SID):
 	user = [{'user': item.AC_user, 'AC_time': item.AC_time}
 			for item in pagination.items]
 	return render_template('AC_user.html', title="Accepted User",
-                           pagination=pagination,
-                           user=user)
+                              endpoint='.AC_user', pagination=pagination,
+                              user=user, SID=SID)

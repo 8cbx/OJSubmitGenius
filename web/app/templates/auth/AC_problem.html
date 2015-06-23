@@ -15,8 +15,11 @@
                 {{ problem.problem.OJ_ID }}
             </a>
         </td>
-        <td>{{ problem.problem.PID }}</td>
+        <td><a href="{{ url_for('main.problem', SID=problem.problem.SID) }}">{{ problem.problem.PID }}</td>
     </tr>
     {% endfor %}
 </table>
+<div class="pagination">
+    {{ macros.pagination_widget(pagination, endpoint, username = username) }}
+</div>
 {% endblock %}
