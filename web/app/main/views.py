@@ -24,8 +24,7 @@ def indexStatus():
 	PID = request.args.get('PID', -1, type=int)
 	form=StatusFilter()
 	if form.validate_on_submit():
-		#print form.PID.data
-		next='/status?OJ_ID='+str(form.OJ_ID.data)+'&user='+str(form.user.data)+'&result='+str(form.Result.data)+'&PID='+str(form.PID.data)
+		next='/status?OJ_ID='+str(form.OJ_ID.data)+'&user='+form.user.data+'&result='+str(form.Result.data)+'&PID='+str(form.PID.data)
 		return redirect(next)
 	if OJ_ID=='' and user=='' and Result=='' and PID==-1:
 		pagination = Code_detail.query.order_by(Code_detail.RunID.desc()).paginate(
@@ -88,16 +87,23 @@ def indexStatus():
     	 	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
     	 	  	error_out=False)
 	status = pagination.items
+	if PID!=-1:
+		form.PID.data=str(PID)
 	form.OJ_ID.data=OJ_ID
 	form.user.data =user
 	form.Result.data = Result
 	return render_template('indexStatus.html', username=current_user.username,form=form, status=status, pagination=pagination)
 	
-@main.route('/problem')
+@main.route('/problem', methods=['GET', 'POST'])
 def indexProblem():
 	page = request.args.get('page', 1, type=int)
 	OJ_ID = request.args.get('OJ_ID', '')
 	PID = request.args.get('PID', -1, type=int)
+	form = ProblemFilter()
+	if form.validate_on_submit():
+		#print form.PID.data
+		next='/problem?OJ_ID='+str(form.OJ_ID.data)+'&PID='+str(form.PID.data)
+		return redirect(next)
 	if OJ_ID=='' and PID==-1:
 		pagination = Problem.query.order_by(Problem.SID.asc()).paginate(
        		page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
@@ -115,7 +121,10 @@ def indexProblem():
        		page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
 			error_out=False)
 	problems = pagination.items
-	return render_template('indexProblem.html',problems=problems, pagination=pagination)
+	form.OJ_ID.data=OJ_ID
+	if PID!=-1:
+		form.PID.data =str(PID)
+	return render_template('indexProblem.html',problems=problems,form=form,pagination=pagination)
 
 
 @main.route('/', methods=['GET', 'POST'])
@@ -206,7 +215,8 @@ def submit():
 			current_user.add_accepted_problem(problem)
 		return redirect(url_for('.indexStatus'))
 	form.OJ_ID.data=OJ_ID
-	form.PID.data=PID
+	if PID!=-1:
+		form.PID.data=PID
 	return render_template('submit.html', form=form)
 
 @main.route('/problem/<int:SID>')

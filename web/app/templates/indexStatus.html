@@ -20,13 +20,13 @@
 </div>
 {% if pagination %}
 <div class="pagination">
-    {{ macros.pagination_widget(pagination, '.indexStatus') }}
+    {{ macros.pagination_widget(pagination, '.indexStatus',OJ_ID=form.OJ_ID.data,user=form.user.data,result=form.Result.data,PID=form.PID.data) }}
 </div>
 {% endif %}
 {% include '_statusPage.html' %}
 {% if pagination %}
 <div class="pagination">
-    {{ macros.pagination_widget(pagination, '.indexStatus') }}
+    {{ macros.pagination_widget(pagination, '.indexStatus',OJ_ID=form.OJ_ID.data,user=form.user.data,result=form.Result.data,PID=form.PID.data) }}
 </div>
 {% endif %}
 {% endblock %}
