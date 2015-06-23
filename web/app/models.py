@@ -63,13 +63,6 @@ class Accepted_Problem(db.Model):
                             primary_key=True)
       AC_time = db.Column(db.DateTime, default=datetime.utcnow)
 
-class Add_Contest(db.Model):
-      __tablename__ = 'Add_contests'
-      Manager_ID = db.Column(db.Integer, db.ForeignKey('users.id'),
-                            primary_key=True)
-      Contest_ID = db.Column(db.Integer, db.ForeignKey('contests.id'),
-                            primary_key=True)
-      ADD_time = db.Column(db.DateTime, default=datetime.utcnow)
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -103,12 +96,6 @@ class User(UserMixin, db.Model):
     AC_problems = db.relationship('Accepted_Problem',
                                 foreign_keys=[Accepted_Problem.AC_user_id],
                                 backref=db.backref('AC_user', lazy='joined'),
-                                lazy='dynamic',
-                                cascade='all, delete-orphan')
-
-    Contests = db.relationship('Add_Contest',
-                                foreign_keys=[Add_Contest.Manager_ID],
-                                backref=db.backref('Add_Contests', lazy='joined'),
                                 lazy='dynamic',
                                 cascade='all, delete-orphan')
 
@@ -314,8 +301,3 @@ class Contest(db.Model):
 	End_time=db.Column(db.DateTime, index=True, default=datetime.utcnow)
 	Openness=db.Column(db.Integer)
 	Manager=db.Column(db.String(64))
-	ADD_user = db.relationship('Add_Contest',
-                                foreign_keys=[Add_Contest.Contest_ID],
-                                backref=db.backref('Add_contests', lazy='joined'),
-                                lazy='dynamic',
-                                cascade='all, delete-orphan')
