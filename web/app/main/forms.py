@@ -51,9 +51,9 @@ class EditProfileAdminForm(Form):
             raise ValidationError('Username already in use.')
 
 class SubmitForm(Form):
-	OJ_ID=SelectField('OJ', choices=[("POJ","POJ")])
-	PID=StringField('PID',validators=[Length(0, 8)])
-	Language=SelectField('OJ', choices=[("0","G++"),("1","GCC"),("2","Java"),("3","Pascal"),("4","C++"),("5","C"),("6","Fortran")])
+	OJ_ID=SelectField('OJ', validators=[Required()],choices=[("POJ","POJ")])
+	PID=StringField('PID',validators=[Required(),Length(0, 8)])
+	Language=SelectField('OJ', validators=[Required()],choices=[("0","G++"),("1","GCC"),("2","Java"),("3","Pascal"),("4","C++"),("5","C"),("6","Fortran")])
 	Code=TextAreaField('Code',validators=[Required(),Length(0, 65535)])
 	submit = SubmitField('Submit')
 class ProblemFilter(Form):

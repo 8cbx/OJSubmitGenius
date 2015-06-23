@@ -91,7 +91,7 @@ def indexStatus():
 	form.OJ_ID.data=OJ_ID
 	form.user.data =user
 	form.Result.data = Result
-	return render_template('indexStatus.html', form=form, status=status, pagination=pagination)
+	return render_template('indexStatus.html', username=current_user.username,form=form, status=status, pagination=pagination)
 	
 @main.route('/problem')
 def indexProblem():
@@ -121,6 +121,42 @@ def indexProblem():
 @main.route('/', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
+
+@main.route('/codeview', methods=['GET', 'POST'])
+@login_required
+def codeview():
+	RunID = request.args.get('RunID', -1, type=int)
+	form = SubmitForm()
+	code = Code_detail.query.filter_by(RunID=RunID).first()
+	if current_user.username==code.user:
+		fp= open('./app/main/POJcode/POJ_'+str(code.RemoteID),"r")
+		User_Code=[]
+		arr=fp.readlines()
+		for lines in arr:
+			lines=lines.replace(' ','&nbsp;').replace('<','&lt;').replace('>','&gt;')
+			User_Code.append(lines)
+		fp.close()
+		return render_template('codeview.html', code=code,Codes=User_Code)
+	else:
+		abort(404)
+
+@main.route('/statusview', methods=['GET', 'POST'])
+@login_required
+def statusview():
+	RunID = request.args.get('RunID', -1, type=int)
+	form = SubmitForm()
+	code = Code_detail.query.filter_by(RunID=RunID).first()
+	if current_user.username==code.user:
+		fp= open('./app/main/POJCEfile/POJ_'+str(code.PID)+str(code.RemoteID),"r")
+		User_CEinfor=[]
+		arr=fp.readlines()
+		for lines in arr:
+			lines=lines.replace(' ','&nbsp;').replace('<','&lt;').replace('>','&gt;')
+			User_CEinfor.append(lines)
+		fp.close()
+		return render_template('statusview.html', code=code,CEinfor=User_CEinfor)
+	else:
+		abort(404)
 
 @main.route('/submit', methods=['GET', 'POST'])
 @login_required

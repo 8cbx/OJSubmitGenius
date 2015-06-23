@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+<div class="codeview">
+        <h1>{{ code.OJ_ID }} {{ code.PID }}</h1>
+    <h2>CE information:</h2>
+    <p>
+    {% for value in CEinfor %}
+    	{{ value|safe }}<br>
+    {% endfor %}
+    </p>
+</div>
+{% endblock %}

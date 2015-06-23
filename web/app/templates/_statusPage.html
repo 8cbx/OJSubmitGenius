@@ -45,10 +45,13 @@ $(document).ready(function() {
                 <th><a href="{{ url_for('main.problem', SID=status.SID) }}">{{ status.PID }}</th>
                 <th>{{ status.OJ_ID }}</th>
                 <th><a href="{{ url_for('auth.user', username=status.user) }}">{{ status.user }}</th>
-                <th>{{ status.Result }}</th>
+                <th>{% if status.Result=='Compile Error' %}
+                <a href="{{ url_for('main.statusview', RunID=status.RunID) }}">{% endif %}
+                {{ status.Result }}</th>
                 <th>{{ status.Memory }}</th>
                 <th>{{ status.Time }}</th>
-                <th>{{ status.Language }}</th>
+                <th>{% if username==status.user %}
+                <a href="{{ url_for('main.codeview', RunID=status.RunID) }}">{% endif %}{{ status.Language }}</th>
                 <th>{{ status.Code_Length }}</th>
                 <th>{{ status.Submit_Time }}</th>
             </tr>
