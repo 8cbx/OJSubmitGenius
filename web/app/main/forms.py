@@ -61,7 +61,7 @@ class SubmitForm(Form):
 			raise ValidationError('Code length must be between 10 and 65535 characters long!')
             
 class ProblemFilter(Form):
-	OJ_ID=SelectField('OJ', choices=[("POJ","POJ")])
+	OJ_ID=SelectField('OJ', choices=[('','All'),("POJ","POJ")])
 	PID=StringField('PID',validators=[Length(0, 8)])
 	submit = SubmitField('Filter!')
 	
