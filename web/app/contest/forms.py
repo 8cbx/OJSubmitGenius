@@ -9,6 +9,6 @@ class AddContestForm(Form):
     Title = StringField('Title', validators=[Length(0, 128)])
     Problem_OJ_ID = SelectField('OJ Name', choices=[("POJ","POJ")])
     Problem_PID = IntegerField('PID', validators=[NumberRange(min=0, max=100000)])
-    #Begin_Time = DateTimeField('Begine Time', format='%m/%d/%y')
-    #End_Time = DateTimeField('End Time', format='%m/%d/%y')
+    Begin_Time = DateTimeField('Begine Time', format='Y-m-d H:i:s')
+    End_Time = DateTimeField('End Time', format='Y-m-d H:i:s')
     submil = SubmitField('Submit')
