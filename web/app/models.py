@@ -63,6 +63,13 @@ class Accepted_Problem(db.Model):
                             primary_key=True)
       AC_time = db.Column(db.DateTime, default=datetime.utcnow)
 
+class Contest_Problem(db.Model):
+      __tablename__ = 'Contest_Problems'
+      problems_SID = db.Column(db.Integer, db.ForeignKey('problems.SID'),
+                            primary_key=True)
+      Contest_id = db.Column(db.Integer, db.ForeignKey('contest.id'),
+                            primary_key=True)
+      Add_time = db.Column(db.DateTime, default=datetime.utcnow)
 
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
@@ -257,6 +264,12 @@ class Problem(db.Model):
                                 lazy='dynamic',
                                 cascade='all, delete-orphan')
 
+	Contest = db.relationship('Contest_Problem',
+                                foreign_keys=[Contest_Problem.problems_SID],
+                                backref=db.backref('Problem', lazy='joined'),
+                                lazy='dynamic',
+                                cascade='all, delete-orphan')
+
 
 class Problem_detail():
 	SID=''
@@ -292,12 +305,25 @@ class Code_detail(db.Model):
 	CEfile=db.Column(db.String(64))
 	Submit_Time=db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
-
 class Contest(db.Model):
-	__tablename__ = 'contests'
+	__tablename__ = 'contest'
 	id=db.Column(db.Integer, primary_key=True)
 	Title=db.Column(db.String(128))
 	Begin_time=db.Column(db.DateTime, index=True, default=datetime.utcnow)
 	End_time=db.Column(db.DateTime, index=True, default=datetime.utcnow)
 	Openness=db.Column(db.Integer)
 	Manager=db.Column(db.String(64))
+	Contest_problems = db.relationship('Contest_Problem',
+                                foreign_keys=[Contest_Problem.Contest_id],
+                                backref=db.backref('Contest', lazy='joined'),
+                                lazy='dynamic',
+                                cascade='all, delete-orphan')
+
+	def add_problem(self, problem):
+           if not self.is_add_problem(problem):
+              f = Contest_Problem(problems_SID=problem.SID, Contest_id=self.id)
+              db.session.add(f)
+
+	def is_add_problem(self, problem):
+           return self.Contest_problems.filter_by(
+               problems_SID=problem.SID).first() is not None
