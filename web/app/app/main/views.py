@@ -5,7 +5,7 @@ from datetime import datetime
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm, SubmitForm, StatusFilter, ProblemFilter
 from .. import db
-from ..models import Permission, Role, User, Problem, Problem_detail, Code_detail
+from ..models import Permission, Role, User, Problem, Problem_detail, Code_detail, OJ_Status
 from ..decorators import admin_required
 from poj_submit import Submit
 from poj_login import TryLogin
@@ -129,7 +129,11 @@ def indexProblem():
 
 @main.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html')
+	oj_status=OJ_Status.query.all()
+	for values in oj_status:
+		if (datetime.utcnow()-values.Last_Update).total_seconds() > 600:
+			values.ping()
+	return render_template('index.html',oj_status=oj_status)
 
 @main.route('/codeview', methods=['GET', 'POST'])
 @login_required

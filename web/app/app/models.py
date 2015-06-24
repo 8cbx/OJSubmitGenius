@@ -5,7 +5,7 @@ from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
 from flask import current_app, request
 from flask.ext.login import UserMixin, AnonymousUserMixin
 from . import db, login_manager
-
+from OJ_Status import CheckOjStatus
 
 class Permission:
     FOLLOW = 0x01
@@ -327,3 +327,13 @@ class Contest(db.Model):
 	def is_add_problem(self, problem):
            return self.Contest_problems.filter_by(
                problems_SID=problem.SID).first() is not None
+class OJ_Status(db.Model):
+	__tablename__ = 'oj_status'
+	OJ_ID=db.Column(db.String(64), primary_key=True)
+	OJ_Status=db.Column(db.Boolean, default=False)
+	Last_Update=db.Column(db.DateTime, index=True, default=datetime.utcnow)
+	def ping(self):
+		self.Last_Update = datetime.utcnow()
+		self.OJ_Status=CheckOjStatus(self.OJ_ID)
+		print self.OJ_Status
+		db.session.add(self)
