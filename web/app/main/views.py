@@ -92,7 +92,7 @@ def indexStatus():
 	form.OJ_ID.data=OJ_ID
 	form.user.data =user
 	form.Result.data = Result
-	return render_template('indexStatus.html', username=current_user.username,form=form, status=status, pagination=pagination)
+	return render_template('indexStatus.html',form=form, status=status, pagination=pagination)
 	
 @main.route('/problem', methods=['GET', 'POST'])
 def indexProblem():

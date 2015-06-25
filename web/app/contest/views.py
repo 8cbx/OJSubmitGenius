@@ -31,3 +31,19 @@ def indexContest():
     return render_template('indexContest.html', contest=contest,
                            pagination=pagination)
 
+@contest.route('/Contest/<int:id>')
+def contest(id):
+    contest = Contest.query.filter_by(id=id).first()
+    if contest is None:
+        flash('Invalid contest.')
+        return redirect(url_for('.indexContest'))
+    page = request.args.get('page', 1, type=int)
+    pagination = contest.Contest_problems.paginate(
+        page, per_page=current_app.config['FLASKY_AC_PROBLEM_PER_PAGE'],
+        error_out=False)
+    problem = [{'problem': item.Problem, 'AC_time': item.Add_time}
+               for item in pagination.items]
+    return render_template('contest.html', contest=contest, title="Contest",
+                           endpoint='.contest', pagination=pagination,
+                           problem=problem, id=id)
+

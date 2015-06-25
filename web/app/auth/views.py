@@ -32,6 +32,7 @@ def unconfirmed():
     return render_template('auth/unconfirmed.html')
 
 @auth.route('/user/<username>')
+@login_required
 def user(username):
     user = User.query.filter_by(username=username).first()
     if user == None:

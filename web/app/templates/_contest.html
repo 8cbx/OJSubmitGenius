@@ -13,7 +13,7 @@
     {% for contest in contest %}
     	<tbody>
             <tr>
-                <th>{{ contest.Title }}</th>
+                <th><a href="{{ url_for('contest.contest', id=contest.id) }}">{{ contest.Title }}</th>
             </tr>
         </tbody>
     {% endfor %}
