@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block title %}Flasky{% endblock %}
+
+{% block page_content %}
+<div class="problem-header">
+        <h1>{{ problems.PID }}{{ problems.Title }}</h1>
+        <table id="problems" class="table table-striped table-bordered" cellspacing="0" width="100%">
+	<thead>
+		<tr>
+			<th>Time Limit</th>
+			<th>Memory Limit</th>
+			<th>Total Submissions</th>
+			<th>Accepted</th>
+			<th>Special Judge</th>
+		</tr>
+	</thead>
+    	<tbody>
+            <tr>
+                <th>{{ problems.Time_Limit }}</th>
+                <th>{{ problems.Memory_Limit }}</th>
+                <th>{{ problems.Total_Submissions }}</th>
+                <th>{{ problems.Accepted }}</th>
+                {% if problems.Special_Judge == 'Special Judge' %}
+                <th>YES</th>
+                {% else %}
+                <th>NO</th>
+                {% endif %}
+            </tr>
+        </tbody>
+        </table>
+    <h2>Description</h2>
+    {% for value in problems.Description %}
+    	<p>{{ value|safe }}</p>
+    {% endfor %}
+    <h2>Input</h2>
+    {% for value in problems.Input %}
+    	<p>{{ value|safe }}</p>
+    {% endfor %}
+    <h2>Output</h2>
+    {% for value in problems.Output %}
+    	<p>{{ value|safe }}</p>
+    {% endfor %}
+    <h2>Sample Input</h2>
+    {% for value in problems.Sample_Input %}
+    	<p>{{ value|safe }}</p>
+    {% endfor %}
+    <h2>Sample Output</h2>
+    {% for value in problems.Sample_Output %}
+    	<p>{{ value|safe }}</p>
+    {% endfor %}
+    <h2>Hint</h2>
+    {% for value in problems.Hint %}
+    	<p>{{ value|safe }}</p>
+    {% endfor %}
+    <h2>Source</h2>
+    <p>{{ problems.Source|safe }}</p>
+    <a class="btn btn-default" href="{{ url_for('main.contest_submit',SID=problems.SID,OJ_ID=problems.OJ_ID, PID=problems.PID, Contest_id =Contest_id) }}">Submit</a>
+    </div>
+{% endblock %}

@@ -15,7 +15,7 @@
                 {{ problem.problem.OJ_ID }}
             </a>
         </td>
-        <td><a href="{{ url_for('main.problem', SID=problem.problem.SID) }}">{{ problem.problem.Title }}</td>
+        <td><a href="{{ url_for('main.contest_problem', Contest_id=contest.id, SID=problem.problem.SID) }}">{{ problem.problem.Title }}</td>
     </tr>
     {% endfor %}
 </table>

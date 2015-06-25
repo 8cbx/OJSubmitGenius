@@ -43,6 +43,7 @@ def contest(id):
         error_out=False)
     problem = [{'problem': item.Problem, 'AC_time': item.Add_time}
                for item in pagination.items]
+    print 'contest            -----------'
     return render_template('contest.html', contest=contest, title="Contest",
                            endpoint='.contest', pagination=pagination,
                            problem=problem, id=id)

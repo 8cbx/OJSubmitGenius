@@ -11,3 +11,4 @@ class AddContestForm(Form):
     Begin_Time = DateTimeField('Begine Time', format='Y-m-d H:i:s')
     End_Time = DateTimeField('End Time', format='Y-m-d H:i:s')
     submil = SubmitField('Submit')
+
