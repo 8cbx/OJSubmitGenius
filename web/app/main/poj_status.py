@@ -60,7 +60,7 @@ class DealWithPages(HTMLParser.HTMLParser):
 		stack_size = self.st.getLength()
 		if stack_size == 2:
 			#print data
-			if data=='Presentation Error' or data=='Time Limit Exceeded' or data=='Memory Limit Exceeded' or data=='Wrong Answer' or data=='Runtime Error' or data=='Output Limit Exceeded' or data=='Compile Error' or data=='Compiling' or data=='Running & Judging':
+			if data=='Presentation Error' or data=='Time Limit Exceeded' or data=='Memory Limit Exceeded' or data=='Wrong Answer' or data=='Runtime Error' or data=='Output Limit Exceeded' or data=='Compile Error' or data=='Compiling' or data=='Running & Judging' or data=='Waiting':
 				Data1.append(data)
 				Data1.append(' ')
 				Data1.append(' ')
@@ -107,7 +107,7 @@ def GetStatus(user,code,language):
 	Data.append(Data1)
 	#print Data[0][3]
 	#print Data1
-	while (Data[0][3]=='Compiling' or Data[0][3]=='Running '):
+	while (Data[0][3]=='Compiling' or Data[0][3]=='Running 'or Data[0][3]=='Waiting'):
 		Data=[]
 		Data1=[]
 		page = getPageContent('http://poj.org/status?problem_id='+str(code.PID)+'&user_id='+user+'&result=&language='+str(language))
