@@ -50,8 +50,9 @@ $(document).ready(function() {
                 {{ status.Result }}</th>
                 <th>{{ status.Memory }}</th>
                 <th>{{ status.Time }}</th>
-                <th>{% if username==status.user %}
-                <a href="{{ url_for('main.codeview', RunID=status.RunID) }}">{% endif %}{{ status.Language }}</th>
+                
+                <th>{% if current_user.is_authenticated() %}{% if current_user.username==status.user %}
+                <a href="{{ url_for('main.codeview', RunID=status.RunID) }}">{% endif %}{% endif %}{{ status.Language }}</th>
                 <th>{{ status.Code_Length }}</th>
                 <th>{{ status.Submit_Time }}</th>
             </tr>
