@@ -181,6 +181,10 @@ def submit():
 	user = User.query.filter_by(username=current_user.username).first()
 	code=Code_detail()
 	if form.validate_on_submit():
+		if form.OJ_ID.data=='POJ':
+			if user.account_POJ=='NU LL':
+				flash('You need to give us your poj info first.')
+				return redirect(url_for('auth.OnlineJudge'))
 		code.SID=SID
 		code.user=current_user.username
 		code.OJ_ID=form.OJ_ID.data

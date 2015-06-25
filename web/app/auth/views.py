@@ -109,6 +109,7 @@ def OnlineJudge():
 					current_user.password_POJ = form.password_POJ.data
 				db.session.add(current_user)
 				flash('The account has been updated')
+				return redirect(request.args.get('next') or url_for('.user', username=current_user.username)) 
 		else:
 			flash('The username or password is wrong!')
 		#return redirect(url_for('.user', username=user.username))

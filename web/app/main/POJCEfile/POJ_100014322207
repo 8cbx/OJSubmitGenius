@@ -1,0 +1,2 @@
+libmingw32.a(main.o):main.c:(.text+0x104): undefined reference to `WinMain@16&#39;
+collect2: ld returned 1 exit status
