@@ -1,9 +1,19 @@
+<script type="text/javascript" class="init">
+$(document).ready(function() {
+    $('#problems').dataTable();
+     
+    $('#problems tbody').on('click', 'tr', function () {
+        var name = $('td', this).eq(0).text();
+        alert( 'You clicked on '+name+'\'s row' );
+    } );
+} );
+</script>
 <ul class="problems">
-	<table id="problems" class="table table-striped table-bordered" cellspacing="0" width="100%">
+	<table id="problems" class="table table-bordered table-hover table-striped" cellspacing="0" width="100%">
 	<thead>
 		<tr>
 			<th>OJ</th>
-			<th>PID</th>
+			<th data-orderable="false">PID</th>
 			<th>Title</th>
 			<th>Total_Submissions</th>
 			<th>Accepted</th>
@@ -20,17 +30,17 @@
 			<th>LastUpdate</th>
 		</tr>
 	</tfoot>
-    {% for problems in problems %}
-    	<tbody>
-            <tr>
-                <th>{{ problems.OJ_ID }}</th>
-                <th>{{ problems.PID }}</th>
-                <th><a href="{{ url_for('main.problem', SID=problems.SID) }}">{{ problems.Title }}</th>
-                <th>{{ problems.Total_Submissions }}</th>
-                <th><a href="{{ url_for('main.AC_user', SID=problems.SID) }}">{{ problems.Accepted }}</th>
-                <th>{{ moment(problems.LastUpdate).fromNow() }}</th>
-            </tr>
-        </tbody>
-    {% endfor %}
+	<tbody>
+	    {% for problems in problems %}
+	    <tr>
+	        <th>{{ problems.OJ_ID }}</th>
+	        <th>{{ problems.PID }}</th>
+	        <th><a href="{{ url_for('main.problem', SID=problems.SID) }}">{{ problems.Title }}</th>
+	        <th>{{ problems.Total_Submissions }}</th>
+	        <th><a href="{{ url_for('main.AC_user', SID=problems.SID) }}">{{ problems.Accepted }}</th>
+	        <th>{{ moment(problems.LastUpdate).fromNow() }}</th>
+	    </tr>
+	  	{% endfor %}
+    </tbody>
     </table>
 </ul>

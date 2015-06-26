@@ -1,32 +1,43 @@
 {% extends "base.html" %}
-
 {% import "_macros.html" as macros %}
-
 {% import "bootstrap/wtf.html" as wtf %}
 
-{% block title %}Flasky{% endblock %}
+{% block title %}Status{% endblock %}
+
+{% block styles %}
+	{{ super() }}
+	<style type="text/css">
+		#title{
+			color: #260026;}
+	</style>
+{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
-    <h1>Hello, {% if current_user.is_authenticated() %}{{ current_user.username }}{% else %}Stranger{% endif %}!</h1>
+<div class="container">
+	<div class="page-header">
+		<h1 id="title">Status</h1>
+	</div>
+	<form method="post" class="form form-inline" role="form">
+		{{ form.hidden_tag() }}
+		{{ form.PID.label(class="control-label") }} {{ form.PID() }}
+		{{ form.OJ_ID.label(class="control-label") }} {{ form.OJ_ID() }}
+		{{ form.user.label(class="control-label") }} {{ form.user() }}
+		{{ form.Result.label(class="control-label") }} {{ form.Result() }}
+		{{ form.submit.lable }}  {{ form.submit(class="btn btn-primary") }}
+	</form>
+	<!-- <div>
+	    {% if current_user.can(Permission.WRITE_ARTICLES) %}
+	    {{ wtf.quick_form(form) }}
+	    {% endif %}
+	</div>
+	<div class="col-md-4">
+	    {{ wtf.quick_form(form) }}
+	</div> -->
+	{% include '_statusPage.html' %}
+	{% if pagination %}
+	<div class="pagination">
+	    {{ macros.pagination_widget(pagination, '.indexStatus',OJ_ID=form.OJ_ID.data,user=form.user.data,result=form.Result.data,PID=form.PID.data) }}
+	</div>
+	{% endif %}
 </div>
-<div>
-    {% if current_user.can(Permission.WRITE_ARTICLES) %}
-    {{ wtf.quick_form(form) }}
-    {% endif %}
-</div>
-<div class="col-md-4">
-    {{ wtf.quick_form(form) }}
-</div>
-{% if pagination %}
-<div class="pagination">
-    {{ macros.pagination_widget(pagination, '.indexStatus',OJ_ID=form.OJ_ID.data,user=form.user.data,result=form.Result.data,PID=form.PID.data) }}
-</div>
-{% endif %}
-{% include '_statusPage.html' %}
-{% if pagination %}
-<div class="pagination">
-    {{ macros.pagination_widget(pagination, '.indexStatus',OJ_ID=form.OJ_ID.data,user=form.user.data,result=form.Result.data,PID=form.PID.data) }}
-</div>
-{% endif %}
 {% endblock %}

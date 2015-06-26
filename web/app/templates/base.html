@@ -1,83 +1,91 @@
+{% extends "initbase.html" %}
 
-{% extends "base2.html" %}
-
-{% block title %}Flasky{% endblock %}
-
-{% block head %}
-{{ super() }}
-<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-<link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-{% endblock %}
-
-{% block navbar %}
-<div class="navbar navbar-inverse" role="navigation">
+    {%- block head %}
+    {{ super() }}
+    {%- block metas %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" charset= "utf-8">
+    {%- endblock metas %}
+    {%- block styles %}
+        <!-- bootstrap css here -->
+        <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ url_for('static', filename='bootstrap-responsive.css') }}" rel="stylesheet" type="text/css">  
+        <!-- customrized css here -->
+        <link href="{{ url_for('static', filename='test.css') }}" rel="stylesheet" type="text/css">
+        <style type="text/css">
+            body{padding:50px;}
+        </style>
+    {%- endblock styles %}
+    {%- endblock head %}
+    {% block body -%}
     <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="{{ url_for('main.index') }}">Home</a>
+        {% block navbar -%}
+        <!--Nav complex start-->
+                
+            <div class="navbar navbar-fixed-top">
+                <div class="container navbar-inner">
+                    <a class="brand" href="{{ url_for('main.index') }}">HEU OJ Genius</a>
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li class="dropdown">
+                                <a href="{{ url_for('main.indexProblem') }}" class="dropdown-toggle">Problems</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Contests</a>
+                                <ul class="dropdown-menu">
+                                    {% if current_user.is_authenticated() %}
+                                    <li><a href="{{ url_for('contest.add_contest') }}">Add Contest</a></li>
+                                    {% endif %}
+                                    <li><a href="{{ url_for('contest.indexContest') }}">All Contest</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav">
+                                <a href="{{ url_for('main.indexStatus') }}">Realtime Status</a>
+                            </li>
+                        </ul>
+                        <ul class="nav pull-right">
+                            {% if current_user.is_authenticated() %}
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="{{ current_user.gravatar(size=18) }}">
+                                    {{ current_user.username }} <b class="caret"></b>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    {% if current_user.confirmed %}
+                                    <li><a href="{{ url_for('auth.user', username=current_user.username) }}">Profile</a></li>
+                                    <li><a href="{{ url_for('auth.change_password') }}">Change Password</a></li>
+                                    <li><a href="{{ url_for('auth.change_email_request') }}">Change Email</a></li>
+                                    <li><a href="{{ url_for('auth.OnlineJudge') }}">Online Judge</a></li>
+                                    {% endif %}
+                                    <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
+                                </ul>
+                            </li>
+                            {% else %}
+                                <li class="nav"><a href="{{ url_for('auth.login') }}">Login</a></li>
+                                <li class="nav"><a href="{{url_for('auth.register')}}">Register</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+        <!--Nav complex end-->
+        {%- endblock navbar %}
+        {% block content %}
+        <div class="container">
+            {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+            </div>
+            {% endfor %}
+
+            {% block page_content %}
+            {% endblock %}
         </div>
-        <div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="{{ url_for('main.indexProblem') }}">Problems</a></li>
-                <li><a href="{{ url_for('main.indexStatus') }}">Status</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        Contest <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                        {% if current_user.is_authenticated() %}
-                        <li><a href="{{ url_for('contest.add_contest') }}">Add Contest</a></li>
-                        {% endif %}
-                        <li><a href="{{ url_for('contest.indexContest') }}">All Contest</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                {% if current_user.is_authenticated() %}
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{ current_user.gravatar(size=18) }}">
-                        Account <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                    	{% if current_user.confirmed %}
-                    	<li><a href="{{ url_for('auth.user', username=current_user.username) }}">Profile</a></li>
-                        <li><a href="{{ url_for('auth.change_password') }}">Change Password</a></li>
-                        <li><a href="{{ url_for('auth.change_email_request') }}">Change Email</a></li>
-                        <li><a href="{{ url_for('auth.OnlineJudge') }}">Online Judge</a></li>
-                        {% endif %}
-                        <li><a href="{{ url_for('auth.logout') }}">Log Out</a></li>
-                    </ul>
-                </li>
-                {% else %}
-                <li><a href="{{ url_for('auth.login') }}">Log In</a></li>
-                {% endif %}
-            </ul>
-        </div>
+        {% endblock %}
     </div>
-</div>
-{% endblock %}
-
-{% block content %}
-<div class="container">
-    {% for message in get_flashed_messages() %}
-    <div class="alert alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        {{ message }}
-    </div>
-    {% endfor %}
-
-    {% block page_content %}{% endblock %}
-</div>
-{% endblock %}
-
-{% block scripts %}
-{{ super() }}
-{{ moment.include_moment() }}
-{% endblock %}
+    {% block scripts %}
+        <script src="{{ url_for('static', filename='jquery-1.9.0.main.js') }}"></script>
+        <script src="{{ url_for('static', filename='bootstrap.js') }}"></script>
+    {%- endblock scripts %}
+    {%- endblock body %}
