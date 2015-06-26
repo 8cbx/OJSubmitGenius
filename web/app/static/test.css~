@@ -1,0 +1,14 @@
+body{
+	background-image: url("background-filler.jpg");}
+div.hero-unit{
+	background-color: #260026;
+	width: auto;
+	height:180px;
+	color: #FBF9F9;}
+div.nav{
+	background-color: #FAEC22;
+	height:63px;}
+.row div{
+	/*background-color: #260026;*/
+	height: 300px;}
+	
