@@ -19,7 +19,7 @@ def add_contest():
         contest.add_problem(problems)
         flash('The contest has been added.')
         return redirect(url_for('contest.indexContest'))
-    return render_template('add_contest.html', form=form)
+    return render_template('contest/add_contest.html', form=form)
 
 @contest.route('/contests')
 def indexContest():
@@ -28,7 +28,7 @@ def indexContest():
         page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
         error_out=False)
     contest = pagination.items
-    return render_template('indexContest.html', contest=contest,
+    return render_template('contest/indexContest.html', contest=contest,
                            pagination=pagination)
 
 @contest.route('/Contest/<int:id>')
