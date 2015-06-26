@@ -303,7 +303,7 @@ class Code_detail(db.Model):
 	Language=db.Column(db.String(64))
 	Code_Length=db.Column(db.String(64))
 	CEfile=db.Column(db.String(64))
-	#Contest_ID=db.Column(db.Integer)
+	Contest_ID=db.Column(db.Integer)
 	Submit_Time=db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
 class Contest(db.Model):

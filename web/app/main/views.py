@@ -96,7 +96,6 @@ def indexStatus():
 	
 @main.route('/problem', methods=['GET', 'POST'])
 def indexProblem():
-	print 'Problem-------------------'
 	page = request.args.get('page', 1, type=int)
 	OJ_ID = request.args.get('OJ_ID', '')
 	PID = request.args.get('PID', -1, type=int)
@@ -175,7 +174,6 @@ def statusview():
 @main.route('/submit', methods=['GET', 'POST'])
 @login_required
 def submit():
-	#print '==============='
 	OJ_ID = request.args.get('OJ_ID', '')
 	SID = request.args.get('SID', -1, type=int)
 	PID = request.args.get('PID', -1, type=int)
@@ -231,12 +229,10 @@ def submit():
 
 @main.route('/contest_submit/<int:Contest_id>', methods=['GET', 'POST'])
 @login_required
-def contest_submit(Contest_id):
-	print '---------------------'
+def contest_submit(Contest_id):    
 	OJ_ID = request.args.get('OJ_ID', '')
 	SID = request.args.get('SID', -1, type=int)
 	PID = request.args.get('PID', -1, type=int)
-	#Contest_id = request.args.get('Contest_id', -1, type=int)
 	form = SubmitForm()
 	user = User.query.filter_by(username=current_user.username).first()
 	code=Code_detail()
@@ -273,7 +269,7 @@ def contest_submit(Contest_id):
 		TryLogin(user.account_POJ,user.password_POJ)
 		Submit(form.Code.data,code.PID,int(form.Language.data))
 		code=GetStatus(current_user.account_POJ,code,form.Language.data)
-		code.Contest_id=Contest_id
+		code.Contest_ID=Contest_id
 		db.session.add(code)
 		flash('Your code has been submitted.')
 		fp= open('./app/main/POJcode/POJ_'+str(code.RemoteID),"w")
