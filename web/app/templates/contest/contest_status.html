@@ -25,14 +25,6 @@
 		{{ form.Result.label(class="control-label") }} {{ form.Result() }}
 		{{ form.submit.lable }}  {{ form.submit(class="btn btn-primary") }}
 	</form>
-	<!-- <div>
-	    {% if current_user.can(Permission.WRITE_ARTICLES) %}
-	    {{ wtf.quick_form(form) }}
-	    {% endif %}
-	</div>
-	<div class="col-md-4">
-	    {{ wtf.quick_form(form) }}
-	</div> -->
 	{% include '_statusPage.html' %}
 	{% if pagination %}
 	<div class="pagination">

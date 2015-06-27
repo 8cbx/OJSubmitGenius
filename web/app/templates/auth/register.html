@@ -1,4 +1,4 @@
-	{% extends "base.html" %}
+{% extends "base.html" %}
 {% import "wtf.html" as wtf %}
 
 {% block title %}Register{% endblock %}
@@ -7,6 +7,8 @@
 	<style type="text/css">
 		#title{
 			color: #260026;}
+		div.alert_title{
+			color: #FF0004;}
 	</style>
 {% endblock %}
 
@@ -21,15 +23,42 @@
 		{{ form.hidden_tag() }}
 		<div class="control-group">
 			{{ form.email.label(class="control-label") }} {{ form.email ()}}
+			{% if form.email.errors %}
+				<span>
+					{% for error in form.email.errors %}
+						<div class="alert_title">
+							<strong>{{ error }}</strong>
+						</div>
+					{% endfor%}
+				</span>
+			{% endif %}
 		</div>
 		<div class="control-group">
 			{{ form.username.label(class="control-label") }} {{ form.username() }}
+			{% if form.username.errors %}
+				<span>
+					{% for error in form.email.errors %}
+						<div class="alert_title">
+							<strong>{{ error }}</strong>
+						</div>
+					{% endfor%}
+				</span>
+			{% endif %}
 		</div>
 		<div class="control-group">
 			{{ form.password.label(class="control-label") }} {{ form.password() }}
 		</div>
 		<div class="control-group">
 			{{ form.password2.label(class="control-label") }} {{ form.password2() }}
+			{% if form.password.errors %}
+				<span>
+					{% for error in form.password.errors %}
+						<div class="alert_title">
+							<strong>{{ error }}</strong>
+						</div>
+					{% endfor%}
+				</span>
+			{% endif %}
 		</div>
 		<div class="control-group">
 			{{ form.country.label(class="control-group") }} {{ form.country() }}

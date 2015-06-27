@@ -1,21 +1,25 @@
 {% extends "base.html" %}
 
-{% block title %}Flasky{% endblock %}
+{% block styles%}
+    {{ super() }}
+{% endblock%}
+
+{% block title %}Source Code{% endblock %}
 
 {% block page_content %}
 <div class="codeview">
-        <h1>{{ code.OJ_ID }} {{ code.PID }}</h1>
-        <table id="problems" class="table table-striped table-bordered" cellspacing="0" width="100%">
-	<thead>
-		<tr>
-			<th>Result</th>
-			<th>Time</th>
-			<th>Memory</th>
-			<th>Language</th>
-			<th>Code Length</th>
-			<th>Submit Time</th>
-		</tr>
-	</thead>
+    <h1>{{ code.OJ_ID }} {{ code.PID }}</h1>
+    <table id="problems" class="table table-bordered" cellspacing="0" width="100%">
+    	<thead>
+    		<tr>
+    			<th>Result</th>
+    			<th>Time</th>
+    			<th>Memory</th>
+    			<th>Language</th>
+    			<th>Code Length</th>
+    			<th>Submit Time</th>
+    		</tr>
+    	</thead>
     	<tbody>
             <tr>
             	<th>{{ code.Result }}</th>
@@ -26,12 +30,16 @@
                 <th>{{ code.Submit_Time }}</th>
             </tr>
         </tbody>
-        </table>
-    <h2>Code:</h2>
-    <p>
-    {% for value in Codes %}
-    	{{ value|safe }}<br>
-    {% endfor %}
-    </p>
+    </table>
+    <div class="container">
+        
+    </div>
+    <div class="well">
+        <h2>Code:</h2>
+            {% for value in Codes %}
+                {{ value|safe }}<br >
+            {% endfor %}
+        
+    </div>
 </div>
 {% endblock %}

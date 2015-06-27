@@ -1,13 +1,35 @@
 {% extends "base.html" %}
 {% import "wtf.html" as wtf %}
 
-{% block title %}Flasky - Online Judge{% endblock %}
+{% block styles%}
+	{{ super() }}
+	<style type="text/css">
+		#title{
+			color: #260026;}
+	</style>
+{% endblock %}
+
+{% block title %}Online Judge{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
+<div class="container">
+	<h1 id="title">Online Judge</h1>
+	<form method="post" role="form" class="form form-actions">
+		<legend>Login Your Account</legend>
+		{{ form.hidden_tag() }}
+		<div class="control-group">
+			<div class="controls">{{ form.account_POJ.label(class="control-label") }} {{ form.account_POJ() }}</div>
+		</div>
+		<div class="control-group">
+			<div class="controls">{{ form.password_POJ.label(class="control-label")}} {{ form.password_POJ() }}</div>
+		</div>
+		{{ form.submit(class="btn btn-primary") }}
+	</form>
+</div>
+<!-- <div class="page-header">
     <h1>Online Judge</h1>
 </div>
 <div class="col-md-4">
     {{ wtf.quick_form(form) }}
-</div>
+</div> -->
 {% endblock %}

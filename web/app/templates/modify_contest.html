@@ -1,19 +1,19 @@
 {% extends "base.html" %}
 {% import "_macros.html" as macros %}
 {% import "wtf.html" as wtf %}
-{% block title %}Problems{% endblock %}
+{% block title %}Modify Problems{% endblock %}
 
 {% block page_content %}
-<div class="modify-contest">
-        <table id="contest" class="table table-striped table-hover table-bordered" cellspacing="0" width="100%">
-	<thead>
-		<tr>
-			<th>Contest Name</th>
-			<th>Begin time</th>
-            <th>End time</th>
-            <th>Manager</th>
-		</tr>
-	</thead>
+<div class="container">
+    <table id="contest" class="table table-bordered" cellspacing="0" width="100%">
+    	<thead>
+    		<tr>
+    			<th>Contest Name</th>
+    			<th>Begin time</th>
+                <th>End time</th>
+                <th>Manager</th>
+    		</tr>
+    	</thead>
     	<tbody>
             <tr>
                 <th>{{ contest.Title }}</th>
@@ -23,17 +23,17 @@
             </tr>
         </tbody>
         </table>
-        <table id="problems" class="table table-striped table-bordered" cellspacing="0" width="100%">
-	<thead>
-		<tr>
-            <th>Problem ID</th>
-            <th>OJ_ID</th>
-			<th>PID</th>
-			<th>Title</th>
-			<th>Modify</th>
-		</tr>
-	</thead>
-	{% set num = 1 %}
+        <table id="problems" class="table table-striped table-hover table-bordered" cellspacing="0" width="100%">
+    	<thead>
+    		<tr>
+                <th>Problem ID</th>
+                <th>OJ_ID</th>
+    			<th>PID</th>
+    			<th>Title</th>
+    			<th>Modify</th>
+    		</tr>
+    	</thead>
+	    {% set num = 1 %}
     	<tbody>
     		{% for problems in problem %}
             <tr>
@@ -46,9 +46,8 @@
             {% set num=num+1 %}
             {% endfor %}
         </tbody>
-        </table>
+    </table>
     {{ wtf.quick_form(form) }}
-   <a class="btn btn-primary" href="{{ url_for('contest.indexContest') }}">Finish</a>
-    
-    </div>
+    <a class="btn btn-primary" href="{{ url_for('contest.indexContest') }}">Finish</a>
+</div>
 {% endblock %}

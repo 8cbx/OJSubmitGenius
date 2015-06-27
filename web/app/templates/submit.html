@@ -1,13 +1,49 @@
 {% extends "base.html" %}
 {% import "wtf.html" as wtf %}
 
-{% block title %}Flasky - Edit Profile{% endblock %}
+{% block title %}Submit code{% endblock %}
+
+{% block styles %}
+	{{ super() }}
+	<style type="text/css">
+		#title{
+			color: #260026;}
+		#Code{
+			width: 600px;
+			height: 400px;}
+		/*#code_title{
+			font-family: }*/
+	</style>
+{%  endblock %}
 
 {% block page_content %}
-<div class="page-header">
-    <h1>Submit Your Code!</h1>
-</div>
-<div class="col-md-4",align="center">
-    {{ wtf.quick_form(form) }}
+<div class="row-fluid">
+	<div class="span2"></div>
+	<div class="span8">
+		<h1 id="title" align="center">Submit Your Solution</h1>
+		<form method="post" role="form" class="form form-inline">
+			<div class="control-group" align="center">
+				{{ form.hidden_tag() }}
+				{{ form.OJ_ID.label(class="control-label") }} {{ form.OJ_ID() }}
+				{{ form.PID.label(class="control-label") }} {{ form.PID() }}
+				{{ form.Language.label(class="control-label") }} {{ form.Language() }}
+			</div>	
+			<div class="control-group" align="center">
+				<p align="center" id="code_title">Source Code</p>
+				{% if form.Code.errors %}
+					<div>
+						{% for error in form.Code.errors %}
+							<p id="error_title">{{ error }}</p>
+						{% endfor%}
+					</div>
+				{% endif %}
+				{{ form.Code() }}
+			</div>
+			<div class="control-group" align="center">
+				{{ form.submit(class="btn btn-primary") }}
+			</div>
+		</form>
+	</div>
+	<div class="span2"></div>
 </div>
 {% endblock %}
