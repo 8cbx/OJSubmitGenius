@@ -40,6 +40,7 @@ $(document).ready(function() {
 	</tfoot>
     {% for status in status %}
     	<tbody>
+    	{% if status.Contest_ID == None %}
             <tr>
                 <th>{{ status.RunID }}</th>
                 <th><a href="{{ url_for('main.problem', SID=status.SID) }}">{{ status.PID }}</th>
@@ -56,6 +57,7 @@ $(document).ready(function() {
                 <th>{{ status.Code_Length }}</th>
                 <th>{{ status.Submit_Time }}</th>
             </tr>
+           {% endif %}
         </tbody>
     {% endfor %}
     </table>

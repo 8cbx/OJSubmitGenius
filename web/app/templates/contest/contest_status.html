@@ -20,7 +20,6 @@
 	<form method="post" class="form form-inline" role="form">
 		{{ form.hidden_tag() }}
 		{{ form.PID.label(class="control-label") }} {{ form.PID() }}
-		{{ form.OJ_ID.label(class="control-label") }} {{ form.OJ_ID() }}
 		{{ form.user.label(class="control-label") }} {{ form.user() }}
 		{{ form.Result.label(class="control-label") }} {{ form.Result() }}
 		{{ form.submit.lable }}  {{ form.submit(class="btn btn-primary") }}
@@ -33,7 +32,7 @@
 	<div class="col-md-4">
 	    {{ wtf.quick_form(form) }}
 	</div> -->
-	{% include '_statusPage.html' %}
+	{% include 'contest/_statusPage.html' %}
 	{% if pagination %}
 	<div class="pagination">
 	    {{ macros.pagination_widget(pagination, '.contest_status',OJ_ID=form.OJ_ID.data,user=form.user.data,result=form.Result.data,PID=form.PID.data) }}
