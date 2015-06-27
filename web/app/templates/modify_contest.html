@@ -5,7 +5,7 @@
 
 {% block page_content %}
 <div class="modify-contest">
-        <table id="contest" class="table table-striped table-bordered" cellspacing="0" width="100%">
+        <table id="contest" class="table table-striped table-hover table-bordered" cellspacing="0" width="100%">
 	<thead>
 		<tr>
 			<th>Contest Name</th>
@@ -41,16 +41,14 @@
                 <th>{{ problems.OJ_ID }}</th>
                 <th>{{ problems.PID }}</th>
                 <th>{{ problems.Title }}</th>
-                <th><a class="btn btn-default" href="{{ url_for('contest.modify_contest',id=contest.id,delete=problems.SID) }}">Delete</a></th>
+                <th><a class="btn btn-danger" href="{{ url_for('contest.modify_contest',id=contest.id,delete=problems.SID) }}">Delete</a></th>
             </tr>
             {% set num=num+1 %}
             {% endfor %}
         </tbody>
         </table>
-   <div class="col-md-4",align="center">
     {{ wtf.quick_form(form) }}
-</div>
-   <a class="btn btn-default" href="{{ url_for('contest.indexContest') }}">Finish</a>
+   <a class="btn btn-primary" href="{{ url_for('contest.indexContest') }}">Finish</a>
     
     </div>
 {% endblock %}
