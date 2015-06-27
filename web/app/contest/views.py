@@ -1,8 +1,8 @@
 from flask import render_template, redirect, url_for, abort, flash, request,\
     current_app
 from flask.ext.login import current_user
-from .forms import AddContestForm
-from ..models import Contest, Problem
+from .forms import AddContestForm, StatusFilter
+from ..models import Contest, Problem, Code_detail
 from .. import db
 from . import contest
 
@@ -31,6 +31,90 @@ def indexContest():
     return render_template('indexContest.html', contest=contest,
                            pagination=pagination)
 
+
+@contest.route('/contest_status', methods=['GET', 'POST'])
+def contest_status():
+    page = request.args.get('page', 1, type=int)
+    OJ_ID = request.args.get('OJ_ID', '')
+    user = request.args.get('user', '')
+    Result = request.args.get('result', '')
+    PID = request.args.get('PID', -1, type=int)
+    Contest_ID = request.args.get('Contest_id', -1, type=int)
+    form=StatusFilter()
+    if form.validate_on_submit():
+        next='/contest/contest_status?OJ_ID='+str(form.OJ_ID.data)+'&user='+form.user.data+'&result='+str(form.Result.data)+'&PID='+str(form.PID.data)+'&Contest_id='+str(Contest_ID)
+        return redirect(next)
+    print Contest_ID
+    if OJ_ID=='' and user=='' and Result=='' and PID==-1:
+        pagination = Code_detail.query.filter(Code_detail.Contest_ID==Contest_ID).order_by(Code_detail.RunID.desc()).paginate(
+     	 page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+			error_out=False)
+    elif OJ_ID!='' and user=='' and Result=='' and PID==-1:
+        pagination = Code_detail.query.filter(Code_detail.Contest_ID==Contest_ID, Code_detail.OJ_ID==OJ_ID).order_by(Code_detail.RunID.desc()).paginate(
+ 	 	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+				error_out=False)
+    elif OJ_ID=='' and user!='' and Result=='' and PID==-1:
+        pagination = Code_detail.query.filter(Code_detail.Contest_ID==Contest_ID, Code_detail.user==user).order_by(Code_detail.RunID.desc()).paginate(
+    	 	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+				error_out=False)
+    elif OJ_ID=='' and user=='' and Result!='' and PID==-1:
+        pagination = Code_detail.query.filter(Code_detail.Contest_ID==Contest_ID, Code_detail.Result==Result).order_by(Code_detail.RunID.desc()).paginate(
+    	 	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+				error_out=False)
+    elif OJ_ID=='' and user=='' and Result=='' and PID!=-1:
+        pagination = Code_detail.query.filter(Code_detail.Contest_ID==Contest_ID, Code_detail.PID==PID).order_by(Code_detail.RunID.desc()).paginate(
+    	 	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+				error_out=False)
+    elif OJ_ID!='' and user!='' and Result=='' and PID==-1:
+        pagination = Code_detail.query.filter(Code_detail.Contest_ID==Contest_ID, Code_detail.OJ_ID==OJ_ID,Code_detail.user==user).order_by(Code_detail.RunID.desc()).paginate(
+    	 	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+				error_out=False)
+    elif OJ_ID!='' and user=='' and Result!='' and PID==-1:
+        pagination = Code_detail.query.filter(Code_detail.Contest_ID==Contest_ID, Code_detail.OJ_ID==OJ_ID,Code_detail.Result==Result).order_by(Code_detail.RunID.desc()).paginate(
+    	 	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+				error_out=False)
+    elif OJ_ID!='' and user=='' and Result=='' and PID!=-1:
+        pagination = Code_detail.query.filter(Code_detail.Contest_ID==Contest_ID, Code_detail.OJ_ID==OJ_ID,Code_detail.PID==PID).order_by(Code_detail.RunID.desc()).paginate(
+    	 	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+				error_out=False)
+    elif OJ_ID=='' and user!='' and Result!='' and PID==-1:
+        pagination = Code_detail.query.filter(Code_detail.Contest_ID==Contest_ID, Code_detail.user==user,Code_detail.Result==Result).order_by(Code_detail.RunID.desc()).paginate(
+    	 	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+				error_out=False)
+    elif OJ_ID=='' and user!='' and Result=='' and PID!=-1:
+        pagination = Code_detail.query.filter(Code_detail.Contest_ID==Contest_ID, Code_detail.user==user,Code_detail.PID==PID).order_by(Code_detail.RunID.desc()).paginate(
+    	 	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+				error_out=False)
+    elif OJ_ID=='' and user=='' and Result!='' and PID!=-1:
+        pagination = Code_detail.query.filter(Code_detail.Contest_ID==Contest_ID, Code_detail.Result==Result,Code_detail.PID==PID).order_by(Code_detail.RunID.desc()).paginate(
+    	 	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+				error_out=False)
+    elif OJ_ID=='':
+        pagination = Code_detail.query.filter(Code_detail.Contest_ID==Contest_ID, Code_detail.user==user,Code_detail.Result==Result,Code_detail.PID==PID).order_by(Code_detail.RunID.desc()).paginate(
+    	 	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+				error_out=False)
+    elif user=='':
+        pagination = Code_detail.query.filter(Code_detail.Contest_ID==Contest_ID, Code_detail.OJ_ID==OJ_ID,Code_detail.Result==Result,Code_detail.PID==PID).order_by(Code_detail.RunID.desc()).paginate(
+    	 	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+				error_out=False)
+    elif Result=='':
+        pagination = Code_detail.query.filter(Code_detail.Contest_ID==Contest_ID, Code_detail.OJ_ID==OJ_ID,Code_detail.user==user,Code_detail.PID==PID).order_by(Code_detail.RunID.desc()).paginate(
+    	 	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+				error_out=False)
+    elif PID==-1:
+        pagination = Code_detail.query.filter(Code_detail.Contest_ID==Contest_ID, Code_detail.OJ_ID==OJ_ID,Code_detail.user==user,Code_detail.Result==Result).order_by(Code_detail.RunID.desc()).paginate(
+    	 	  page, per_page=current_app.config['FLASKY_POSTS_PER_PAGE'],
+    	 	  	error_out=False)
+    status = pagination.items
+    if PID!=-1:
+        form.PID.data=str(PID)
+    form.OJ_ID.data=OJ_ID
+    form.user.data =user
+    form.Result.data = Result
+    return render_template('contest/contest_status.html',form=form, status=status, pagination=pagination)
+
+
+
 @contest.route('/Contest/<int:id>')
 def contest(id):
     contest = Contest.query.filter_by(id=id).first()
@@ -41,10 +125,10 @@ def contest(id):
     pagination = contest.Contest_problems.paginate(
         page, per_page=current_app.config['FLASKY_AC_PROBLEM_PER_PAGE'],
         error_out=False)
-    problem = [{'problem': item.Problem, 'AC_time': item.Add_time}
+    problem = [{'problem': item.Problem, 'Add_time': item.Add_time}
                for item in pagination.items]
-    print 'contest            -----------'
+    print problem
     return render_template('contest.html', contest=contest, title="Contest",
-                           endpoint='.contest', pagination=pagination,
+                           endpoint='.contest', 
+                           pagination=pagination,
                            problem=problem, id=id)
-
