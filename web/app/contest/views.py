@@ -23,7 +23,6 @@ def add_contest():
 def modify_contest():
 	page = request.args.get('page', 1, type=int)
 	contest_id = request.args.get('id', -1, type=int)
-	print contest_id
 	contest = Contest.query.filter_by(id=contest_id).first()
 	if contest is None:
 		flash('Invalid contest.')
@@ -33,7 +32,6 @@ def modify_contest():
 	for values in contest_problem:
 		in_problem=Problem.query.filter_by(SID=values.problems_SID).first()
 		problem.append(in_problem)
-	print problem
 	delete_PID = request.args.get('delete', -1, type=int)
 	if delete_PID!=-1:
 		print "Delete "+str(delete_PID)
