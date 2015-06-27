@@ -328,6 +328,13 @@ class Contest(db.Model):
 	def is_add_problem(self, problem):
            return self.Contest_problems.filter_by(
                problems_SID=problem.SID).first() is not None
+
+	def delete_problem(self, SID):
+           f = self.Contest_problems.filter_by(problems_SID=SID).first()
+           if f:
+               db.session.delete(f)
+
+
 class OJ_Status(db.Model):
 	__tablename__ = 'oj_status'
 	OJ_ID=db.Column(db.String(64), primary_key=True)

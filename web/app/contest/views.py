@@ -34,7 +34,8 @@ def modify_contest():
 		problem.append(in_problem)
 	delete_SID = request.args.get('delete', -1, type=int)
 	if delete_SID!=-1:
-		print "Delete "+str(delete_SID)
+		print '-------------'
+		contest.delete_problem(delete_SID)
 	form = AddContestProblemForm()
 	if form.validate_on_submit():
 		problems=Problem.query.filter_by(OJ_ID=form.Problem_OJ_ID.data, PID=form.Problem_PID.data).first()
