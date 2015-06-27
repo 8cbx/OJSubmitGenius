@@ -1,13 +1,44 @@
 {% extends "base.html" %}
+{% import "_macros.html" as macros %}
 {% import "wtf.html" as wtf %}
 
-{% block title %}Flasky - Edit Profile{% endblock %}
+{% block styles %}
+	{{ super() }}
+	<style type="text/css">
+		#title{
+			color: #260026;}
+	</style>
+{% endblock %}
+
+{% block title %}Edit Profile{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
-    <h1>Edit Your Profile</h1>
-</div>
-<div class="col-md-4",align="center">
-    {{ wtf.quick_form(form) }}
+<div class="row-fluid">
+	<div class="span2"></div>
+	<div class="span8">
+		<h1 id="title">Edit Profile</h1>
+		<form method="post" role="form" class="form form-actions form-horizontal">
+			{{ form.hidden_tag() }}
+			<div class="control-group">
+				<div class="span10">{{ form.name.label(class="span3") }} {{ form.name(class="span6") }}</div>
+				<div class="span2"></div>
+			</div>
+			<div class="control-group">
+				<div class="span10">{{ form.country.label(class="span3") }} {{ form.country(class="span6") }}</div>
+				<div class="span2"></div>
+			</div>
+			<div class="control-group">
+				<div class="span10">{{ form.school.label(class="span3") }} {{ form.school(class="span6") }}</div>
+				<div class="span2"></div>
+			</div>
+			<div class="control-group">
+				<div class="span10">{{ form.about_me.label(class="span3") }} {{ form.about_me(class="span6", style="height: 180px;") }}</div>
+				<div class="span2"></div>
+			</div>
+			<div class="control-group">
+				{{form.submit(class="btn btn-primary") }}
+			</div>
+		</form>
+	</div>
 </div>
 {% endblock %}

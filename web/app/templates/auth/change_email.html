@@ -1,13 +1,41 @@
 {% extends "base.html" %}
 {% import "wtf.html" as wtf %}
 
-{% block title %}Flasky - Change Email Address{% endblock %}
+{% block title %}Change Email Address{% endblock %}
+
+{% block styles%}
+	{{ super() }}
+	<style type="text/css">
+		#title{
+			color: #260026;}
+		div.alert_title{
+			color: #FF0004;}
+	</style>
+{% endblock%}
 
 {% block page_content %}
-<div class="page-header">
-    <h1>Change Your Email Address</h1>
-</div>
-<div class="col-md-4">
-    {{ wtf.quick_form(form) }}
+<div class="container">
+	<h1 id="title">Change Email Address</h1>
+	<form method="post" role="form" class="form form-actions">
+		{{ form.hidden_tag() }}
+		<div class="control-group">
+			<div class="controls">{{ form.email.label(class="control-label") }} {{ form.email() }}</div>
+			{% if form.email.errors %}
+				<span>
+					{% for error in form.email.errors %}
+						<div class="control-group">
+							<div class="alert_title">
+								<strong>{{ error }}</strong>
+							</div>
+						</div>
+					{% endfor %}
+				</span>
+			{% endif %}
+		</div>
+		<div class="control-group">
+			<div class="controls">{{ form.password.label(class="control-label") }} {{ form.password() }}</div>
+		</div>
+		{{ form.submit(class="btn btn-primary") }}
+	</form>
 </div>
 {% endblock %}
