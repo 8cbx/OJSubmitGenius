@@ -1,13 +1,13 @@
-"""first
+"""create all
 
-Revision ID: c5bf8393c6d
+Revision ID: d981365cbe8
 Revises: None
-Create Date: 2015-06-27 16:41:06.450624
+Create Date: 2015-06-24 20:49:06.760228
 
 """
 
 # revision identifiers, used by Alembic.
-revision = 'c5bf8393c6d'
+revision = 'd981365cbe8'
 down_revision = None
 
 from alembic import op
@@ -27,13 +27,6 @@ def upgrade():
     )
     op.create_index(op.f('ix_contest_Begin_time'), 'contest', ['Begin_time'], unique=False)
     op.create_index(op.f('ix_contest_End_time'), 'contest', ['End_time'], unique=False)
-    op.create_table('oj_status',
-    sa.Column('OJ_ID', sa.String(length=64), nullable=False),
-    sa.Column('OJ_Status', sa.Boolean(), nullable=True),
-    sa.Column('Last_Update', sa.DateTime(), nullable=True),
-    sa.PrimaryKeyConstraint('OJ_ID')
-    )
-    op.create_index(op.f('ix_oj_status_Last_Update'), 'oj_status', ['Last_Update'], unique=False)
     op.create_table('problems',
     sa.Column('SID', sa.Integer(), nullable=False),
     sa.Column('OJ_ID', sa.String(length=64), nullable=True),
@@ -67,7 +60,6 @@ def upgrade():
     sa.Column('Language', sa.String(length=64), nullable=True),
     sa.Column('Code_Length', sa.String(length=64), nullable=True),
     sa.Column('CEfile', sa.String(length=64), nullable=True),
-    sa.Column('Contest_ID', sa.Integer(), nullable=True),
     sa.Column('Submit_Time', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('RunID')
     )
@@ -134,8 +126,6 @@ def downgrade():
     op.drop_table('roles')
     op.drop_index(op.f('ix_problems_LastUpdate'), table_name='problems')
     op.drop_table('problems')
-    op.drop_index(op.f('ix_oj_status_Last_Update'), table_name='oj_status')
-    op.drop_table('oj_status')
     op.drop_index(op.f('ix_contest_End_time'), table_name='contest')
     op.drop_index(op.f('ix_contest_Begin_time'), table_name='contest')
     op.drop_table('contest')
