@@ -41,7 +41,7 @@
                 <th>{{ problems.OJ_ID }}</th>
                 <th>{{ problems.PID }}</th>
                 <th>{{ problems.Title }}</th>
-                <th><a class="btn btn-default" href="{{ url_for('contest.modify_contest',id=contest.id) }}">Delete</a></th>
+                <th><a class="btn btn-default" href="{{ url_for('contest.modify_contest',id=contest.id,delete=problems.SID) }}">Delete</a></th>
             </tr>
             {% set num=num+1 %}
             {% endfor %}
