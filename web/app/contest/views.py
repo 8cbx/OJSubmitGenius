@@ -32,9 +32,9 @@ def modify_contest():
 	for values in contest_problem:
 		in_problem=Problem.query.filter_by(SID=values.problems_SID).first()
 		problem.append(in_problem)
-	delete_PID = request.args.get('delete', -1, type=int)
-	if delete_PID!=-1:
-		print "Delete "+str(delete_PID)
+	delete_SID = request.args.get('delete', -1, type=int)
+	if delete_SID!=-1:
+		print "Delete "+str(delete_SID)
 	form = AddContestProblemForm()
 	if form.validate_on_submit():
 		problems=Problem.query.filter_by(OJ_ID=form.Problem_OJ_ID.data, PID=form.Problem_PID.data).first()
