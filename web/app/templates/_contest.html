@@ -2,18 +2,33 @@
 	<table id="contest" class="table table-striped table-bordered" cellspacing="0" width="100%">
 	<thead>
 		<tr>
-			<th>Title</th>
+			<th>Contest Name</th>
+			<th>Begin time</th>
+            <th>End time</th>
+            <th>Manager</th>
+            <th>Modify</th>
 		</tr>
 	</thead>
 	<tfoot>
 		<tr>
-			<th>Title</th>
+			<th>Contest Name</th>
+			<th>Begin time</th>
+            <th>End time</th>
+            <th>Manager</th>
+            <th>Modify</th>
 		</tr>
 	</tfoot>
     {% for contest in contest %}
     	<tbody>
             <tr>
                 <th><a href="{{ url_for('contest.contest', id=contest.id) }}">{{ contest.Title }}</th>
+                <th>{{ contest.Begin_time }}</th>
+                <th>{{ contest.End_time }}</th>
+                <th>{{ contest.Manager }}</th>
+                <th>{% if current_user.username==contest.Manager %}
+                <a class="btn btn-default" href="{{ url_for('contest.modify_contest', id=contest.id) }}">Modify</a>
+                {% else %}<a class="btn btn-default">Modify</a>
+                {% endif %}
             </tr>
         </tbody>
     {% endfor %}

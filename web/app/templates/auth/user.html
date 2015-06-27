@@ -1,41 +1,121 @@
 {% extends "base.html" %}
 {% import "_macros.html" as macros %}
 
-{% block title %}Flasky - {{ user.username }}{% endblock %}
+{% block styles%}
+    {{ super() }}
+    <style type="text/css">
+        .title{
+            color: #260026;}
+    </style>
+{% endblock %}
+
+{% block title %}{{ user.username }}-Profile{% endblock %}
 
 {% block page_content %}
-<div class="page-header">
-    <img class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=256) }}">
-    <div class="profile-header">
-        <h1>{{ user.username }}</h1>
-        {% if user.name%}
-        <p>
-            {% if user.name %}{{ user.name }}<br>{% endif %}
-        </p>
-        {% endif %}
-        {% if user.about_me %}<p>{{ user.about_me }}</p>{% endif %}
-        {% if user.country %}<p>{{ user.country }}</p>{% endif %}
-        <p>Member since {{ moment(user.member_since).format('L') }}. Last seen {{ moment(user.last_seen).fromNow() }}.</p>
-	 <p>
-            {% if user != current_user %}
-                {% if not current_user.is_following(user) %}
-                <a href="{{ url_for('.follow', username=user.username) }}" class="btn btn-primary">Follow</a>
-                {% else %}
-                <a href="{{ url_for('.unfollow', username=user.username) }}" class="btn btn-default">Unfollow</a>
+<div class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            <div class="well">
+                <img class="img-rounded profile-thumbnail" src="{{ user.gravatar(size=256) }}">
+                <h3 class="title">User Statistics</h3>
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                        <tr>
+                            <th class="span9">Total Submissions</th>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus',user=user.username) }}">{{ Total_Submissions }}</td>
+                        </tr>
+                        <tr>
+                            <th class="span9">POJ Submissions</th>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', OJ_ID='POJ',user=user.username) }}">{{ POJ_Submissions }}</td>
+                        </tr>
+                        <tr>
+                            <th class="span9">Accepted</th>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Accepted',user=user.username) }}">{{ AC }}</td>
+                        </tr>
+                        <tr>
+                            <th class="span9">Compile Error</th>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Compile Error',user=user.username) }}">{{ CE }}</td>
+                        </tr>
+                        <tr>
+                            <th class="span9">Wrong Answer</th>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Wrong Answer',user=user.username) }}">{{ WA }}</td>
+                        </tr>
+                        <tr>
+                            <th class="span9">Presentation Error</th>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Presentation Error',user=user.username) }}">{{ PE }}</td>
+                        </tr>
+                        <tr>
+                            <th class="span9">Runtime Error</th>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Runtime Error',user=user.username) }}">{{ RE }}</td>
+                        </tr>
+                        <tr>
+                            <th class="span9">Time Limit Exceed</th>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Time Limit Exceeded',user=user.username) }}">{{ TLE }}</td>
+                        </tr>
+                        <tr>
+                            <th class="span9">Memory Limit Exceed</th>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Memory Limit Exceeded',user=user.username) }}">{{ MLE }}</td>
+                        </tr>
+                        <tr>
+                            <th class="span9">Output Limit Exceed</th>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Output Limit Exceeded',user=user.username) }}">{{ OLE }}</td>
+                        </tr>
+                        <tr>
+                            <th class="span9">Restricted Function</th>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Restricted Function',user=user.username) }}">{{ RF }}</td>
+                        </tr>
+                        <tr>
+                            <th class="span9">Others</th>
+                            <td class="span3">{{ Others }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="span9">
+            <h2 class="title">Infomation of {{ user.username}}</h2>
+            <div>
+                <table class="table table-hover">
+                    <tbody>
+                        <tr>
+                            <th class="span3">Username:</th>
+                            <td class="span9">{{ user.username }}</td>
+                        </tr>
+                        <tr>
+                            <th class="span3">Country</th>
+                            <td class="span9">{{ user.country }}</td>
+                        </tr>
+                        <tr>
+                            <th class="span3">About me</th>
+                            <td class="span9">{{ user.about_me }}</td>
+                        </tr>
+                        <tr>
+                            <th class="span3">Register time</th>
+                            <td class="span9">{{ moment(user.member_since).format('L') }}</td>
+                        </tr>
+                        <tr>
+                            <th class="span3">Last Login</th>
+                            <td class="span9">{{ moment(user.last_seen).fromNow() }}</td>
+                        </tr>
+                        <tr>
+                            <th class="span3"><a href="{{ url_for('.followers', username=user.username) }}">Followers</a></th>
+                            <td class="span9"><span class="badge">{{ user.followers.count() }}</span></td>
+                        </tr>
+                        <tr>
+                            <th class="span3"><a href="{{ url_for('.followed_by', username=user.username) }}">Following</a></th>
+                            <td class="span9"><span class="badge">{{ user.followed.count() }}</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="btn-group">
+                {% if user == current_user %}
+                <a class="btn btn-primary" href="{{ url_for('.edit_profile') }}">Edit Profile</a>
                 {% endif %}
-            {% endif %}
-            <a href="{{ url_for('.followers', username=user.username) }}">Followers: <span class="badge">{{ user.followers.count() }}</span></a>
-            <a href="{{ url_for('.followed_by', username=user.username) }}">Following: <span class="badge">{{ user.followed.count() }}</span></a>
-            {% if current_user.is_authenticated() and user != current_user and user.is_following(current_user) %}
-            | <span class="label label-default">Follows you</span>
-            {% endif %}
-        </p>
-        <p>
-            {% if user == current_user %}
-            <a class="btn btn-default" href="{{ url_for('.edit_profile') }}">Edit Profile</a>
-            {% endif %}
-            <a class="btn btn-default" href="{{ url_for('.AC_problem', username=user.username) }}">Accepted Problem</a>
-        </p>
+                <a class="btn btn-primary" href="{{ url_for('.AC_problem', username=user.username) }}">Accepted Problem</a>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
+

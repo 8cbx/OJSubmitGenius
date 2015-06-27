@@ -157,7 +157,6 @@ def codeview():
 @login_required
 def statusview():
 	RunID = request.args.get('RunID', -1, type=int)
-	form = SubmitForm()
 	code = Code_detail.query.filter_by(RunID=RunID).first()
 	if current_user.username==code.user:
 		fp= open('./app/main/POJCEfile/POJ_'+str(code.PID)+str(code.RemoteID),"r")
@@ -169,7 +168,8 @@ def statusview():
 		fp.close()
 		return render_template('statusview.html', code=code,CEinfor=User_CEinfor)
 	else:
-		abort(404)
+		flash("You don't have right to check other's CE info!")
+		return redirect(url_for('.indexStatus'))
 
 @main.route('/submit', methods=['GET', 'POST'])
 @login_required
@@ -213,7 +213,9 @@ def submit():
 		TryLogin(user.account_POJ,user.password_POJ)
 		Submit(form.Code.data,code.PID,int(form.Language.data))
 		code=GetStatus(current_user.account_POJ,code,form.Language.data)
+		print code
 		db.session.add(code)
+		db.session.commit()
 		flash('Your code has been submitted.')
 		fp= open('./app/main/POJcode/POJ_'+str(code.RemoteID),"w")
 		fp.write(form.Code.data)
@@ -271,6 +273,7 @@ def contest_submit(Contest_id):
 		code=GetStatus(current_user.account_POJ,code,form.Language.data)
 		code.Contest_ID=Contest_id
 		db.session.add(code)
+		db.session.commit()
 		flash('Your code has been submitted.')
 		fp= open('./app/main/POJcode/POJ_'+str(code.RemoteID),"w")
 		fp.write(form.Code.data)

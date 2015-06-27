@@ -4,7 +4,7 @@ from flask.ext.login import login_user, logout_user, login_required, \
     current_user
 from . import auth
 from .. import db
-from ..models import User, Permission
+from ..models import User, Permission, Code_detail
 from ..email import send_email
 from .forms import LoginForm, RegistrationForm, ChangePasswordForm,\
     PasswordResetRequestForm, PasswordResetForm, ChangeEmailForm,\
@@ -39,7 +39,19 @@ def user(username):
     	abort(404)
     if user.confirmed==0:
     	return redirect(url_for('auth.unconfirmed'))
-    return render_template('auth/user.html', user=user)
+    Total_Submissions=Code_detail.query.filter(Code_detail.user==user.username).count()
+    POJ_Submissions=Code_detail.query.filter(Code_detail.OJ_ID=='POJ',Code_detail.user==user.username).count()
+    AC=Code_detail.query.filter(Code_detail.Result=='Accepted',Code_detail.user==user.username).count()
+    CE=Code_detail.query.filter(Code_detail.Result=='Compile Error',Code_detail.user==user.username).count()
+    WA=Code_detail.query.filter(Code_detail.Result=='Wrong Answer',Code_detail.user==user.username).count()
+    PE=Code_detail.query.filter(Code_detail.Result=='Presentation Error',Code_detail.user==user.username).count()
+    RE=Code_detail.query.filter(Code_detail.Result=='Runtime Error',Code_detail.user==user.username).count()
+    TLE=Code_detail.query.filter(Code_detail.Result=='Time Limit Exceeded',Code_detail.user==user.username).count()
+    MLE=Code_detail.query.filter(Code_detail.Result=='Memory Limit Exceeded',Code_detail.user==user.username).count()
+    OLE=Code_detail.query.filter(Code_detail.Result=='Output Limit Exceeded',Code_detail.user==user.username).count()
+    RF=Code_detail.query.filter(Code_detail.Result=='Restricted Function',Code_detail.user==user.username).count()
+    Others=Total_Submissions-AC-CE-WA-PE-RE-TLE-MLE-OLE-RF
+    return render_template('auth/user.html', user=user,Others=Others,Total_Submissions=Total_Submissions,POJ_Submissions=POJ_Submissions,AC=AC,CE=CE,WA=WA,PE=PE,RE=RE,TLE=TLE,MLE=MLE,OLE=OLE,RF=RF)
 
 @auth.route('/edit-profile', methods=['GET', 'POST'])
 @login_required
@@ -53,6 +65,7 @@ def edit_profile():
         #current_user.password_POJ = form.password_POJ.data
         current_user.about_me = form.about_me.data
         db.session.add(current_user)
+        db.session.commit()
         flash('Your profile has been updated.')
         return redirect(url_for('.user', username=current_user.username))
     form.name.data = current_user.name
@@ -81,6 +94,7 @@ def edit_profile_admin(id):
         #user.password_POJ = form.password_POJ.data
         user.about_me = form.about_me.data
         db.session.add(user)
+        db.session.commit()
         flash('The profile has been updated.')
         return redirect(url_for('.user', username=user.username))
     form.email.data = user.email
@@ -108,6 +122,7 @@ def OnlineJudge():
 					current_user.account_POJ = form.account_POJ.data
 					current_user.password_POJ = form.password_POJ.data
 				db.session.add(current_user)
+				db.session.commit()
 				flash('The account has been updated')
 				return redirect(request.args.get('next') or url_for('.user', username=current_user.username)) 
 		else:
@@ -189,6 +204,7 @@ def change_password():
         if current_user.verify_password(form.old_password.data):
             current_user.password = form.password.data
             db.session.add(current_user)
+            db.session.commit()
             flash('Your password has been updated.')
             return redirect(url_for('main.index'))
         else:
