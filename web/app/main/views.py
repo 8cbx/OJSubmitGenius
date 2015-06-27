@@ -232,21 +232,28 @@ def submit():
 @main.route('/contest_submit/<int:Contest_id>', methods=['GET', 'POST'])
 @login_required
 def contest_submit(Contest_id):    
-	OJ_ID = request.args.get('OJ_ID', '')
-	SID = request.args.get('SID', -1, type=int)
 	PID = request.args.get('PID', -1, type=int)
 	form = SubmitForm()
+	contest = Contest.query.filter_by(id=Contest_id).first()
+	if contest is None:
+		flash('Invalid contest.')
+		return redirect(url_for('.indexContest'))
+	contest_problem=contest.Contest_problems.filter_by(Contest_id=Contest_id)
+	problem=contest_problem.count()
 	user = User.query.filter_by(username=current_user.username).first()
 	code=Code_detail()
+	if problem>=PID:
+		form.OJ_ID.data=Problem.query.filter_by(SID=contest_problem[(PID-1)].problems_SID).first().OJ_ID
 	if form.validate_on_submit():
+		PID=int(form.PID.data)
 		if form.OJ_ID.data=='POJ':
 			if user.account_POJ=='NU LL':
 				flash('You need to give us your poj info first.')
 				return redirect(url_for('auth.OnlineJudge'))
-		code.SID=SID
+		code.SID=contest_problem[(PID-1)].problems_SID
 		code.user=current_user.username
 		code.OJ_ID=form.OJ_ID.data
-		code.PID=form.PID.data
+		code.PID=Problem.query.filter_by(SID=contest_problem[PID-1].problems_SID).first().PID
 		code.Result='Pending'
 		code.Memory=''
 		code.Time=''
@@ -281,8 +288,7 @@ def contest_submit(Contest_id):
 		if code.Result=='Accepted':
 			problem=Problem.query.filter_by(SID=code.SID).first()
 			current_user.add_accepted_problem(problem)
-		return redirect(url_for('.indexStatus'))
-	form.OJ_ID.data=OJ_ID
+		return redirect(url_for('contest.contest_status',Contest_id=Contest_id))
 	if PID!=-1:
 		form.PID.data=PID
 	return render_template('contest/contest_submit.html', form=form)
@@ -468,7 +474,7 @@ def contest_problem(Contest_id, Num):
 		elif flag==13:
 			problems.Source=problems.Source+lines.decode('utf-8')+'\n'
 	fp.close()
-	return render_template('contest/contest_problem.html',problems=problems, Contest_id=Contest_id)
+	return render_template('contest/contest_problem.html',problems=problems,num=num ,Contest_id=Contest_id)
 	 
 @main.route('/problem/<int:SID>/AC_user')
 def AC_user(SID):

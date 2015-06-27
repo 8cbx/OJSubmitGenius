@@ -25,7 +25,7 @@
 		{{ form.submit.lable }}  {{ form.submit(class="btn btn-primary") }}
 	</form>
 
-	{% include 'contest/__statusPage.html' %}
+	{% include 'contest/_statusPage.html' %}
 	{% if pagination %}
 	<div class="pagination">
 	    {{ macros.pagination_widget(pagination, '.contest_status',OJ_ID=form.OJ_ID.data,user=form.user.data,result=form.Result.data,PID=form.PID.data) }}

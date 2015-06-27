@@ -53,7 +53,7 @@ class EditProfileAdminForm(Form):
 class SubmitForm(Form):
 	OJ_ID=SelectField('OJ', validators=[Required()],choices=[('','All'),("POJ","POJ")])
 	PID=StringField('PID',validators=[Required(),Length(0, 8)])
-	Language=SelectField('OJ', validators=[Required()],choices=[("0","G++"),("1","GCC"),("2","Java"),("3","Pascal"),("4","C++"),("5","C"),("6","Fortran")])
+	Language=SelectField('Language', validators=[Required()],choices=[("0","G++"),("1","GCC"),("2","Java"),("3","Pascal"),("4","C++"),("5","C"),("6","Fortran")])
 	Code=TextAreaField('Code',validators=[Required()])
 	submit = SubmitField('Submit')
 	def validate_Code(self, field):

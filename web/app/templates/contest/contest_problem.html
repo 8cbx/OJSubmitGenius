@@ -37,8 +37,8 @@
         </table>
         <div align="center">
             <div class="btn-group">
-                <a class="btn btn-primary" href="{{ url_for('main.contest_submit',SID=problems.SID,OJ_ID=problems.OJ_ID, PID=problems.PID, Contest_id =Contest_id) }}">Submit</a>
-                <a class="btn btn-default" href="{{ url_for('contest.contest_status', Contest_id=contest.id) }}">Status</a>
+                <a class="btn btn-primary" href="{{ url_for('main.contest_submit',PID=num, Contest_id =Contest_id) }}">Submit</a>
+                <a class="btn btn-default" href="{{ url_for('contest.contest_status', Contest_id=Contest_id) }}">Status</a>
             </div>
         </div>
         <h2>Description</h2>
