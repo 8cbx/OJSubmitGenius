@@ -5,7 +5,7 @@ from datetime import datetime
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm, SubmitForm, StatusFilter, ProblemFilter
 from .. import db
-from ..models import Permission, Role, User, Problem, Problem_detail, Code_detail, OJ_Status
+from ..models import Permission, Role, User, Problem, Problem_detail, Code_detail, OJ_Status, Contest, Contest_Problem
 from ..decorators import admin_required
 from poj_submit import Submit
 from poj_login import TryLogin
@@ -372,8 +372,21 @@ def problem(SID):
 	fp.close()
 	return render_template('problem.html',problems=problems)
 
-@main.route('/contest/<int:Contest_id>/contest_problem/<int:SID>', methods=['GET', 'POST'])
-def contest_problem(Contest_id, SID):
+@main.route('/contest/<int:Contest_id>/contest_problem/<int:Num>', methods=['GET', 'POST'])
+def contest_problem(Contest_id, Num):
+	contest_problem=Contest_Problem.query.filter_by(Contest_id=Contest_id)
+	num = 1;
+	flag = 0
+	for contest_problem in contest_problem:
+		if num == Num - 1:
+			SID = contest_problem.problems_SID
+			flag = 1
+			break
+		num = num + 1
+	if flag == 0:
+		flash('wrong contest problem id')
+		return redirect(url_for('contest.contest', id = Contest_id))
+	print SID
 	problem = Problem.query.get_or_404(SID)
 	problems=Problem_detail()
 	problems.SID=problem.SID
@@ -455,7 +468,6 @@ def contest_problem(Contest_id, SID):
 		elif flag==13:
 			problems.Source=problems.Source+lines.decode('utf-8')+'\n'
 	fp.close()
-	print 'contest/contest_problem.html'
 	return render_template('contest/contest_problem.html',problems=problems, Contest_id=Contest_id)
 	 
 @main.route('/problem/<int:SID>/AC_user')
