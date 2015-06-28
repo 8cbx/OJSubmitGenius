@@ -22,51 +22,51 @@
                     <tbody>
                         <tr>
                             <th class="span9">Total Submissions</th>
-                            <td class="span3">#</td>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus',user=user.username) }}">{{ Total_Submissions }}</td>
                         </tr>
                         <tr>
                             <th class="span9">POJ Submissions</th>
-                            <td class="span3">#</td>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', OJ_ID='POJ',user=user.username) }}">{{ POJ_Submissions }}</td>
                         </tr>
                         <tr>
                             <th class="span9">Accepted</th>
-                            <td class="span3">#</td>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Accepted',user=user.username) }}">{{ AC }}</td>
                         </tr>
                         <tr>
                             <th class="span9">Compile Error</th>
-                            <td class="span3">#</td>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Compile Error',user=user.username) }}">{{ CE }}</td>
                         </tr>
                         <tr>
                             <th class="span9">Wrong Answer</th>
-                            <td class="span3">#</td>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Wrong Answer',user=user.username) }}">{{ WA }}</td>
                         </tr>
                         <tr>
                             <th class="span9">Presentation Error</th>
-                            <td class="span3">#</td>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Presentation Error',user=user.username) }}">{{ PE }}</td>
                         </tr>
                         <tr>
                             <th class="span9">Runtime Error</th>
-                            <td class="span3">#</td>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Runtime Error',user=user.username) }}">{{ RE }}</td>
                         </tr>
                         <tr>
                             <th class="span9">Time Limit Exceed</th>
-                            <td class="span3">#</td>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Time Limit Exceeded',user=user.username) }}">{{ TLE }}</td>
                         </tr>
                         <tr>
                             <th class="span9">Memory Limit Exceed</th>
-                            <td class="span3">#</td>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Memory Limit Exceeded',user=user.username) }}">{{ MLE }}</td>
                         </tr>
                         <tr>
                             <th class="span9">Output Limit Exceed</th>
-                            <td class="span3">#</td>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Output Limit Exceeded',user=user.username) }}">{{ OLE }}</td>
                         </tr>
                         <tr>
                             <th class="span9">Restricted Function</th>
-                            <td class="span3">#</td>
+                            <td class="span3"><a href="{{ url_for('main.indexStatus', result='Restricted Function',user=user.username) }}">{{ RF }}</td>
                         </tr>
                         <tr>
                             <th class="span9">Others</th>
-                            <td class="span3">#</td>
+                            <td class="span3">{{ Others }}</td>
                         </tr>
                     </tbody>
                 </table>
