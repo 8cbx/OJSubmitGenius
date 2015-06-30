@@ -8,8 +8,15 @@ $(document).ready(function() {
     } );
 } );
 </script>
+<form method="post" role="form" class="form form-inline" align="center">
+		{{ form.hidden_tag() }}
+		{{ form.OJ_ID.label(class="control-label") }} {{ form.OJ_ID() }}
+		{{ form.PID.label(class="control-label") }} {{ form.PID() }}
+		{{ form.submit.lable }}  {{ form.submit(class="btn btn-primary") }}
+	</form>
 <ul class="problems">
 	<table id="problems" class="table table-bordered table-hover table-striped" cellspacing="0" width="100%">
+	
 	<thead>
 		<tr>
 			<th>OJ</th>
