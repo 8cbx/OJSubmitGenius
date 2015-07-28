@@ -29,7 +29,7 @@
             {% for problem in problem %}
             <tr>
                 <td>{{ Num }}{% set Num = Num + 1%}</td>
-                <td><a href="{{ url_for('main.contest_problem', Contest_id=contest.id, Num = Num) }}">{{ problem.problem.Title }}</td>
+                <td><a href="{{ url_for('contest.contest_problem', Contest_id=contest.id, Num = Num) }}">{{ problem.problem.Title }}</td>
             </tr>
             {% endfor %}
         </tbody>

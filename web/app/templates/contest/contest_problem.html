@@ -37,7 +37,7 @@
         </table>
         <div align="center">
             <div class="btn-group">
-                <a class="btn btn-primary" href="{{ url_for('main.contest_submit',PID=num, Contest_id =Contest_id) }}">Submit</a>
+                <a class="btn btn-primary" href="{{ url_for('contest.contest_submit',PID=num, Contest_id =Contest_id) }}">Submit</a>
                 <a class="btn btn-default" href="{{ url_for('contest.contest_status', Contest_id=Contest_id) }}">Status</a>
             </div>
         </div>

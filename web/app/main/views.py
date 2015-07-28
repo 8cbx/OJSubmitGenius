@@ -5,7 +5,7 @@ from datetime import datetime
 from . import main
 from .forms import EditProfileForm, EditProfileAdminForm, SubmitForm, StatusFilter, ProblemFilter
 from .. import db
-from ..models import Permission, Role, User, Problem, Problem_detail, Code_detail, OJ_Status, Contest, Contest_Problem
+from ..models import Permission, Role, User, Problem, Problem_detail, Code_detail, OJ_Status
 from ..decorators import admin_required
 from poj_submit import Submit
 from poj_login import TryLogin
@@ -229,69 +229,7 @@ def submit():
 		form.PID.data=PID
 	return render_template('submit.html', form=form)
 
-@main.route('/contest_submit/<int:Contest_id>', methods=['GET', 'POST'])
-@login_required
-def contest_submit(Contest_id):    
-	PID = request.args.get('PID', -1, type=int)
-	form = SubmitForm()
-	contest = Contest.query.filter_by(id=Contest_id).first()
-	if contest is None:
-		flash('Invalid contest.')
-		return redirect(url_for('.indexContest'))
-	contest_problem=contest.Contest_problems.filter_by(Contest_id=Contest_id)
-	problem=contest_problem.count()
-	user = User.query.filter_by(username=current_user.username).first()
-	code=Code_detail()
-	if problem>=PID:
-		form.OJ_ID.data=Problem.query.filter_by(SID=contest_problem[(PID-1)].problems_SID).first().OJ_ID
-	if form.validate_on_submit():
-		PID=int(form.PID.data)
-		if form.OJ_ID.data=='POJ':
-			if user.account_POJ=='NU LL':
-				flash('You need to give us your poj info first.')
-				return redirect(url_for('auth.OnlineJudge'))
-		code.SID=contest_problem[(PID-1)].problems_SID
-		code.user=current_user.username
-		code.OJ_ID=form.OJ_ID.data
-		code.PID=Problem.query.filter_by(SID=contest_problem[PID-1].problems_SID).first().PID
-		code.Result='Pending'
-		code.Memory=''
-		code.Time=''
-		code.CEfile=''
-		code.RemoteID=''
-		if form.Language.data=='0':
-			code.Language='G++'
-		if form.Language.data=='1':
-			code.Language='GCC'
-		if form.Language.data=='2':
-			code.Language='Java'
-		if form.Language.data=='3':
-			code.Language='Pascal'
-		if form.Language.data=='4':
-			code.Language='C++'
-		if form.Language.data=='5':
-			code.Language='C'
-		if form.Language.data=='6':
-			code.Language='Fortran'
-		code.Code_Length=len(form.Code.data)
-		#code.Submit_Time=datetime.utcnow
-		TryLogin(user.account_POJ,user.password_POJ)
-		Submit(form.Code.data,code.PID,int(form.Language.data))
-		code=GetStatus(current_user.account_POJ,code,form.Language.data)
-		code.Contest_ID=Contest_id
-		db.session.add(code)
-		db.session.commit()
-		flash('Your code has been submitted.')
-		fp= open('./app/main/POJcode/POJ_'+str(code.RemoteID),"w")
-		fp.write(form.Code.data)
-		fp.close()
-		if code.Result=='Accepted':
-			problem=Problem.query.filter_by(SID=code.SID).first()
-			current_user.add_accepted_problem(problem)
-		return redirect(url_for('contest.contest_status',Contest_id=Contest_id))
-	if PID!=-1:
-		form.PID.data=PID
-	return render_template('contest/contest_submit.html', form=form)
+
 
 @main.route('/problem/<int:SID>', methods=['GET', 'POST'])
 def problem(SID):
@@ -378,103 +316,6 @@ def problem(SID):
 	fp.close()
 	return render_template('problem.html',problems=problems)
 
-@main.route('/contest/<int:Contest_id>/contest_problem/<int:Num>', methods=['GET', 'POST'])
-def contest_problem(Contest_id, Num):
-	contest_problem=Contest_Problem.query.filter_by(Contest_id=Contest_id)
-	num = 1;
-	flag = 0
-	for contest_problem in contest_problem:
-		if num == Num - 1:
-			SID = contest_problem.problems_SID
-			flag = 1
-			break
-		num = num + 1
-	if flag == 0:
-		flash('wrong contest problem id')
-		return redirect(url_for('contest.contest', id = Contest_id))
-	print SID
-	problem = Problem.query.get_or_404(SID)
-	problems=Problem_detail()
-	problems.SID=problem.SID
-	problems.OJ_ID=problem.OJ_ID
-	problems.PID=0
-	problems.Title=''
-	problems.Time_Limit=''
-	problems.Memory_Limit=''
-	problems.Total_Submissions=0
-	problems.Accepted=0
-	problems.Spical_Judge=''
-	problems.Description=[]
-	problems.Input=[]
-	problems.Output=[]
-	problems.Sample_Input=[]
-	problems.Sample_Output=[]
-	problems.Hint=[]
-	problems.Source=''
-	fp= open('./app/main/POJ/POJ_'+str(problem.PID),"r")
-	arr=fp.readlines()
-	flag=0
-	for lines in arr:
-		#print lines
-		#print repr(lines)
-		if lines.find('-PID-')!=-1:
-			flag=1;
-		elif lines.find('-Title:-')!=-1:
-			flag=2;
-		elif lines.find('-Time Limit:-')!=-1:
-			flag=3;
-		elif lines.find('-Memory Limit:-')!=-1:
-			flag=4;
-		elif lines.find('-Total Submissions:-')!=-1:
-			flag=5;
-		elif lines.find('-Accepted:-')!=-1:
-			flag=6;
-		elif lines.find('-Description:-')!=-1:
-			flag=7;
-		elif lines.find('-Input:-')!=-1:
-			flag=8;
-		elif lines.find('-Output:-')!=-1:
-			flag=9;
-		elif lines.find('-Sample Input:-')!=-1:
-			flag=10;
-		elif lines.find('-Sample Output:-')!=-1:
-			flag=11;
-		elif lines.find('-Hint:-')!=-1:
-			flag=12;
-		elif lines.find('-Source:-')!=-1:
-			flag=13;
-		elif flag==1 and lines.find('-PID-')==-1:
-			problems.PID=problems.PID+int(lines)
-		elif flag==2 and lines.find('-Title:-')==-1:
-			problems.Title=problems.Title+lines.decode('utf-8')
-		elif flag==3 and lines.find('-Memory Limit:-')==-1:
-			problems.Time_Limit=problems.Time_Limit+lines
-		elif flag==4 and lines.find('-Total Submissions:-')==-1:
-			problems.Memory_Limit=problems.Memory_Limit+lines
-		elif flag==5 and lines.find('-Accepted:-')==-1:
-			lines=lines.strip()
-			problems.Total_Submissions=problems.Total_Submissions+int(lines)
-		elif flag==6 and lines.find('Special Judge')!=-1:
-			problems.Special_Judge='Special Judge'
-		elif flag==6 and lines.find('-Description:-')==-1:
-			lines=lines.strip()
-			problems.Accepted=problems.Accepted+int(lines)
-		elif flag==7 and lines.find('-Input:-')==-1:
-			problems.Description.append(lines.decode('utf-8'))
-		elif flag==8 and lines.find('-Output:-')==-1:
-			problems.Input.append(lines.decode('utf-8'))
-		elif flag==9 and lines.find('-Sample Input:-')==-1:
-			problems.Output.append(lines.decode('utf-8'))
-		elif flag==10 and lines.find('-Sample Output:-')==-1:
-			problems.Sample_Input.append(lines.decode('utf-8'))
-		elif flag==11 and lines.find('-Hint:-')==-1:
-			problems.Sample_Output.append(lines.decode('utf-8'))
-		elif flag==12 and lines.find('-Source:-')==-1:
-			problems.Hint.append(lines.decode('utf-8'))
-		elif flag==13:
-			problems.Source=problems.Source+lines.decode('utf-8')+'\n'
-	fp.close()
-	return render_template('contest/contest_problem.html',problems=problems,num=num ,Contest_id=Contest_id)
 	 
 @main.route('/problem/<int:SID>/AC_user')
 def AC_user(SID):

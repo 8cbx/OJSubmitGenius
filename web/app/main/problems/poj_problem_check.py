@@ -60,10 +60,13 @@ class DealWithPages(HTMLParser.HTMLParser):
 				if name == 'align' and value == 'center':
 					self.st.push('tr')
 					break
-		if tag == 'i' or tag == 'sup':
+		if tag == 'i':
 			coun=coun-2
-			havei=2
+			havei=1
 			#fp.write('------\n')
+		if  tag == 'sup':
+			coun=coun-1
+			havei=1
 	def handle_data(self, data):
 		global Data
 		global coun
@@ -71,6 +74,7 @@ class DealWithPages(HTMLParser.HTMLParser):
 		global havebeenprint
 		global havei
 		#print '----'+data+'------'
+		#print coun
 		data=data.replace(',','\.\..')
 		stack_size = self.st.getLength()
 		#print stack_size
@@ -127,7 +131,7 @@ class DealWithPages(HTMLParser.HTMLParser):
 			#fp.write('------\n')
 			
 if __name__ == '__main__':
-	for i in range(1,2):
+	for i in range(23,100):
 		havebeenprint=0
 		havei=0
 		page = getPageContent('http://poj.org/problemlist?volume='+str(i))

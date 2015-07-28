@@ -48,7 +48,7 @@ $(document).ready(function() {
                 		{% set PID=num %}
                 	{% endif %}
                 {% endfor %}
-                <a href="{{ url_for('main.contest_problem', Contest_id=Contest_id, Num=PID+1) }}">{{ PID }}</th>
+                <a href="{{ url_for('contest.contest_problem', Contest_id=Contest_id, Num=PID+1) }}">{{ PID }}</th>
                 <th><a href="{{ url_for('auth.user', username=status.user) }}">{{ status.user }}</th>
                 <th>{% if status.Result=='Compile Error' %}
                 <a href="{{ url_for('main.statusview', RunID=status.RunID) }}">{% endif %}
